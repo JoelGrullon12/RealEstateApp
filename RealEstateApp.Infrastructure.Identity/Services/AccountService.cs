@@ -246,6 +246,11 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             return viewModelList;
         }
 
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
         #region Private Methods
         private async Task<RegisterUserDTO> RegisterUserAsync(RegisterRequest request)
         {

@@ -16,5 +16,6 @@ namespace RealEstateApp.Core.Application.Interfaces.Services
         Task<RegisterResponse> RegisterDeveloperAsync(RegisterRequest request);
         Task<SetUserResponse> SetUserStatusAsync(string userId);
         Task<RegisterResponse> UpdateUserAsync(RegisterRequest request);
+        Task SignOutAsync();
     }
 }

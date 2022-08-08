@@ -45,7 +45,7 @@ namespace RealEstateApp.Infrastructure.Identity
 
             #region Services
             services.AddTransient<IAccountService, AccountService>();
-            //services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IRoleService, RoleService>();
             #endregion
         }
     }
