@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Infrastructure.Identity.Context;
 using RealEstateApp.Infrastructure.Identity.Entities;
+using RealEstateApp.Infrastructure.Identity.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +43,10 @@ namespace RealEstateApp.Infrastructure.Identity
             });
             #endregion
 
-            //#region Services
-            //services.AddTransient<IAccountService, AccountService>();
+            #region Services
+            services.AddTransient<IAccountService, AccountService>();
             //services.AddTransient<IRoleService, RoleService>();
-            //#endregion
+            #endregion
         }
     }
 }
