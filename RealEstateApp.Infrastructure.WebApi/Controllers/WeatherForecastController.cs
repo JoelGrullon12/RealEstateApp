@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Infrastructure.WebApi.Controllers
+namespace RealEstateApp.Presentation.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

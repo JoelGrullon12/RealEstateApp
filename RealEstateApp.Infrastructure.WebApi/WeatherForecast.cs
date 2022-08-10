@@ -1,6 +1,6 @@
 using System;
 
-namespace RealEstateApp.Infrastructure.WebApi
+namespace RealEstateApp.Presentation.WebApi
 {
     public class WeatherForecast
     {

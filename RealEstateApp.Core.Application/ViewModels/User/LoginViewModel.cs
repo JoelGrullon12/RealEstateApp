@@ -8,7 +8,7 @@ namespace RealEstateApp.Core.Application.ViewModels.User
 {
     public class LoginViewModel
     {
-        public string UserName { get; set; }
+        public string UserOrEmail { get; set; }
         public string Password { get; set; }
     }
 }

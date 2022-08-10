@@ -7,12 +7,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RealEstateApp.Infrastructure.Identity;
+using RealEstateApp.Infrastructure.Persistence;
+using RealEstateApp.Infrastructure.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Infrastructure.WebApi
+namespace RealEstateApp.Presentation.WebApi
 {
     public class Startup
     {
@@ -26,8 +29,13 @@ namespace RealEstateApp.Infrastructure.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+
+            services.AddPersistenceLayer(Configuration);
+            services.AddIdentityLayer(Configuration);
+
+            services.AddSharedLayer(Configuration);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RealEstateApp.Infrastructure.WebApi", Version = "v1" });

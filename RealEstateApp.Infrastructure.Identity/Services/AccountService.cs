@@ -282,6 +282,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 Name = request.FirstName,
                 LastName = request.LastName,
                 DNI = request.DNI,
+                PhoneNumber = request.Phone,
                 ImgUrl = "imagen XD"
             };
 

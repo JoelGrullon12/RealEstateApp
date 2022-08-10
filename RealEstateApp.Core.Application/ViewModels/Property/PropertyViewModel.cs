@@ -22,6 +22,7 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public int Bathrooms { get; set; }
         public int Size { get; set; }
         public int AgentId { get; set; }
+        public DateTime Created { get; set; }
 
         #region Navigation Properties
         public PropertyTypeViewModel Type { get; set; }
