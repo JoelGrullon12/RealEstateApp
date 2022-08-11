@@ -7,9 +7,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RealEstateApp.Core.Application;
 using RealEstateApp.Infrastructure.Identity;
 using RealEstateApp.Infrastructure.Persistence;
 using RealEstateApp.Infrastructure.Shared;
+using RealEstateApp.Presentation.WebApi.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,17 +31,16 @@ namespace RealEstateApp.Presentation.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services.AddPersistenceLayer(Configuration);
             services.AddIdentityLayer(Configuration);
+            services.AddApplicationLayer(Configuration);
+            services.AddSwaggerExtension();
+            services.AddApiVersioningExtension();
 
-            services.AddSharedLayer(Configuration);
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RealEstateApp.Infrastructure.WebApi", Version = "v1" });
-            });
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,15 +49,20 @@ namespace RealEstateApp.Presentation.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RealEstateApp.Infrastructure.WebApi v1"));
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHttpMethodOverride();
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseHealthChecks("/health");
+
+            app.UseSwaggerExtension();
 
             app.UseEndpoints(endpoints =>
             {
