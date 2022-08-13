@@ -17,7 +17,7 @@ namespace RealEstateApp.Core.Domain.Entities
         public int Bedrooms { get; set; }
         public int Bathrooms { get; set; }
         public int Size { get; set; }
-        public int AgentId { get; set; }
+        public string AgentId { get; set; }
 
         #region Navigation Properties
         public PropertyType Type { get; set; }

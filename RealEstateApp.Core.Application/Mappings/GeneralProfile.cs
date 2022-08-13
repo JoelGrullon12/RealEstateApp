@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
 using RealEstateApp.Core.Application.DTO.Account;
+using RealEstateApp.Core.Application.DTO.API.Properties;
+using RealEstateApp.Core.Application.DTO.API.PropertyTypes;
+using RealEstateApp.Core.Application.DTO.API.SellTypes;
+using RealEstateApp.Core.Application.DTO.API.Upgrades;
+using RealEstateApp.Core.Application.Features.Properties.Queries.ListProperties;
 using RealEstateApp.Core.Application.ViewModels.Favorite;
 using RealEstateApp.Core.Application.ViewModels.Property;
 using RealEstateApp.Core.Application.ViewModels.PropertyImg;
@@ -153,6 +158,55 @@ namespace RealEstateApp.Core.Application.Mappings
                 .ForMember(dest => dest.Created, opt => opt.Ignore())
                 .ForMember(dest => dest.PropertyUpgrades, opt => opt.Ignore())
                 .ForMember(dest => dest.Properties, opt => opt.Ignore())
+                ;
+
+
+            // ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            // ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            // ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            // CQRS DTOs - Entities
+
+            ///<Entity>
+            /// Property
+            /// </Entity>
+            CreateMap<Property, PropertyResponse>()
+                .ForMember(dest => dest.Agent, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.TypeId, opt => opt.Ignore())
+                .ForMember(dest => dest.AgentId, opt => opt.Ignore())
+                .ForMember(dest => dest.SellTypeId, opt => opt.Ignore())
+                .ForMember(dest => dest.PropertyUpgrades, opt => opt.Ignore())
+                .ForMember(dest => dest.Favorites, opt => opt.Ignore())
+                .ForMember(dest => dest.Images, opt => opt.Ignore())
+                ;
+
+            ///<Entity>
+            /// PropertyType
+            /// </Entity>
+            CreateMap<PropertyType, PropertyTypeResponse>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.Properties, opt => opt.Ignore())
+                ;
+
+            ///<Entity>
+            /// SellType
+            /// </Entity>
+            CreateMap<SellType, SellTypeResponse>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.Properties, opt => opt.Ignore())
+                ;
+
+            ///<Entity>
+            /// Upgrade
+            /// </Entity>
+            CreateMap<Upgrade, UpgradeResponse>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.Properties, opt => opt.Ignore())
+                .ForMember(dest => dest.PropertyUpgrades, opt => opt.Ignore())
                 ;
 
 

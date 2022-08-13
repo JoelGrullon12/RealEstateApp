@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.17" />
@@ -16,6 +17,36 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RealEstateApp.Core.Domain\RealEstateApp.Core.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Properties\Queries\GetPropertyByCode\" />
+    <Folder Include="Features\Properties\Queries\GetPropertyById\" />
+    <Folder Include="Features\PropertyImgs\Commands\CreateFavorite\" />
+    <Folder Include="Features\PropertyImgs\Commands\DeleteFavorite\" />
+    <Folder Include="Features\PropertyImgs\Commands\UpdateFavorite\" />
+    <Folder Include="Features\PropertyImgs\Queries\GetAllFavorites\" />
+    <Folder Include="Features\PropertyImgs\Queries\GetFavoriteById\" />
+    <Folder Include="Features\PropertyTypes\Commands\CreateFavorite\" />
+    <Folder Include="Features\PropertyTypes\Commands\DeleteFavorite\" />
+    <Folder Include="Features\PropertyTypes\Commands\UpdateFavorite\" />
+    <Folder Include="Features\PropertyTypes\Queries\GetAllFavorites\" />
+    <Folder Include="Features\PropertyTypes\Queries\GetFavoriteById\" />
+    <Folder Include="Features\PropertyUpgrades\Commands\CreateFavorite\" />
+    <Folder Include="Features\PropertyUpgrades\Commands\DeleteFavorite\" />
+    <Folder Include="Features\PropertyUpgrades\Commands\UpdateFavorite\" />
+    <Folder Include="Features\PropertyUpgrades\Queries\GetAllFavorites\" />
+    <Folder Include="Features\PropertyUpgrades\Queries\GetFavoriteById\" />
+    <Folder Include="Features\SellTypes\Commands\CreateFavorite\" />
+    <Folder Include="Features\SellTypes\Commands\DeleteFavorite\" />
+    <Folder Include="Features\SellTypes\Commands\UpdateFavorite\" />
+    <Folder Include="Features\SellTypes\Queries\GetAllFavorites\" />
+    <Folder Include="Features\SellTypes\Queries\GetFavoriteById\" />
+    <Folder Include="Features\Upgrades\Commands\CreateFavorite\" />
+    <Folder Include="Features\Upgrades\Commands\DeleteFavorite\" />
+    <Folder Include="Features\Upgrades\Commands\UpdateFavorite\" />
+    <Folder Include="Features\Upgrades\Queries\GetAllFavorites\" />
+    <Folder Include="Features\Upgrades\Queries\GetFavoriteById\" />
   </ItemGroup>
 
 </Project>
