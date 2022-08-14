@@ -13,7 +13,7 @@ namespace RealEstateApp.Core.Application.Interfaces.Services
         Task<UserViewModel> GetByIdSaveViewModel(string id);
         Task<LoginResponse> LoginAsync(LoginViewModel login);
         Task LogOut();
-        Task SetUserStatus(string id);
+        Task SetUserStatus(string id, bool status);
         Task<RegisterResponse> Update(SaveUserViewModel saveViewModel);
     }
 }

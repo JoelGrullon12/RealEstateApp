@@ -31,7 +31,7 @@ namespace RealEstateApp.Core.Application.Features.Properties.Queries.ListPropert
 
         public async Task<IList<PropertyResponse>> Handle(ListPropertiesQuery request, CancellationToken cancellationToken)
         {
-            var props = await _propRepo.GetAllWithIncludes(new List<string> { "Type", "SellType", "Images", "Upgrades" });
+            var props = await _propRepo.GetAllWithIncludes(new List<string> { "Type", "SellType", "Upgrades" });
 
             List<PropertyResponse> response = new();
 

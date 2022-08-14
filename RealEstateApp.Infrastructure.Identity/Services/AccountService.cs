@@ -65,7 +65,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             return response;
         }
 
-        public async Task<SetUserResponse> SetUserStatusAsync(string userId)
+        public async Task<SetUserResponse> SetUserStatusAsync(string userId,bool status)
         {
             var response = new SetUserResponse();
             var user = await _userManager.FindByIdAsync(userId);
@@ -76,17 +76,16 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 response.Error = "Esta cuenta no existe";
             }
 
-            var active = user.EmailConfirmed;
-            user.EmailConfirmed = !active;
+            user.EmailConfirmed = status;
             var result = await _userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
             {
                 response.HasError = true;
-                response.Error = active ? $"Error tratando de inactivar la cuenta '{user.Email}'." : $"Error tratando de activar la cuenta '{user.Email}'.";
+                response.Error = !status ? $"Error tratando de inactivar la cuenta '{user.Email}'." : $"Error tratando de activar la cuenta '{user.Email}'.";
             }
 
-            response.Active = !active;
+            response.Active = status;
             return response;
         }
 

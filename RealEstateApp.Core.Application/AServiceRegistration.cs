@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Application.Services;
@@ -16,7 +17,9 @@ namespace RealEstateApp.Core.Application
         public static void AddApplicationLayer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
 
+            #region dependency injections
             services.AddTransient(typeof(IGenericService<,>), typeof(GenericService<,,>));
             services.AddTransient<IFavoriteService, FavoriteService>();
             services.AddTransient<IPropertyImgService, PropertyImgService>();
@@ -26,6 +29,7 @@ namespace RealEstateApp.Core.Application
             services.AddTransient<ISellTypeService, SellTypeService>();
             services.AddTransient<IUpgradeService, UpgradeService>();
             services.AddTransient<IUserService, UserService>();
+            #endregion
         }
     }
 }

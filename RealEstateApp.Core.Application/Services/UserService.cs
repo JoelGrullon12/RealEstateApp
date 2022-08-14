@@ -91,9 +91,9 @@ namespace RealEstateApp.Core.Application.Services
             return roles;
         }
 
-        public async Task SetUserStatus(string id)
+        public async Task SetUserStatus(string id, bool status)
         {
-            await _accountService.SetUserStatusAsync(id);
+            await _accountService.SetUserStatusAsync(id, status);
         }
 
         public async Task LogOut()
