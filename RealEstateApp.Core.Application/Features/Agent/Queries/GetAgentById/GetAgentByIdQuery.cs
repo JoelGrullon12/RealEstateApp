@@ -30,6 +30,10 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById
         public async Task<AgentResponse> Handle(GetAgentByIdQuery request, CancellationToken cancellationToken)
         {
             var agent = await _userService.GetByIdSaveViewModel(request.Id);
+
+            if (agent == null)
+                return null;
+
             var props = await _propRepo.GetAllAsync();
 
             int propCount = (await _propRepo.GetAllAsync()).Where(prop => prop.AgentId == agent.Id).Count();

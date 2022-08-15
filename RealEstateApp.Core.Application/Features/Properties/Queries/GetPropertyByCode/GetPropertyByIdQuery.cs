@@ -33,6 +33,10 @@ namespace RealEstateApp.Core.Application.Features.Properties.Queries.GetProperty
         public async Task<PropertyResponse> Handle(GetPropertyByIdQuery request, CancellationToken cancellationToken)
         {
             var prop = await _propRepo.GetByIdWithIncludes(request.Id, new List<string> { "Type", "SellType" }, new List<string> { "Upgrades" });
+
+            if (prop == null)
+                return null;
+
             var agent = await _userService.GetByIdSaveViewModel(prop.AgentId);
 
             var response = _mapper.Map<PropertyResponse>(prop);

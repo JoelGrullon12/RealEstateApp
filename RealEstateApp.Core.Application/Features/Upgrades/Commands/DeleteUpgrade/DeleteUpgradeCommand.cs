@@ -28,7 +28,12 @@ namespace RealEstateApp.Core.Application.Features.Upgrades.Commands.DeleteUpgrad
         {
             try
             {
-                await _upRepo.DeleteAsync(request.Id);
+                var upgrade = await _upRepo.GetByIdAsync(request.Id);
+
+                if (upgrade == null)
+                    return false;
+
+                await _upRepo.DeleteAsync(upgrade);
                 return true;
             }
             catch (Exception)

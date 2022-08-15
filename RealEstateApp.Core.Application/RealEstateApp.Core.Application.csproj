@@ -19,12 +19,4 @@
     <ProjectReference Include="..\RealEstateApp.Core.Domain\RealEstateApp.Core.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\PropertyUpgrades\Commands\CreateFavorite\" />
-    <Folder Include="Features\PropertyUpgrades\Commands\DeleteFavorite\" />
-    <Folder Include="Features\PropertyUpgrades\Commands\UpdateFavorite\" />
-    <Folder Include="Features\PropertyUpgrades\Queries\GetAllFavorites\" />
-    <Folder Include="Features\PropertyUpgrades\Queries\GetFavoriteById\" />
-  </ItemGroup>
-
 </Project>

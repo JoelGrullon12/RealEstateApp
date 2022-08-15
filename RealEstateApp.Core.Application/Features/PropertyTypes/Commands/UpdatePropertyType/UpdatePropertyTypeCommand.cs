@@ -33,6 +33,10 @@ namespace RealEstateApp.Core.Application.Features.PropertyTypes.Commands.UpdateP
         public async Task<PropertyTypeResponse> Handle(UpdatePropertyTypeCommand request, CancellationToken cancellationToken)
         {
             var propType = _mapper.Map<PropertyType>(request);
+
+            if(propType == null)
+                return null;
+
             await _propTypeRepo.UpdateAsync(propType, request.Id);
 
             return _mapper.Map<PropertyTypeResponse>(propType);

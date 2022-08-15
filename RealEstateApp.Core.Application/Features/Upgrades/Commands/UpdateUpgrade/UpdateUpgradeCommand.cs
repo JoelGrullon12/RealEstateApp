@@ -35,6 +35,10 @@ namespace RealEstateApp.Core.Application.Features.Upgrades.Commands.UpdateUpgrad
             try
             {
                 var upgrade = _mapper.Map<Upgrade>(request);
+
+                if (upgrade == null)
+                    return null;
+
                 await _upRepo.UpdateAsync(upgrade, request.Id);
                 return _mapper.Map<UpgradeResponse>(upgrade);
             }

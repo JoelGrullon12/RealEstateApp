@@ -27,7 +27,12 @@ namespace RealEstateApp.Core.Application.Features.SellTypes.Commands.DeleteSellT
         {
             try
             {
-                await _sellTypeRepo.DeleteAsync(request.Id);
+                var sellType = await _sellTypeRepo.GetByIdAsync(request.Id);
+
+                if (sellType == null)
+                    return false;
+
+                await _sellTypeRepo.DeleteAsync(sellType);
                 return true;
             }catch(Exception ex)
             {

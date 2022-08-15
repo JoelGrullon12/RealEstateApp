@@ -6,7 +6,7 @@ namespace RealEstateApp.Core.Application.Interfaces.Repositories
     public interface IGenericRepository<Entity> where Entity : class
     {
         Task<Entity> AddAsync(Entity t);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Entity t);
         Task<List<Entity>> GetAllAsync();
         Task<List<Entity>> GetAllWithIncludes(List<string> props);
         Task<Entity> GetByIdAsync(int id);

@@ -27,7 +27,12 @@ namespace RealEstateApp.Core.Application.Features.PropertyTypes.Commands.DeleteP
         {
             try
             {
-                await _propTypeRepo.DeleteAsync(request.Id);
+                var propType = await _propTypeRepo.GetByIdAsync(request.Id);
+
+                if (propType == null)
+                    return false;
+
+                await _propTypeRepo.DeleteAsync(propType);
                 return true;
             }catch(Exception ex)
             {

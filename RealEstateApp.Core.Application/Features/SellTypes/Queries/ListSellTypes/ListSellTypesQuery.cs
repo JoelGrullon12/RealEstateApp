@@ -9,24 +9,24 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Core.Application.Features.SellTypes.Queries.ListSellType
+namespace RealEstateApp.Core.Application.Features.SellTypes.Queries.ListSellTypes
 {
-    public class ListSellTypeQuery:IRequest<IList<SellTypeResponse>>
+    public class ListSellTypesQuery:IRequest<IList<SellTypeResponse>>
     {
     }
 
-    public class ListSellTypeQueryHandler : IRequestHandler<ListSellTypeQuery, IList<SellTypeResponse>>
+    public class ListSellTypesQueryHandler : IRequestHandler<ListSellTypesQuery, IList<SellTypeResponse>>
     {
         private readonly ISellTypeRepository _sellTypeRepo;
         private readonly IMapper _mapper;
 
-        public ListSellTypeQueryHandler(ISellTypeRepository sellTypeRepo, IMapper mapper)
+        public ListSellTypesQueryHandler(ISellTypeRepository sellTypeRepo, IMapper mapper)
         {
             _sellTypeRepo = sellTypeRepo;
             _mapper = mapper;
         }
 
-        public async Task<IList<SellTypeResponse>> Handle(ListSellTypeQuery request, CancellationToken cancellationToken)
+        public async Task<IList<SellTypeResponse>> Handle(ListSellTypesQuery request, CancellationToken cancellationToken)
         {
             var sellTypes = await _sellTypeRepo.GetAllAsync();
             return _mapper.Map<List<SellTypeResponse>>(sellTypes);

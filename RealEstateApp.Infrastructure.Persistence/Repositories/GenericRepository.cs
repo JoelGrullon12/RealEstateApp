@@ -32,9 +32,8 @@ namespace RealEstateApp.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public virtual async Task DeleteAsync(int id)
+        public virtual async Task DeleteAsync(Entity t)
         {
-            Entity t = await _dbContext.Set<Entity>().FindAsync(id);
             _dbContext.Set<Entity>().Remove(t);
             await _dbContext.SaveChangesAsync();
         }

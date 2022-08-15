@@ -33,6 +33,10 @@ namespace RealEstateApp.Core.Application.Features.SellTypes.Commands.UpdateSellT
         public async Task<SellTypeResponse> Handle(UpdateSellTypeCommand request, CancellationToken cancellationToken)
         {
             var sellType = _mapper.Map<SellType>(request);
+
+            if (sellType == null)
+                return null;
+
             await _sellTypeRepo.UpdateAsync(sellType, request.Id);
             return _mapper.Map<SellTypeResponse>(sellType);
         }
