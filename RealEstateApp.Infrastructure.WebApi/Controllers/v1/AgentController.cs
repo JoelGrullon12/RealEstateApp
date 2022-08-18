@@ -26,7 +26,7 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         {
             try
             {
-                var agentList = await Mediator.Send(new ListAgentsQuery());
+                var agentList = await Mediator.Send(new ListClientsQuery());
 
                 if (agentList == null || agentList.Count == 0)
                     return NotFound();
@@ -50,7 +50,7 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         {
             try
             {
-                var agent = await Mediator.Send(new GetAgentByIdQuery
+                var agent = await Mediator.Send(new GetClientByIdQuery
                 {
                     Id = id
                 });
@@ -77,7 +77,7 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         {
             try
             {
-                var props = await Mediator.Send(new GetAgentPropertyQuery
+                var props = await Mediator.Send(new GetClientPropertyQuery
                 {
                     AgentId = id
                 });
@@ -101,7 +101,7 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> ChangeStatus([FromBody] ChangeAgentStatusCommand request)
+        public async Task<IActionResult> ChangeStatus([FromBody] ChangeClientStatusCommand request)
         {
             try
             {

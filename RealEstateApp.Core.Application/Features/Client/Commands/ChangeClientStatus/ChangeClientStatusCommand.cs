@@ -7,19 +7,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeAgentStatus
+namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeClientStatus
 {
     public class ChangeClientStatusCommand:IRequest<bool>
     {
-        public string AgentId { get; set; }
+        public string ClientId { get; set; }
         public bool Status { get; set; }
     }
 
-    public class ChangeAgentStatusCommandHandler : IRequestHandler<ChangeClientStatusCommand, bool>
+    public class ChangeClientStatusCommandHandler : IRequestHandler<ChangeClientStatusCommand, bool>
     {
         private readonly IUserService _userService;
 
-        public ChangeAgentStatusCommandHandler(IUserService userService)
+        public ChangeClientStatusCommandHandler(IUserService userService)
         {
             _userService = userService;
         }
@@ -28,13 +28,13 @@ namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeAgentStat
         {
             try
             {
-                var agent = await _userService.GetByIdSaveViewModel(request.AgentId);
+                var client = await _userService.GetByIdSaveViewModel(request.ClientId);
 
-                if (agent == null)
+                if (client == null)
                     return false;
 
-                agent.IsActive = request.Status;
-                await _userService.SetUserStatus(request.AgentId, request.Status);
+                client.IsActive = request.Status;
+                await _userService.SetUserStatus(request.ClientId, request.Status);
                 return true;
             }catch(Exception ex)
             {
