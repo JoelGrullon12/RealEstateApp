@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateApp.Core.Application.DTO.API.Properties;
 using RealEstateApp.Core.Application.Features.Properties.Queries.GetPropertyByCode;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace RealEstateApp.Presentation.WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
+    [Authorize(Roles="Admin,Developer")]
     public class PropertyController : BaseApiController
     {
 

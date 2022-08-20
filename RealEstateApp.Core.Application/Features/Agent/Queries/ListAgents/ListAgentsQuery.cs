@@ -27,8 +27,7 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.ListAgents
             _propRepo = propRepo;
         }
 
-        public async Task<IList<AgentResponse>> Handle(ListAgentsQuery request, CancellationToken cancellationToken)
-         {
+      
         public async Task<IList<AgentResponse>> Handle(ListClientsQuery request, CancellationToken cancellationToken)
         {
             var agents = await _userService.GetAllViewModel();

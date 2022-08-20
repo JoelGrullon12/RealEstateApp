@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateApp.Core.Application.DTO.API.Agents;
 using RealEstateApp.Core.Application.DTO.API.Properties;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace RealEstateApp.Presentation.WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
+    [Authorize(Roles="Admin,Developer")]
     public class AgentController : BaseApiController
     {
 
@@ -96,6 +98,7 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        [Authorize(Roles="Admin")]
         [HttpPut("ChangeStatus")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

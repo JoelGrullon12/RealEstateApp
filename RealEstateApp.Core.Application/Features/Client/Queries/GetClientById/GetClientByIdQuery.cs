@@ -29,7 +29,7 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetClientById
 
         public async Task<ClientResponse> Handle(GetClientByIdQuery request, CancellationToken cancellationToken)
         {
-            var client = await _userService.GetByIdSaveViewModel(request.Id);
+            var client = await _userService.GetByIdViewModel(request.Id);
 
             if (client == null)
                 return null;

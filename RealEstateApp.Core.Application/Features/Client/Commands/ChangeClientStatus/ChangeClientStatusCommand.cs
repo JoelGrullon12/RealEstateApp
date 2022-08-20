@@ -28,7 +28,7 @@ namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeClientSta
         {
             try
             {
-                var client = await _userService.GetByIdSaveViewModel(request.ClientId);
+                var client = await _userService.GetByIdViewModel(request.ClientId);
 
                 if (client == null)
                     return false;

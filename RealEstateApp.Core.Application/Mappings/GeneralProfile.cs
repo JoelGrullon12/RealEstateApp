@@ -10,6 +10,7 @@ using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.UpdatePrope
 using RealEstateApp.Core.Application.Features.SellTypes.Commands.CreateSellType;
 using RealEstateApp.Core.Application.Features.SellTypes.Commands.UpdateSellType;
 using RealEstateApp.Core.Application.Features.Upgrades.Commands.CreateUpgrade;
+using RealEstateApp.Core.Application.Features.Upgrades.Commands.UpdateUpgrade;
 using RealEstateApp.Core.Application.ViewModels.Favorite;
 using RealEstateApp.Core.Application.ViewModels.Property;
 using RealEstateApp.Core.Application.ViewModels.PropertyImg;
@@ -243,6 +244,13 @@ namespace RealEstateApp.Core.Application.Mappings
             CreateMap<Upgrade, CreateUpgradeCommand>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.Properties, opt => opt.Ignore())
+                .ForMember(dest => dest.PropertyUpgrades, opt => opt.Ignore())
+                ;
+
+            CreateMap<Upgrade, UpdateUpgradeCommand>()
+                .ReverseMap()
                 .ForMember(dest => dest.Created, opt => opt.Ignore())
                 .ForMember(dest => dest.Properties, opt => opt.Ignore())
                 .ForMember(dest => dest.PropertyUpgrades, opt => opt.Ignore())
