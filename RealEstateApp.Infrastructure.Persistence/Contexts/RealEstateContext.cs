@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RealEstateApp.Core.Domain.Common;
 using RealEstateApp.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Infrastructure.Persistence.Contexts
@@ -11,6 +13,20 @@ namespace RealEstateApp.Infrastructure.Persistence.Contexts
     public class RealEstateContext:DbContext
     {
         public RealEstateContext(DbContextOptions<RealEstateContext> options) : base(options) { }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries<AuditableBaseEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.Created = DateTime.Now;
+                        break;
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImg> PropertyImgs { get; set; }

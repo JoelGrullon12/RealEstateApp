@@ -38,7 +38,7 @@ namespace RealEstateApp.Core.Application.Features.Properties.Queries.ListPropert
             foreach(var prop in props)
             {
                 PropertyResponse property = _mapper.Map<PropertyResponse>(prop);
-                var agent=await _userService.GetByIdSaveViewModel(prop.AgentId);
+                var agent=await _userService.GetByIdViewModel(prop.AgentId);
 
                 int propCount = 0;
 

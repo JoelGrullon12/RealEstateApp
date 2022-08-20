@@ -37,7 +37,7 @@ namespace RealEstateApp.Core.Application.Features.Properties.Queries.GetProperty
             if (prop == null)
                 return null;
             
-            var agent = await _userService.GetByIdSaveViewModel(prop.AgentId);
+            var agent = await _userService.GetByIdViewModel(prop.AgentId);
 
             var response = _mapper.Map<PropertyResponse>(prop);
             int propCount = 0;

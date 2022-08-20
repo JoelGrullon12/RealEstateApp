@@ -69,19 +69,9 @@ namespace RealEstateApp.Core.Application.Services
             return viewModelList;
         }
 
-        public async Task<UserViewModel> GetByIdSaveViewModel(string id)
+        public async Task<UserViewModel> GetByIdViewModel(string id)
         {
-            var roles = _roleService.GetAllRoles();
             UserViewModel user = await _accountService.GetUserByIdViewModel(id);
-
-            foreach (var role in roles)
-            {
-                if (role.Name == user.Role)
-                {
-                    user.Role = role.Id;
-                }
-            }
-
             return user;
         }
 

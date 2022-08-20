@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RealEstateApp.Core.Application.DTO.API.Agents;
+using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using System;
@@ -27,23 +28,26 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.ListAgents
         }
 
         public async Task<IList<AgentResponse>> Handle(ListAgentsQuery request, CancellationToken cancellationToken)
-        {
+         {
             var agents = await _userService.GetAllViewModel();
 
             List<AgentResponse> response = new();
 
             foreach(var agent in agents)
             {
-                int propCount = (await _propRepo.GetAllAsync()).Where(prop => prop.AgentId == agent.Id).Count();
-                response.Add(new AgentResponse
+                if (agent.Role == Roles.Agent.ToString())
                 {
-                    Id = agent.Id,
-                    Name = agent.FirstName,
-                    LastName = agent.LastName,
-                    Email = agent.Email,
-                    Phone = agent.Phone,
-                    PropertiesCount = propCount
-                });
+                    int propCount = (await _propRepo.GetAllAsync()).Where(prop => prop.AgentId == agent.Id).Count();
+                    response.Add(new AgentResponse
+                    {
+                        Id = agent.Id,
+                        Name = agent.FirstName,
+                        LastName = agent.LastName,
+                        Email = agent.Email,
+                        Phone = agent.Phone,
+                        PropertiesCount = propCount
+                    });
+                }
             }
 
             return response;

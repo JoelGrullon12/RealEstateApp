@@ -28,7 +28,7 @@ namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeAgentStat
         {
             try
             {
-                var agent = await _userService.GetByIdSaveViewModel(request.AgentId);
+                var agent = await _userService.GetByIdViewModel(request.AgentId);
 
                 if (agent == null)
                     return false;

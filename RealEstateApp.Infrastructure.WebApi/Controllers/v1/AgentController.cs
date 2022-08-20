@@ -46,7 +46,7 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AgentResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get([FromQuery] string id)
+        public async Task<IActionResult> Get([FromRoute] string id)
         {
             try
             {

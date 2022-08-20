@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using RealEstateApp.Core.Application.DTO.API.Agents;
+using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using System;
@@ -29,9 +30,9 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById
 
         public async Task<AgentResponse> Handle(GetAgentByIdQuery request, CancellationToken cancellationToken)
         {
-            var agent = await _userService.GetByIdSaveViewModel(request.Id);
+            var agent = await _userService.GetByIdViewModel(request.Id);
 
-            if (agent == null)
+            if (agent == null || agent.Role != Roles.Agent.ToString())
                 return null;
 
             var props = await _propRepo.GetAllAsync();
