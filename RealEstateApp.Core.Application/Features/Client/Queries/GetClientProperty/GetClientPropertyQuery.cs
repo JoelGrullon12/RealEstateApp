@@ -10,20 +10,20 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentProperty
+namespace RealEstateApp.Core.Application.Features.Client.Queries.GetClientProperty
 {
     public class GetClientPropertyQuery:IRequest<IList<PropertyResponse>>
     {
-        public string AgentId { get; set; }
+        public string ClientId { get; set; }
     }
 
-    public class GetAgentPropertyQueryHandler : IRequestHandler<GetClientPropertyQuery, IList<PropertyResponse>>
+    public class GetClientPropertyQueryHandler : IRequestHandler<GetClientPropertyQuery, IList<PropertyResponse>>
     {
         private readonly IPropertyRepository _propRepo;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public GetAgentPropertyQueryHandler(IPropertyRepository propRepo, IUserService userService, IMapper mapper)
+        public GetClientPropertyQueryHandler(IPropertyRepository propRepo, IUserService userService, IMapper mapper)
         {
             _propRepo = propRepo;
             _userService = userService;
@@ -38,27 +38,27 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentProperty
 
             foreach (var prop in props)
             {
-                if (prop.AgentId == request.AgentId)
+                if (prop.ClientId == request.ClientId)
                 {
                     var property = _mapper.Map<PropertyResponse>(prop);
-                    var agent = await _userService.GetByIdViewModel(prop.AgentId);
+                    var client = await _userService.GetByIdSaveViewModel(prop.ClientId);
 
                     int propCount = 0;
 
-                    foreach (var propertyByAgent in props)
+                    foreach (var propertyByClient in props)
                     {
-                        if (propertyByAgent.AgentId == agent.Id)
+                        if (propertyByClient.ClientId == client.Id)
                             propCount++;
                     }
 
 
-                    property.Agent = new()
+                    property.Client = new()
                     {
-                        Id = agent.Id,
-                        Name = agent.FirstName,
-                        LastName = agent.LastName,
-                        Email = agent.Email,
-                        Phone = agent.Phone,
+                        Id = client.Id,
+                        Name = client.FirstName,
+                        LastName = client.LastName,
+                        Email = client.Email,
+                        Phone = client.Phone,
                         PropertiesCount = propCount
                     };
 

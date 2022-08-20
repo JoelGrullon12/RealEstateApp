@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById
 {
-    public class GetAgentByIdQuery:IRequest<AgentResponse>
+    public class GetClientByIdQuery:IRequest<AgentResponse>
     {
         public string Id { get; set; }
     }
 
-    public class GetAgentByIdQueryHandler : IRequestHandler<GetAgentByIdQuery, AgentResponse>
+    public class GetAgentByIdQueryHandler : IRequestHandler<GetClientByIdQuery, AgentResponse>
     {
         private readonly IUserService _userService;
         private readonly IPropertyRepository _propRepo;
@@ -28,7 +28,7 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById
             _propRepo = propRepo;
         }
 
-        public async Task<AgentResponse> Handle(GetAgentByIdQuery request, CancellationToken cancellationToken)
+        public async Task<AgentResponse> Handle(GetClientByIdQuery request, CancellationToken cancellationToken)
         {
             var agent = await _userService.GetByIdViewModel(request.Id);
 

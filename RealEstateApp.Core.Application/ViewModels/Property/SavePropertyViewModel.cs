@@ -17,5 +17,7 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public int Bathrooms { get; set; }
         public int Size { get; set; }
         public int AgentId { get; set; }
+
+        public int ClientId { get; set; }
     }
 }

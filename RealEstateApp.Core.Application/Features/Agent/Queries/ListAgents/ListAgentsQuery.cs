@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Agent.Queries.ListAgents
 {
-    public class ListAgentsQuery : IRequest<IList<AgentResponse>>
+    public class ListClientsQuery : IRequest<IList<AgentResponse>>
     { }
 
-    public class ListAgentsQueryHandler : IRequestHandler<ListAgentsQuery, IList<AgentResponse>>
+    public class ListAgentsQueryHandler : IRequestHandler<ListClientsQuery, IList<AgentResponse>>
     {
         private readonly IUserService _userService;
         private readonly IPropertyRepository _propRepo;
@@ -29,6 +29,8 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.ListAgents
 
         public async Task<IList<AgentResponse>> Handle(ListAgentsQuery request, CancellationToken cancellationToken)
          {
+        public async Task<IList<AgentResponse>> Handle(ListClientsQuery request, CancellationToken cancellationToken)
+        {
             var agents = await _userService.GetAllViewModel();
 
             List<AgentResponse> response = new();
