@@ -13,9 +13,9 @@ namespace RealEstateApp.Infrastructure.Identity.Seeds
     {
         public static async Task SeedsAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            var defaultUser = new AppUser
+            AppUser defaultUser = new AppUser
             {
-                Name = "Admin",
+                FirstName = "Admin",
                 LastName = "User",
                 UserName = "AdminUser",
                 Email = "adminuser@email.com",
@@ -25,11 +25,11 @@ namespace RealEstateApp.Infrastructure.Identity.Seeds
 
             if (userManager.Users.All(user => user.Id != defaultUser.Id))
             {
-                var user = await userManager.FindByEmailAsync(defaultUser.Email);
+                AppUser user = await userManager.FindByEmailAsync(defaultUser.Email);
 
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "Password123!");
+                    await userManager.CreateAsync(defaultUser, "Pa$$word123!");
                     await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
                 }
             }

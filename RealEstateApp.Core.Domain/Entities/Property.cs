@@ -18,7 +18,6 @@ namespace RealEstateApp.Core.Domain.Entities
         public int Bathrooms { get; set; }
         public int Size { get; set; }
         public string AgentId { get; set; }
-
         public string ClientId { get; set; }
 
         #region Navigation Properties

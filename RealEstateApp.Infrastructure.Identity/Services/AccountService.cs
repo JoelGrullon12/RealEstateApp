@@ -80,7 +80,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             return response;
         }
 
-        public async Task<SetUserResponse> SetUserStatusAsync(string userId,bool status)
+        public async Task<SetUserResponse> SetUserStatusAsync(string userId, bool status)
         {
             var response = new SetUserResponse();
             var user = await _userManager.FindByIdAsync(userId);
@@ -190,7 +190,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 }
             }
 
-            user.Name = request.FirstName;
+            user.FirstName = request.FirstName;
             user.LastName = request.LastName;
             user.UserName = request.UserName;
             user.Email = request.Email;
@@ -219,7 +219,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             UserViewModel saveViewModel = new UserViewModel
             {
                 Id = user.Id,
-                FirstName = user.Name,
+                FirstName = user.FirstName,
                 LastName = user.LastName,
                 DNI = user.DNI,
                 Email = user.Email,
@@ -238,7 +238,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             List<UserViewModel> viewModelList = users.Select(user => new UserViewModel
             {
                 Id = user.Id,
-                FirstName = user.Name,
+                FirstName = user.FirstName,
                 LastName = user.LastName,
                 DNI = user.DNI,
                 Email = user.Email,
@@ -293,7 +293,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             {
                 Email = request.Email,
                 UserName = request.UserName,
-                Name = request.FirstName,
+                FirstName = request.FirstName,
                 LastName = request.LastName,
                 DNI = request.DNI,
                 PhoneNumber = request.Phone,

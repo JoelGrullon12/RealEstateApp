@@ -15,7 +15,7 @@ namespace RealEstateApp.Infrastructure.Identity.Seeds
         {
             var defaultUser = new AppUser
             {
-                Name = "Client",
+                FirstName = "Client",
                 LastName = "User",
                 UserName = "ClientUser",
                 Email = "clientuser@email.com",
@@ -29,7 +29,7 @@ namespace RealEstateApp.Infrastructure.Identity.Seeds
 
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "Password123!");
+                    await userManager.CreateAsync(defaultUser, "Pa$$word123!");
                     await userManager.AddToRoleAsync(defaultUser, Roles.Client.ToString());
                 }
             }
