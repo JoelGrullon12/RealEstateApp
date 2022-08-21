@@ -37,7 +37,14 @@ namespace RealEstateApp.Presentation.WebApi
             services.AddSwaggerExtension();
             services.AddApiVersioningExtension();
 
-            services.AddControllers().AddNewtonsoftJson(options =>
+            services.AddControllers(opt =>
+            {
+                opt.Filters.Add(new ProducesAttribute("application/json"));
+            }).ConfigureApiBehaviorOptions(opt =>
+            {
+                opt.SuppressInferBindingSourcesForParameters = true;
+                opt.SuppressMapClientErrors = true;
+            }).AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
             services.AddHealthChecks();

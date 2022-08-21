@@ -7,13 +7,16 @@ using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.DeletePrope
 using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.UpdatePropertyType;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Queries.GetPropertyTypeById;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Queries.ListPropertyTypes;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
     [Authorize(Roles="Admin,Developer")]
+    [SwaggerTag("Mantenimiento de Tipos de Propiedades")]
     public class PropertyTypeController : BaseApiController
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,9 +24,14 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [Authorize(Roles="Admin")]
         [HttpPost("Create")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Crear Tipo de Propiedad",
+            Description = "Crea un tipo de propiedad con los datos suministrados en formato JSON"
+            )]
         public async Task<IActionResult> Post([FromBody] CreatePropertyTypeCommand request)
         {
             try
@@ -49,10 +57,15 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [Authorize(Roles="Admin")]
         [HttpPut("Update")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK,Type=typeof(PropertyTypeResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Editar Tipo de Propiedad",
+            Description = "Edita un tipo de propiedad segun los datos suministrados en formato JSON y modifica el registro correspondiente al Id"
+            )]
         public async Task<IActionResult> Put([FromBody] UpdatePropertyTypeCommand request)
         {
             try
@@ -80,6 +93,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PropertyTypeResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Listar Tipos de Propiedades",
+            Description = "Lista todos los tipos de propiedades guardados en la base de datos"
+            )]
         public async Task<IActionResult> Get()
         {
             try
@@ -104,6 +121,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PropertyTypeResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Tipo de Propiedad por Id",
+            Description = "Muestra los datos del tipo de propiedad correspondiente al Id suministrado"
+            )]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             try
@@ -132,6 +153,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Eliminar Tipo de Propiedad",
+            Description = "Elimina el Tipo de Propiedad correspondiente al Id suministrado"
+            )]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             try

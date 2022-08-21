@@ -7,13 +7,16 @@ using RealEstateApp.Core.Application.Features.Upgrades.Commands.DeleteUpgrade;
 using RealEstateApp.Core.Application.Features.Upgrades.Commands.UpdateUpgrade;
 using RealEstateApp.Core.Application.Features.Upgrades.Queries.GetUpgradeById;
 using RealEstateApp.Core.Application.Features.Upgrades.Queries.ListUpgrades;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApi.Controllers.v1
 {
     [Authorize(Roles="Admin,Developer")]
     [ApiVersion("1.0")]
+    [SwaggerTag("Mantenimiento de Mejoras")]
     public class UpgradeController : BaseApiController
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,9 +24,14 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [Authorize(Roles="Admin")]
         [HttpPost("Create")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Crear Mejora",
+            Description = "Crea una mejora con los datos suministrados en formato JSON"
+            )]
         public async Task<IActionResult> Post([FromBody] CreateUpgradeCommand request)
         {
             try
@@ -49,10 +57,15 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [Authorize(Roles="Admin")]
         [HttpPut("Update")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpgradeResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Editar Mejora",
+            Description = "Edita una mejora segun los datos suministrados en formato JSON y modifica el registro correspondiente al Id"
+            )]
         public async Task<IActionResult> Put([FromBody] UpdateUpgradeCommand request)
         {
             try
@@ -80,6 +93,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpgradeResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Listar Mejoras",
+            Description = "Lista todas las mejoras guardadas en la base de datos"
+            )]
         public async Task<IActionResult> Get()
         {
             try
@@ -104,6 +121,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UpgradeResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Mejora por Id",
+            Description = "Muestra los datos de la mejora correspondiente al Id suministrado"
+            )]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             try
@@ -132,6 +153,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Eliminar Mejora",
+            Description = "Elimina la Mejora correspondiente al Id suministrado"
+            )]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             try

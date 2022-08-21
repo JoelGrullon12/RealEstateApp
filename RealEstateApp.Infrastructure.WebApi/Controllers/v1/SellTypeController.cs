@@ -7,13 +7,16 @@ using RealEstateApp.Core.Application.Features.SellTypes.Commands.DeleteSellType;
 using RealEstateApp.Core.Application.Features.SellTypes.Commands.UpdateSellType;
 using RealEstateApp.Core.Application.Features.SellTypes.Queries.GetSellTypeById;
 using RealEstateApp.Core.Application.Features.SellTypes.Queries.ListSellTypes;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApi.Controllers.v1
 {
     [Authorize(Roles="Admin,Developer")]
     [ApiVersion("1.0")]
+    [SwaggerTag("Mantenimiento de Tipos de Ventas")]
     public class SellTypeController : BaseApiController
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,9 +24,14 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [Authorize(Roles="Admin")]
         [HttpPost("Create")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Crear Tipo de Venta",
+            Description = "Crea un tipo de venta con los datos suministrados en formato JSON"
+            )]
         public async Task<IActionResult> Post([FromBody] CreateSellTypeCommand request)
         {
             try
@@ -49,10 +57,15 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [Authorize(Roles="Admin")]
         [HttpPut("Update")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SellTypeResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Editar Tipo de Venta",
+            Description = "Edita un tipo de venta segun los datos suministrados en formato JSON y modifica el registro correspondiente al Id"
+            )]
         public async Task<IActionResult> Put([FromBody] UpdateSellTypeCommand request)
         {
             try
@@ -80,6 +93,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SellTypeResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Listar Tipos de Ventas",
+            Description = "Lista todos los tipos de ventas guardados en la base de datos"
+            )]
         public async Task<IActionResult> Get()
         {
             try
@@ -104,6 +121,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SellTypeResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Tipo de Venta por Id",
+            Description = "Muestra los datos del tipo de venta correspondiente al Id suministrado"
+            )]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             try
@@ -132,6 +153,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Eliminar Tipo de Venta",
+            Description = "Elimina el Tipo de Venta correspondiente al Id suministrado"
+            )]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             try

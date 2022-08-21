@@ -7,13 +7,16 @@ using RealEstateApp.Core.Application.Features.Agent.Commands.ChangeAgentStatus;
 using RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById;
 using RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentProperty;
 using RealEstateApp.Core.Application.Features.Agent.Queries.ListAgents;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
     [Authorize(Roles="Admin,Developer")]
+    [SwaggerTag("Listar y activar/desactivar Agentes")]
     public class AgentController : BaseApiController
     {
 
@@ -24,6 +27,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AgentResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary ="Listado de agentes",
+            Description ="Lista todos los agentes mostrando la cantidad de propiedades que ha creado cada agente"
+            )]
         public async Task<IActionResult> Get()
         {
             try
@@ -48,6 +55,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AgentResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Agente por Id",
+            Description = "Obtiene los datos del agente correspondiente al Id suministrado"
+            )]
         public async Task<IActionResult> Get([FromRoute] string id)
         {
             try
@@ -75,6 +86,10 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PropertyResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Propiedades de un agente",
+            Description = "Obtiene los datos de las propiedades creadas por el agente correspondiente al Id suministrado"
+            )]
         public async Task<IActionResult> GetProperties([FromRoute] string id)
         {
             try
@@ -100,10 +115,15 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [Authorize(Roles="Admin")]
         [HttpPut("ChangeStatus")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Cambiar estado de un agente",
+            Description = "Cambia el estado del agente correspondiente al Id suministrado a activo o inactivo segun se indique"
+            )]
         public async Task<IActionResult> ChangeStatus([FromBody] ChangeClientStatusCommand request)
         {
             try

@@ -31,6 +31,7 @@ namespace RealEstateApp.Presentation.WebApi.Extensions
                     }
                 });
 
+                opt.EnableAnnotations();
                 opt.DescribeAllParametersInCamelCase();
                 opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
