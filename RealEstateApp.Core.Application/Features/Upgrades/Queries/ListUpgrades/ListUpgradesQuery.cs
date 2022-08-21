@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Upgrades.Queries.ListUpgrades
 {
+    /// <summary>
+    /// Parametros para listar todas las mejoras
+    /// </summary>
     public class ListUpgradesQuery:IRequest<IList<UpgradeResponse>>
     {
     }

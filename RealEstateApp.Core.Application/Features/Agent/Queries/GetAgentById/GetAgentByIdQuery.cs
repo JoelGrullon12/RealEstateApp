@@ -3,6 +3,7 @@ using RealEstateApp.Core.Application.DTO.API.Agents;
 using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,15 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById
 {
+    /// <summary>
+    /// Parametros para buscar un agente por el Id
+    /// </summary>
     public class GetClientByIdQuery:IRequest<AgentResponse>
     {
+        /// <example>
+        /// dfc25c57-e56a-482d-9ec5-a005dac64551
+        /// </example>
+        [SwaggerParameter(Description = "Id del Agente que se esta buscando")]
         public string Id { get; set; }
     }
 

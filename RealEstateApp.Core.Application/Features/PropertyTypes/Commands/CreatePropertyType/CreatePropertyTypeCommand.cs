@@ -2,6 +2,7 @@
 using MediatR;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,21 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.PropertyTypes.Commands.CreatePropertyType
 {
+    /// <summary>
+    /// Parametros para crear un tipo de propiedad
+    /// </summary>
     public class CreatePropertyTypeCommand:IRequest<bool>
     {
+        /// <example>
+        /// Cabaña
+        /// </example>
+        [SwaggerParameter(Description = "Nombre del tipo de propiedad")]
         public string Name { get; set; }
+
+        /// <example>
+        /// Edificio de madera en medio del bosque
+        /// </example>
+        [SwaggerParameter(Description = "Descripcion del tipo de propiedad")]
         public string Description { get; set; }
     }
 

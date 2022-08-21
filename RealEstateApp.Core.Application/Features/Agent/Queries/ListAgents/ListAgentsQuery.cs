@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Agent.Queries.ListAgents
 {
+    /// <summary>
+    /// Parametros para listar los agentes
+    /// </summary>
     public class ListClientsQuery : IRequest<IList<AgentResponse>>
     { }
 

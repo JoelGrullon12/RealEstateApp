@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,15 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.PropertyTypes.Commands.DeletePropertyType
 {
+    /// <summary>
+    /// Parametros para eliminar un tipo de propiedad
+    /// </summary>
     public class DeletePropertyTypeCommand:IRequest<bool>
     {
+        /// <example>
+        /// 3
+        /// </example>
+        [SwaggerParameter(Description = "Id del tipo de propiedad")]
         public int Id { get; set; }
     }
 

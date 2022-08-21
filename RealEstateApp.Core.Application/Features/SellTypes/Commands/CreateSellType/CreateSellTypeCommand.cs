@@ -2,6 +2,7 @@
 using MediatR;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,21 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.SellTypes.Commands.CreateSellType
 {
+    /// <summary>
+    /// Parametros para crear un tipo de venta
+    /// </summary>
     public class CreateSellTypeCommand : IRequest<bool>
     {
+        /// <example>
+        /// Directa
+        /// </example>
+        [SwaggerParameter(Description = "Nombre del tipo de venta")]
         public string Name { get; set; }
+
+        /// <example>
+        /// Venta en persona con el dueño y el comprador presente
+        /// </example>
+        [SwaggerParameter(Description = "Descripcion del tipo de venta")]
         public string Description { get; set; }
     }
 

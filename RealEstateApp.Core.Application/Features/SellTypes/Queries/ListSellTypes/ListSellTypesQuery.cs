@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.SellTypes.Queries.ListSellTypes
 {
+    /// <summary>
+    /// Parametros para listar todos los tipos de venta
+    /// </summary>
     public class ListSellTypesQuery:IRequest<IList<SellTypeResponse>>
     {
     }

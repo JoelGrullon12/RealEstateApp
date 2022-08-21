@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using RealEstateApp.Core.Application.Interfaces.Services;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,21 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeAgentStatus
 {
+    /// <summary>
+    /// Parametros para cambiar el estado de un agente
+    /// </summary>
     public class ChangeClientStatusCommand:IRequest<bool>
     {
+        /// <example>
+        /// dfc25c57-e56a-482d-9ec5-a005dac64551
+        /// </example>
+        [SwaggerParameter(Description ="Id del agente que se va a cambiar el estado")]
         public string AgentId { get; set; }
+
+        /// <example>
+        /// true
+        /// </example>
+        [SwaggerParameter(Description = "Nuevo estado del agente en formato booleano")]
         public bool Status { get; set; }
     }
 

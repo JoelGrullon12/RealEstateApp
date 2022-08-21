@@ -3,6 +3,7 @@ using MediatR;
 using RealEstateApp.Core.Application.DTO.API.SellTypes;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,27 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.SellTypes.Commands.UpdateSellType
 {
+    /// <summary>
+    /// Parametros para actualizar un tipo de venta
+    /// </summary>
     public class UpdateSellTypeCommand:IRequest<SellTypeResponse>
     {
+        /// <example>
+        /// 3
+        /// </example>
+        [SwaggerParameter(Description = "Id del tipo de venta")]
         public int Id { get; set; }
+
+        /// <example>
+        /// Directa
+        /// </example>
+        [SwaggerParameter(Description = "Nombre del tipo de venta")]
         public string Name { get; set; }
+
+        /// <example>
+        /// Venta en persona con el dueño y el comprador presente
+        /// </example>
+        [SwaggerParameter(Description = "Descripcion del tipo de venta")]
         public string Description { get; set; }
     }
 

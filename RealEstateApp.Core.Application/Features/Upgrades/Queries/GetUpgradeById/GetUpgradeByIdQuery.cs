@@ -2,6 +2,7 @@
 using MediatR;
 using RealEstateApp.Core.Application.DTO.API.Upgrades;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,15 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Upgrades.Queries.GetUpgradeById
 {
+    /// <summary>
+    /// Parametros para buscar una mejora por el Id
+    /// </summary>
     public class GetUpgradeByIdQuery:IRequest<UpgradeResponse>
     {
+        /// <example>
+        /// 2
+        /// </example>
+        [SwaggerParameter(Description = "Id de la mejora")]
         public int Id { get; set; }
     }
 

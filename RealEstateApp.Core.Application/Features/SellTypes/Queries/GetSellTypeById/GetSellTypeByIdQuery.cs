@@ -2,6 +2,7 @@
 using MediatR;
 using RealEstateApp.Core.Application.DTO.API.SellTypes;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,15 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.SellTypes.Queries.GetSellTypeById
 {
+    /// <summary>
+    /// Parametros para buscar un tipo de venta por su Id
+    /// </summary>
     public class GetSellTypeByIdQuery:IRequest<SellTypeResponse>
     {
+        /// <example>
+        /// 3
+        /// </example>
+        [SwaggerParameter(Description = "Id del tipo de venta")]
         public int Id { get; set; }
     }
 

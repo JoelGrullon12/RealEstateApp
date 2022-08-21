@@ -3,6 +3,7 @@ using MediatR;
 using RealEstateApp.Core.Application.DTO.API.Properties;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,15 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentProperty
 {
+    /// <summary>
+    /// Parametros para buscar las propiedades creadas por un agente
+    /// </summary>
     public class GetClientPropertyQuery:IRequest<IList<PropertyResponse>>
     {
+        /// <example>
+        /// dfc25c57-e56a-482d-9ec5-a005dac64551
+        /// </example>
+        [SwaggerParameter(Description = "Id del Agente del que se buscan las propiedades")]
         public string AgentId { get; set; }
     }
 

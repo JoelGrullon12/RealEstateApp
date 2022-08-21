@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,15 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Upgrades.Commands.DeleteUpgrade
 {
+    /// <summary>
+    /// Parametros para eliminar una mejora
+    /// </summary>
     public class DeleteUpgradeCommand:IRequest<bool>
     {
+        /// <example>
+        /// 2
+        /// </example>
+        [SwaggerParameter(Description = "Id de la mejora")]
         public int Id { get; set; }
     }
 

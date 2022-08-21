@@ -3,6 +3,7 @@ using MediatR;
 using RealEstateApp.Core.Application.DTO.API.Properties;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,15 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Properties.Queries.GetPropertyById
 {
+    /// <summary>
+    /// Parametros para buscar una propiedad por el Codigo
+    /// </summary>
     public class GetPropertyByCodeQuery : IRequest<PropertyResponse>
     {
+        /// <example>
+        /// 982489
+        /// </example>
+        [SwaggerParameter(Description = "Codigo de 6 digits de la propiedad que se esta buscando")]
         public int Code { get; set; }
     }
 

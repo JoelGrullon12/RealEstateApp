@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.PropertyTypes.Queries.ListPropertyTypes
 {
+    /// <summary>
+    /// Parametros para listar todos los tipos de propiedades
+    /// </summary>
     public class ListPropertyTypesQuery:IRequest<IList<PropertyTypeResponse>>
     {
     }

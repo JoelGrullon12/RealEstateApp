@@ -3,6 +3,7 @@ using MediatR;
 using RealEstateApp.Core.Application.DTO.API.PropertyTypes;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,27 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.PropertyTypes.Commands.UpdatePropertyType
 {
+    /// <summary>
+    /// Parametros para editar un tipo de propiedad
+    /// </summary>
     public class UpdatePropertyTypeCommand:IRequest<PropertyTypeResponse>
     {
+        /// <example>
+        /// 3
+        /// </example>
+        [SwaggerParameter(Description = "Id del tipo de propiedad")]
         public int Id { get; set; }
+
+        /// <example>
+        /// Cabaña
+        /// </example>
+        [SwaggerParameter(Description = "Nombre del tipo de propiedad")]
         public string Name { get; set; }
+
+        /// <example>
+        /// Edificio de madera en medio del bosque
+        /// </example>
+        [SwaggerParameter(Description = "Descripcion del tipo de propiedad")]
         public string Description { get; set; }
     }
 

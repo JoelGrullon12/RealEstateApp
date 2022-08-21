@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Properties.Queries.ListProperties
 {
+    /// <summary>
+    /// Parametros para listar todas las propiedades
+    /// </summary>
     public class ListPropertiesQuery : IRequest<IList<PropertyResponse>>
     {
     }
