@@ -49,6 +49,8 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             {
                 case "Agent":
                     return RedirectToRoute(new { controller = "Agent", action = "Index" });
+                case "Client":
+                    return RedirectToRoute(new { controller = "Client", action = "Index" });
                 case "Admin":
                     return RedirectToRoute(new { controller = "Admin", action = "Index" });
                 default:
