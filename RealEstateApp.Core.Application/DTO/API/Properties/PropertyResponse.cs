@@ -24,7 +24,6 @@ namespace RealEstateApp.Core.Application.DTO.API.Properties
 
         public AgentResponse Agent { get; set; }
 
-        public ClientResponse Client { get; set; }
         public PropertyTypeResponse Type { get; set; }
         public SellTypeResponse SellType { get; set; }
 

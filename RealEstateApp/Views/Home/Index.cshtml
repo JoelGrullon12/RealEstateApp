@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using RealEstateApp.Core.Application.ViewModels.Property;
+
+@model PropertyListViewModel
+@{
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="my-3 row row-cols-1 row-cols-md-3 g-4">
+  
+  <div class="col">
+    <div class="card">
+      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
+        alt="Hollywood Sign on The Hill" />
+      <div class="card-body">
+          @foreach (var properties in Model.PropertyTypes)
+         {
+              <h5 class="card-title">@properties.Type.Name</h5>
+         }
+       
+        <p class="card-text">
+          Descripcion
+        </p>
+         <h5 class="card-title">Codigo</h5>
+        <p class="card-text">
+         148984
+        </p>
+         <h5 class="card-title">Venta</h5>
+        <p class="card-text">
+         500,000
+        </p>
+        <h5 class="card-title">Habitaciones</h5>
+        <p class="card-text">
+        </p>
+        <h5 class="card-title">Baños</h5>
+        <p class="card-text">
+        </p>
+        <h5 class="card-title">Tamaño</h5>
+        <p class="card-text">
+         500 mt
+        </p>
+      </div>
+    </div>
+  </div>
+
 </div>
