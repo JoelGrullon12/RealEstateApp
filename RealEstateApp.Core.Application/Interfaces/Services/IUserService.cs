@@ -1,4 +1,4 @@
-﻿using RealEstateApp.Core.Application.DTO.Account;
+﻿using RealEstateApp.Core.Application.Dtos.Account;
 using RealEstateApp.Core.Application.ViewModels.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;

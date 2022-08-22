@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Core.Application.DTO.Account
+namespace RealEstateApp.Core.Application.Dtos.Account
 {
     public class RefreshToken
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RealEstateApp.Core.Application.DTO.API.Agents;
-using RealEstateApp.Core.Application.DTO.API.Properties;
+using RealEstateApp.Core.Application.Dtos.API.Agents;
+using RealEstateApp.Core.Application.Dtos.API.Properties;
 using RealEstateApp.Core.Application.Features.Agent.Commands.ChangeAgentStatus;
 using RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById;
 using RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentProperty;

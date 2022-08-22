@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RealEstateApp.Core.Application.DTO.API.Upgrades;
+using RealEstateApp.Core.Application.Dtos.API.Upgrades;
 using RealEstateApp.Core.Application.Features.Upgrades.Commands.CreateUpgrade;
 using RealEstateApp.Core.Application.Features.Upgrades.Commands.DeleteUpgrade;
 using RealEstateApp.Core.Application.Features.Upgrades.Commands.UpdateUpgrade;

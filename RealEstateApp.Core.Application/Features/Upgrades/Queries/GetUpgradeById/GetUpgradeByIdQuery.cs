@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using RealEstateApp.Core.Application.DTO.API.Upgrades;
+using RealEstateApp.Core.Application.Dtos.API.Upgrades;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using System;

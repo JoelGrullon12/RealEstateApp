@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RealEstateApp.Core.Application.DTO.API.Clients;
+using RealEstateApp.Core.Application.Dtos.API.Clients;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetClientById
 {
-    public class GetClientByIdQuery:IRequest<ClientResponse>
+    public class GetClientByIdQuery : IRequest<ClientResponse>
     {
         public string Id { get; set; }
     }
@@ -51,5 +51,4 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetClientById
             return response;
         }
     }
-
 }

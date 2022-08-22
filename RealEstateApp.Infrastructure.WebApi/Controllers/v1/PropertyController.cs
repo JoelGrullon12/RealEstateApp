@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RealEstateApp.Core.Application.DTO.API.Properties;
+using RealEstateApp.Core.Application.Dtos.API.Properties;
 using RealEstateApp.Core.Application.Features.Properties.Queries.GetPropertyByCode;
 using RealEstateApp.Core.Application.Features.Properties.Queries.GetPropertyById;
 using RealEstateApp.Core.Application.Features.Properties.Queries.ListProperties;

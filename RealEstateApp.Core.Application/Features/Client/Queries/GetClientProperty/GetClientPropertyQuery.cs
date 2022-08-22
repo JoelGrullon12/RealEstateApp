@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using RealEstateApp.Core.Application.DTO.API.Properties;
+using RealEstateApp.Core.Application.Dtos.API.Properties;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using System;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Client.Queries.GetClientProperty
 {
-    public class GetClientPropertyQuery:IRequest<IList<PropertyResponse>>
+    public class GetClientPropertyQuery : IRequest<IList<PropertyResponse>>
     {
         public string ClientId { get; set; }
     }
@@ -50,7 +50,6 @@ namespace RealEstateApp.Core.Application.Features.Client.Queries.GetClientProper
                         if (propertyByClient.ClientId == client.Id)
                             propCount++;
                     }
-
 
                     property.Client = new()
                     {

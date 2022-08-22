@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using RealEstateApp.Core.Application.DTO.API.Clients;
+using RealEstateApp.Core.Application.Dtos.API.Clients;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using System;

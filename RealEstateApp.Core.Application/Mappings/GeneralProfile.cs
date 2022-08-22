@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using RealEstateApp.Core.Application.DTO.Account;
-using RealEstateApp.Core.Application.DTO.API.Properties;
-using RealEstateApp.Core.Application.DTO.API.PropertyTypes;
-using RealEstateApp.Core.Application.DTO.API.SellTypes;
-using RealEstateApp.Core.Application.DTO.API.Upgrades;
+using RealEstateApp.Core.Application.Dtos.Account;
+using RealEstateApp.Core.Application.Dtos.API.Properties;
+using RealEstateApp.Core.Application.Dtos.API.PropertyTypes;
+using RealEstateApp.Core.Application.Dtos.API.SellTypes;
+using RealEstateApp.Core.Application.Dtos.API.Upgrades;
 using RealEstateApp.Core.Application.Features.Properties.Queries.ListProperties;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.CreatePropertyType;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.UpdatePropertyType;

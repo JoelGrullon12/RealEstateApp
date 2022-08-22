@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RealEstateApp.Core.Application.DTO.API.PropertyTypes;
+using RealEstateApp.Core.Application.Dtos.API.PropertyTypes;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.CreatePropertyType;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.DeletePropertyType;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.UpdatePropertyType;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Core.Application.DTO.Email
+namespace RealEstateApp.Core.Application.Dtos.Email
 {
     public class EmailRequest
     {

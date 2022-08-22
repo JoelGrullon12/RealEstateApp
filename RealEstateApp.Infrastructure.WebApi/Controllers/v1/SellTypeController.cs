@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RealEstateApp.Core.Application.DTO.API.SellTypes;
+using RealEstateApp.Core.Application.Dtos.API.SellTypes;
 using RealEstateApp.Core.Application.Features.SellTypes.Commands.CreateSellType;
 using RealEstateApp.Core.Application.Features.SellTypes.Commands.DeleteSellType;
 using RealEstateApp.Core.Application.Features.SellTypes.Commands.UpdateSellType;

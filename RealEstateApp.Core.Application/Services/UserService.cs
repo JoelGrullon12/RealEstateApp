@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RealEstateApp.Core.Application.DTO.Account;
+using RealEstateApp.Core.Application.Dtos.Account;
 using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;

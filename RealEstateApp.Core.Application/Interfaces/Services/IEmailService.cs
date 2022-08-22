@@ -1,4 +1,4 @@
-﻿using RealEstateApp.Core.Application.DTO.Email;
+﻿using RealEstateApp.Core.Application.Dtos.Email;
 using System;
 using System.Collections.Generic;
 using System.Linq;

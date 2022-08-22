@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Core.Application.DTO.API.PropertyTypes
+namespace RealEstateApp.Core.Application.Dtos.API.SellTypes
 {
-    public class PropertyTypeResponse
+    public class SellTypeResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RealEstateApp.Core.Application.DTO.API.Agents;
+using RealEstateApp.Core.Application.Dtos.API.Agents;
 using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace RealEstateApp.Core.Application.DTO.Account
+namespace RealEstateApp.Core.Application.Dtos.Account
 {
     public class LoginResponse
     {

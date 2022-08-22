@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using RealEstateApp.Core.Application.DTO.API.SellTypes;
+using RealEstateApp.Core.Application.Dtos.API.SellTypes;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
