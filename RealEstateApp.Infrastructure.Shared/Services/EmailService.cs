@@ -1,15 +1,12 @@
-﻿using MailKit.Net.Smtp;
+﻿using System;
+using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using RealEstateApp.Core.Application.DTO.Email;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Domain.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateApp.Infrastructure.Shared.Services
 {

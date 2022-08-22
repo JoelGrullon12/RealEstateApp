@@ -46,7 +46,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 if (user == null)
                 {
                     response.HasError = true;
-                    response.Error = $"No existe existe el usuario '{request.UserOrEmail}'";
+                    response.Error = $"No existe el usuario '{request.UserOrEmail}'";
                     return response;
                 }
             }
@@ -327,15 +327,17 @@ namespace RealEstateApp.Infrastructure.Identity.Services
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub,user.UserName)
-                ,new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
-                ,new Claim(JwtRegisteredClaimNames.Email,user.Email)
-                ,new Claim("userId",user.Id)
+                new Claim(JwtRegisteredClaimNames.Sub,user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email,user.Email),
+                new Claim("userId",user.Id)
             }
             .Union(userClaims)
             .Union(roleClaims);
 
-            var symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+            string key = _jwtSettings.Key;
+
+            var symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
             var signingCredentials = new SigningCredentials(symetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
             var jwtSecToken = new JwtSecurityToken(
