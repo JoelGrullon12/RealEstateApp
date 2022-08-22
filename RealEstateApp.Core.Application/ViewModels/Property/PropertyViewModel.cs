@@ -23,7 +23,6 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public int Size { get; set; }
         public int AgentId { get; set; }
 
-        public int ClientId { get; set; }
         public DateTime Created { get; set; }
 
         #region Navigation Properties
@@ -34,6 +33,8 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public ICollection<UpgradeViewModel> Upgrades { get; set; }
 
         public ICollection<FavoriteViewModel> Favorites { get; set; }
+
+
         #endregion
     }
 }
