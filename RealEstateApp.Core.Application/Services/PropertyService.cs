@@ -30,11 +30,19 @@ namespace RealEstateApp.Core.Application.Services
             _mapper = mapper;
         }
 
+<<<<<<< HEAD
         public async Task<List<PropertyViewModel>> GetAllViewModelFromUser()
         {
             List<PropertyViewModel> properties = await base.GetAllViewModel();
             List<PropertyViewModel> propertiesOfUserLoggedIn = properties.FindAll(property => property.AgentId == _user.Id).ToList();
             return propertiesOfUserLoggedIn;
+=======
+        public async Task<List<PropertyViewModel>> GetProperties()
+        {
+           
+           List<Property> properties = await _propRepository.GetAllAsync();
+            return _mapper.Map<List<PropertyViewModel>>(properties);
+>>>>>>> 92f8e3d2ea8d662396ec1dbebb4e4cff2693605d
         }
     }
 }

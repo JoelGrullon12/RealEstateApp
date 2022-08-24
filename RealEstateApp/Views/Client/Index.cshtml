@@ -1,0 +1,15 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.Property
+@using RealEstateApp.Core.Application.ViewModels.User
+@model PropertyViewModel
+@{
+    ViewData["Title"] = "Home";
+   
+}
+
+<h1>Home del Cliente</h1>
+
+
+
+@foreach(var item in Model.Upgrades) {
+    <h1>@item.Name</h1>
+}
