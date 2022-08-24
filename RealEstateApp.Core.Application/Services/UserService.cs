@@ -4,6 +4,7 @@ using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Application.ViewModels.Favorite;
+using RealEstateApp.Core.Application.ViewModels.Property;
 using RealEstateApp.Core.Application.ViewModels.User;
 using RealEstateApp.Core.Domain.Entities;
 using System;
@@ -18,13 +19,15 @@ namespace RealEstateApp.Core.Application.Services
     {
         private readonly IAccountService _accountService;
         private readonly IRoleService _roleService;
+        private readonly IPropertyService _propertyService;
         private readonly IMapper _mapper;
 
-        public UserService(IAccountService repo, IMapper mapper, IRoleService roleService)
+        public UserService(IAccountService repo, IMapper mapper, IRoleService roleService, IPropertyService propertyService)
         {
             _accountService = repo;
             _mapper = mapper;
             _roleService = roleService;
+            _propertyService = propertyService;
         }
 
         public async Task<LoginResponse> LoginAsync(LoginViewModel login)
@@ -42,17 +45,11 @@ namespace RealEstateApp.Core.Application.Services
             if (saveViewModel.Type == Roles.Admin.ToString())
                 response = await _accountService.RegisterAdminUserAsync(request);
             else if (saveViewModel.Type == Roles.Client.ToString())
-            {
                 response = await _accountService.RegisterClientUserAsync(request);
-            }
             else if (saveViewModel.Type == Roles.Agent.ToString())
-            {
                 response = await _accountService.RegisterAgentUserAsync(request);
-            }
             else if (saveViewModel.Type == Roles.Developer.ToString())
-            {
                 response = await _accountService.RegisterDeveloperAsync(request);
-            }
             else
             {
                 response = new()
@@ -92,6 +89,24 @@ namespace RealEstateApp.Core.Application.Services
         public async Task SetUserStatus(string id, bool status)
         {
             await _accountService.SetUserStatusAsync(id, status);
+        }
+
+        public async Task Delete(string id)
+        {
+            SaveUserViewModel user = await _accountService.GetByIdSaveUserViewModel(id);
+
+            if (user.Role == Roles.Agent.ToString())
+            {
+                List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
+                List<PropertyViewModel> propertiesOfAgentUser = properties.FindAll(property => property.AgentId == user.Id);
+
+                foreach (PropertyViewModel property in propertiesOfAgentUser)
+                {
+                    await _propertyService.Delete(property.Id);
+                }
+            }
+
+            await _accountService.DeleteUser(id);
         }
 
         public async Task LogOut()

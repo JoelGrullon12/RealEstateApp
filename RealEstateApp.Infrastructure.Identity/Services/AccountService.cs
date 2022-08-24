@@ -25,9 +25,9 @@ namespace RealEstateApp.Infrastructure.Identity.Services
         private readonly SignInManager<AppUser> _signInManager;
         private readonly JWTSettings _jwtSettings;
 
-        public AccountService(UserManager<AppUser> userMaganer, SignInManager<AppUser> signInManager, IOptions<JWTSettings> jWTSettings)
+        public AccountService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IOptions<JWTSettings> jWTSettings)
         {
-            _userManager = userMaganer;
+            _userManager = userManager;
             _signInManager = signInManager;
             _jwtSettings = jWTSettings.Value;
         }
@@ -260,6 +260,12 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             return viewModelList;
         }
 
+        public async Task DeleteUser(string id)
+        {
+            AppUser user = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(user);
+        }
+
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
@@ -269,6 +275,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
         private async Task<RegisterUserDTO> RegisterUserAsync(RegisterRequest request)
         {
             RegisterUserDTO userDTO = new();
+            userDTO.Response = new RegisterResponse();
             userDTO.Response.HasError = false;
 
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
@@ -297,7 +304,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 LastName = request.LastName,
                 DNI = request.DNI,
                 PhoneNumber = request.Phone,
-                ImgUrl = "imagen XD"
+                ImgUrl = ""
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -310,6 +317,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             }
 
             userDTO.User = user;
+            userDTO.Response.UserId = user.Id;
             return userDTO;
         }
 

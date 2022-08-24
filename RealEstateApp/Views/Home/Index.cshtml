@@ -1,27 +1,22 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property;
-@model PropertyListViewModel
+@model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Inicio";
 }
 
+<h1>Hola</h1>
 
- <h1>Hola</h1>
-
-@foreach(var properties in Model.PropertyTypes)
+@*@foreach (var properties in Model.PropertyTypes)
 {
     <h1>@properties.Name</h1>
 }
 
-@foreach(var properties in Model.SellTypes)
+@foreach (var properties in Model.SellTypes)
 {
     <h1>@properties.Name</h1>
-}
-
-
-
+}*@
 
 <div class="my-3 row row-cols-1 row-cols-md-3 g-4">
-<<<<<<< HEAD
     <div class="col">
         <div class="card">
             <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
@@ -54,36 +49,36 @@
                 </p>
             </div>
         </div>
-=======
-  
-    <div class="col">
-    <div class="card">
-      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-        alt="Hollywood Sign on The Hill" />
-      <div class="card-body">
-       
-        <p class="card-text">
-          Descripcion
-        </p>
-         <h5 class="card-title">Codigo</h5>
-        <p class="card-text">
-         
-        </p>
-         <h5 class="card-title">Venta</h5>
-        <p class="card-text">
-         500,000
-        </p>
-        <h5 class="card-title">Habitaciones</h5>
-        <p class="card-text">
-        </p>
-        <h5 class="card-title">Baños</h5>
-        <p class="card-text">
-        </p>
-        <h5 class="card-title">Tamaño</h5>
-        <p class="card-text">
-         500 mt
-        </p>
-      </div>
->>>>>>> 92f8e3d2ea8d662396ec1dbebb4e4cff2693605d
+
+        <div class="col">
+            <div class="card">
+                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
+                     alt="Hollywood Sign on The Hill" />
+                <div class="card-body">
+
+                    <p class="card-text">
+                        Descripcion
+                    </p>
+                    <h5 class="card-title">Codigo</h5>
+                    <p class="card-text">
+
+                    </p>
+                    <h5 class="card-title">Venta</h5>
+                    <p class="card-text">
+                        500,000
+                    </p>
+                    <h5 class="card-title">Habitaciones</h5>
+                    <p class="card-text">
+                    </p>
+                    <h5 class="card-title">Baños</h5>
+                    <p class="card-text">
+                    </p>
+                    <h5 class="card-title">Tamaño</h5>
+                    <p class="card-text">
+                        500 mt
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
