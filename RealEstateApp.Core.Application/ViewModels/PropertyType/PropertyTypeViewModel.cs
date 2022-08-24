@@ -12,6 +12,8 @@ namespace RealEstateApp.Core.Application.ViewModels.PropertyType
         public string Name { get; set; }
         public string Description { get; set; }
 
+       
+
         #region Navigation Properties
         public ICollection<PropertyViewModel> Properties { get; set; }
         #endregion

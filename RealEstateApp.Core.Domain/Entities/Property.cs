@@ -20,6 +20,8 @@ namespace RealEstateApp.Core.Domain.Entities
         public string AgentId { get; set; }
         public string ClientId { get; set; }
 
+       
+
         #region Navigation Properties
         public PropertyType Type { get; set; }
         public SellType SellType { get; set; }

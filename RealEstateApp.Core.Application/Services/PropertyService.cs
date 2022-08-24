@@ -39,11 +39,32 @@ namespace RealEstateApp.Core.Application.Services
 
         }
 
+        /*public async Task<List<FavoriteViewModel>> GetFavoriteViews()
+        {
+
+        }*/
+
         // No es necesario utilizar este metodo ya que se tiene el GetAllViewModel desde la interfaz
         public async Task<List<PropertyViewModel>> GetProperties()
         {
-            List<Property> properties = await _propRepository.GetAllAsync();
-            return _mapper.Map<List<PropertyViewModel>>(properties);
+
+            List<PropertyViewModel> properties = await base.GetAllViewModel();
+
+            // var properties = new List<PropertyViewModel>();
+            /*var result = from s in properties
+                     where s.TypeId == s.Type.Id
+                     select s;*/
+
+            //List<PropertyViewModel> propertiesFind = properties.FindAll(prop => prop.TypeId == prop.Type.Id).ToList();
+
+            //properties = properties.Equals(property => property.TypeId == property.Type.Id)
+
+            // return(properties);
+
+
+            return (properties);
+
+
         }
     }
 }

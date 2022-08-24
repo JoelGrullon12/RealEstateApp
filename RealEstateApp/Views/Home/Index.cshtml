@@ -1,89 +1,53 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property;
-@model PropertyListViewModel
+@using RealEstateApp.Core.Application.ViewModels.PropertyType;
+@model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Inicio";
 }
 
 
- <h1>Hola</h1>
-
-@foreach(var properties in Model.PropertyTypes)
-{
-    <h1>@properties.Name</h1>
-}
-
-@foreach(var properties in Model.SellTypes)
-{
-    <h1>@properties.Name</h1>
-}
-
-
-
-
-<div class="my-3 row row-cols-1 row-cols-md-3 g-4">
-<<<<<<< HEAD
-    <div class="col">
-        <div class="card">
-            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-                 alt="Hollywood Sign on The Hill" />
-            <div class="card-body">
-                @*                @foreach (var properties in Model.PropertyTypes)
-                {*@
-                <h5 class="card-title">@*@properties.Type.Name*@ Name</h5>
-                @*                }*@
-                <p class="card-text">
-                    Descripcion
-                </p>
-                <h5 class="card-title">Codigo</h5>
-                <p class="card-text">
-                    148984
-                </p>
-                <h5 class="card-title">Venta</h5>
-                <p class="card-text">
-                    500,000
-                </p>
-                <h5 class="card-title">Habitaciones</h5>
-                <p class="card-text">
-                </p>
-                <h5 class="card-title">Baños</h5>
-                <p class="card-text">
-                </p>
-                <h5 class="card-title">Tamaño</h5>
-                <p class="card-text">
-                    500 mt
-                </p>
-            </div>
-        </div>
-=======
-  
-    <div class="col">
-    <div class="card">
-      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-        alt="Hollywood Sign on The Hill" />
-      <div class="card-body">
-       
-        <p class="card-text">
-          Descripcion
-        </p>
-         <h5 class="card-title">Codigo</h5>
-        <p class="card-text">
-         
-        </p>
-         <h5 class="card-title">Venta</h5>
-        <p class="card-text">
-         500,000
-        </p>
-        <h5 class="card-title">Habitaciones</h5>
-        <p class="card-text">
-        </p>
-        <h5 class="card-title">Baños</h5>
-        <p class="card-text">
-        </p>
-        <h5 class="card-title">Tamaño</h5>
-        <p class="card-text">
-         500 mt
-        </p>
-      </div>
->>>>>>> 92f8e3d2ea8d662396ec1dbebb4e4cff2693605d
+<div class="container-fluid">
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2 class="text-center">No hay propiedades</h2>
+        }
+        else
+        {
+            foreach (PropertyViewModel property in Model)
+            {
+             
+                <div class="col-4 m-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="https://conceptodefinicion.de/wp-content/uploads/2014/03/arriend.jpg" class="card-img" style="width:100%;height:auto;">
+                        </div>
+                        <div class="card-body">
+                            @if(@property.Type == null) {
+                                <p>No existen tipos de propiedades creadas</p>
+                              
+                            }else{
+                                <p>@property.Type.Name</p>
+                            }
+                            @if(@property.SellType == null)
+                            {
+                                <p>No existen tipos de ventas creadas</p>
+                            }else
+                            {
+                                <p>@property.SellType.Id</p>
+                            }
+                            <p><b>Codigo: </b>@property.Code</p>
+                            <p><b>Precio:</b> $@property.Price</p>
+                            <p><b>Habitaciones:</b> @property.Bedrooms</p>
+                            <p><b>Baños:</b> @property.Bathrooms</p>
+                            <p>Tamaño en metros: @property.Size</p>
+                        </div>
+                        <div class="btn-group">
+                           
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>

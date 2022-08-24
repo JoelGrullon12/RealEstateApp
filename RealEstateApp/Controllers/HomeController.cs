@@ -11,54 +11,60 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace RealEstateApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IPropertyService _propertyService;
 
-        public HomeController(ILogger<HomeController> logger, IPropertyService propertyService )
+        private readonly IPropertyService _propertyService;
+        private readonly IPropertyTypeService _propertyTypeService;
+        private readonly ISellTypeService _sellTypeService;
+
+        public HomeController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, ISellTypeService sellTypeService)
         {
-            _logger = logger;
+
             _propertyService = propertyService;
+            _propertyTypeService = propertyTypeService;
+            _sellTypeService = sellTypeService;
+
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
 
-            /* var PropertyTypeViewModel = new List<PropertyTypeViewModel>()
-             {
-                 new PropertyTypeViewModel {Id = 1, Name = "Apartamento", Description = "Apartamento Descripcion" },
-                 new PropertyTypeViewModel {Id = 2, Name = "Casa", Description = "Casa Descripcion" }
-             };
+
+
+            //var properties = 
+            /* List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
+            var properties = PropertyViewModel.inc
+             //var types = ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
+             /*var sells = ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
+             List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
+             var propertiesFiltered = properties.FindAll(prop => types = sells).ToList();
+             return View(propertiesFiltered);*/
+
+
+            //var properties = new List<PropertyViewModel>();
+
+            //get all students whose name is Bill
 
 
 
-             var SellTypeViewModel = new List<SellTypeViewModel>()
-             {
-                 new SellTypeViewModel {Id = 1, Name = "Alquiler", Description = "Alquiler Descripcion" },
-                 new SellTypeViewModel {Id = 2, Name = "Venta", Description = "Venta Descripcion" },
-             };*/
 
-            PropertyListViewModel propertyList = new();
-            List<PropertyViewModel> properties = await _propertyService.GetProperties();
+            /*foreach (var student in result)
+                Console.WriteLine(properties);*/
+            //List<PropertyViewModel> propertiesFiltered = properties.FindAll(prop => prop.TypeId == prop.Type.Id || prop.SellTypeId == prop.SellType.Id);
+            //ViewBag.Properties = propertiesFiltered;
+            //return View(new PropertyViewModel());
+            // List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
+            //List<PropertyTypeViewModel> propertyTypes = await _propertyTypeService.GetAllViewModel();
+            //properties.AddRange(types);*/
 
-           /* propertyList.PropertyTypes.Add()
 
+            return View(await _propertyService.GetAllViewModel());
 
-            var propiedades = new PropertyListViewModel
-            {
-                PropertyTypes = PropertyTypeViewModel,
-                SellTypes = SellTypeViewModel
-            };*/
-
-     
-           
-
-            return View(properties);
-         
         }
     }
 }

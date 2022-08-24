@@ -22,5 +22,63 @@ namespace RealEstateApp.Core.Application.Services
             _propTypeRepository = repo;
             _mapper = mapper;
         }
+
+        public async Task Update(SavePropertyTypeViewViewModel vm)
+        {
+            PropertyType PropertyType = await _propTypeRepository.GetByIdAsync(vm.id);
+            categoria.Id = vm.Id;
+            categoria.Nombre = vm.Nombre;
+            categoria.Descripcion = vm.Descripcion;
+
+            await _categoriaRepository.UpdateAsync(categoria);
+        }
+
+        public async Task<SaveCategoriaViewModel> Add(SaveCategoriaViewModel vm)
+        {
+            Categoria categoria = new();
+            categoria.Nombre = vm.Nombre;
+            categoria.Descripcion = vm.Descripcion;
+
+            categoria = await _categoriaRepository.AddAsync(categoria);
+
+            SaveCategoriaViewModel categoriaVm = new();
+
+            categoriaVm.Id = categoria.Id;
+            categoriaVm.Nombre = categoria.Nombre;
+            categoriaVm.Descripcion = categoria.Descripcion;
+
+            return categoriaVm;
+        }
+
+        public async Task Delete(int id)
+        {
+            var categoria = await _categoriaRepository.GetByIdAsync(id);
+            await _categoriaRepository.DeleteAsync(categoria);
+        }
+
+        public async Task<SaveCategoriaViewModel> GetByIdSaveViewModel(int id)
+        {
+            var categoria = await _categoriaRepository.GetByIdAsync(id);
+
+            SaveCategoriaViewModel vm = new();
+            vm.Id = categoria.Id;
+            vm.Nombre = categoria.Nombre;
+            vm.Descripcion = categoria.Descripcion;
+
+            return vm;
+        }
+
+        public async Task<List<CategoriaViewModel>> GetAllViewModel()
+        {
+            var categoriaList = await _categoriaRepository.GetAllWithIncludeAsync(new List<string> { "Anuncios" });
+
+            return categoriaList.Select(categoria => new CategoriaViewModel
+            {
+                Nombre = categoria.Nombre,
+                Descripcion = categoria.Descripcion,
+                Id = categoria.Id,
+                AnunciosQuantity = categoria.Anuncios.Where(anuncio => anuncio.UserId == userViewModel.Id).Count()
+            }).ToList();
+        }
     }
 }

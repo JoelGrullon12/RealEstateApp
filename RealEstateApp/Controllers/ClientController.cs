@@ -27,11 +27,5 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         }
 
     }
-    /*public IActionResult Register()
-{
-    List<RoleViewModel> roles = _roleService.GetAllRoles();
-    List<RoleViewModel> rolesFiltered = roles.FindAll(role => role.Name == "Client" || role.Name == "Agent");
-    ViewBag.Roles = rolesFiltered;
-    return View(new SaveUserViewModel());
-}*/
+ 
 }

@@ -9,6 +9,8 @@ namespace RealEstateApp.Core.Domain.Entities
 {
     public class PropertyType : AuditableBaseEntity
     {
+
+       
         public string Name { get; set; }
         public string Description { get; set; }
 
@@ -16,4 +18,6 @@ namespace RealEstateApp.Core.Domain.Entities
         public ICollection<Property> Properties { get; set; }
         #endregion
     }
+
+    
 }

@@ -14,10 +14,10 @@
                 <div class="card-body">
                     @Html.ValidationSummary(false, "", new {@class = "text-danger"})
                     <form method="post" asp-controller="User" asp-action="Register">
-                        @*<div class="mb-3">
+                        <div class="mb-3">
                             <label asp-for="UserName" class="form-label">Usuario</label>
                             <input asp-for="UserName" class="form-control" />
-                        </div>*@
+                        </div>
                         <div class="mb-3">
                             <label asp-for="FirstName" class="form-label">Nombre</label>
                             <input asp-for="FirstName" class="form-control" />
