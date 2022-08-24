@@ -1,4 +1,6 @@
 ﻿using RealEstateApp.Core.Application.ViewModels.User;
+using RealEstateApp.Core.Application.ViewModels.PropertyType;
+using RealEstateApp.Core.Application.ViewModels.SellType;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,12 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
 {
     public class PropertyListViewModel
     {
-        public UserViewModel User { get; set; }
-        public List<PropertyViewModel> PropertyTypes { get; set; }
-        public List<PropertyViewModel> SellTypes { get; set; }
+       //public UserViewModel User { get; set; }
+    
+ 
+        public List<PropertyTypeViewModel> PropertyTypes { get; set; }
+        public List<SellTypeViewModel> SellTypes { get; set; }
+
 
     }
 }

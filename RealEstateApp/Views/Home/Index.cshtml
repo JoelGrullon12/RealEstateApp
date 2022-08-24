@@ -5,21 +5,36 @@
     ViewData["Title"] = "Inicio";
 }
 
+
+ <h1>Hola</h1>
+
+@foreach(var properties in Model.PropertyTypes)
+{
+    <h1>@properties.Name</h1>
+}
+
+@foreach(var properties in Model.SellTypes)
+{
+    <h1>@properties.Name</h1>
+}
+
+
+
+
 <div class="my-3 row row-cols-1 row-cols-md-3 g-4">
   
-  <div class="col">
+    <div class="col">
     <div class="card">
       <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
         alt="Hollywood Sign on The Hill" />
       <div class="card-body">
-         
        
         <p class="card-text">
           Descripcion
         </p>
          <h5 class="card-title">Codigo</h5>
         <p class="card-text">
-         148984
+         
         </p>
          <h5 class="card-title">Venta</h5>
         <p class="card-text">

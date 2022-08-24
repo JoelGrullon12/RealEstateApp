@@ -22,5 +22,12 @@ namespace RealEstateApp.Core.Application.Services
             _propRepository = repo;
             _mapper = mapper;
         }
+
+        public async Task<List<PropertyViewModel>> GetProperties()
+        {
+           
+           List<Property> properties = await _propRepository.GetAllAsync();
+            return _mapper.Map<List<PropertyViewModel>>(properties);
+        }
     }
 }
