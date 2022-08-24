@@ -1,0 +1,54 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.User
+@model SaveUserViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2 class="text-center">Crear administrador</h2>
+                </div>
+                <div class="card-body">
+                    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                    <form method="post" asp-controller="Admin" asp-action="Create">
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="FirstName">Nombre</label>
+                            <input class="form-control" asp-for="FirstName" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="LastName">Apellido</label>
+                            <input class="form-control" asp-for="LastName" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="DNI">Cédula</label>
+                            <input class="form-control" asp-for="DNI" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="Email">Email</label>
+                            <input class="form-control" asp-for="Email" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="UserName">Nombre de usuario</label>
+                            <input class="form-control" asp-for="UserName" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="Password">Contraseña</label>
+                            <input class="form-control" asp-for="Password" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="ConfirmPassword">Confirmar contraseña</label>
+                            <input class="form-control" asp-for="ConfirmPassword" />
+                        </div>
+                        <input type="hidden" asp-for="Phone" value="0101"/>
+                        <input type="hidden" asp-for="Type" value="Admin" />
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a class="btn btn-secondary" asp-controller="Admin" asp-action="Admins">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.User
+@model List<UserViewModel>
+@{
+    ViewData["Title"] = "Administradores";
+}
+
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-4 offset-8">
+            <a class="btn btn-success w-100" asp-controller="Admin" asp-action="Create">Crear administrador</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>No hay administradores registrados en el sistema</h2>
+        }
+        else
+        {
+            @foreach (UserViewModel admin in Model)
+            {
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>@admin.FirstName @admin.LastName</h4>
+                        </div>
+                        <div class="card-body">
+                            <h6>@admin.UserName</h6>
+                            <h6>@admin.DNI</h6>
+                            <h6>@admin.Email</h6>
+                            <div>
+                                @if (admin.IsActive)
+                                {
+                                    <a class="btn btn-danger" asp-controller="User" asp-action="SetUserStatus">Desactivar</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-success" asp-controller="User" asp-action="SetUserStatus">Activar</a>
+                                }
+                                <a class="btn btn-warning" asp-controller="User" asp-action="Edit" asp-route-id="@admin.Id">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

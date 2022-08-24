@@ -1,0 +1,34 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.User
+@model SaveUserViewModel
+@{
+    bool isAgent = (Model.Role == "Agent");
+    string title = (isAgent) ? "Borrar agente" : "Borrar usuario";
+    string action = (isAgent) ? "Agents" : "Admins";
+    ViewData["Title"] = title;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="card">
+                <div class="card-header bg-danger">
+                    @if (isAgent)
+                    {
+                        <h2 class="text-white">¿Estás seguro que deseas borrar a este agente y todas sus propiedades?</h2>
+                    }
+                    else
+                    {
+                        <h2 class="text-white">¿Estás seguro que deseas borrar a este usuario?</h2>
+                    }
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="User" asp-action="Delete">
+                        <input type="hidden" asp-action="Id" />
+                        <button type="submit" class="btn btn-danger">Aceptar</button>
+                        <a class="btn btn-secondary" asp-controller="Admin" asp-action="@action">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateApp.Core.Application.Dtos.Account;
+using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Services;
+using RealEstateApp.Core.Application.ViewModels.Property;
 using RealEstateApp.Core.Application.ViewModels.User;
 using StockApp.Core.Application.Helpers;
 using System.Collections.Generic;
@@ -78,13 +80,67 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             }
 
             RegisterResponse response = await _userService.Add(saveViewModel);
-            
+
             if (response != null || response.HasError)
             {
                 ModelState.AddModelError("userError", response.Error);
             }
-            
+
             return RedirectToRoute(new { controller = "User", action = "Index" });
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            SaveUserViewModel saveViewModel = await _userService.GetByIdSaveViewModel(id);
+            return View(saveViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(SaveUserViewModel saveViewModel)
+        {
+            SaveUserViewModel oldUser = await _userService.GetByIdSaveViewModel(saveViewModel.Id);
+
+            if (!ModelState.IsValid)
+            {
+                if (oldUser.Role == Roles.Agent.ToString())
+                {
+                    return View("MyProfile", saveViewModel);
+                }
+                else if (oldUser.Role == Roles.Admin.ToString())
+                {
+                    return View("Edit", saveViewModel);
+                }
+            }
+
+            RegisterResponse response = await _userService.Update(saveViewModel);
+
+            if (response != null || response.HasError)
+            {
+                ModelState.AddModelError("userError", response.Error);
+                if (oldUser.Role == Roles.Agent.ToString())
+                {
+                    return View("MyProfile", saveViewModel);
+                }
+                else if (oldUser.Role == Roles.Admin.ToString())
+                {
+                    return View("Edit", saveViewModel);
+                }
+            }
+
+            string controller = "";
+            string action = "";
+            if (oldUser.Role == Roles.Admin.ToString())
+            {
+                controller = "Admin";
+                action = "Admins";
+            }
+            else if (oldUser.Role == Roles.Agent.ToString())
+            {
+                controller = "User";
+                action = "MyProfile";
+            }
+
+            return RedirectToRoute(new { controller = controller, action = action });
         }
 
         public async Task<IActionResult> MyProfile()
@@ -93,23 +149,44 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             return View(user);
         }
 
-        public async Task<IActionResult> EditProfile(SaveUserViewModel saveViewModel)
+        public async Task<IActionResult> SetUserStatus(string id)
         {
-            if (!ModelState.IsValid)
+            SaveUserViewModel user = await _userService.GetByIdSaveViewModel(id);
+            await _userService.SetUserStatus(user.Id, !user.IsActive);
+            string controllerAction = "";
+            if (user.Role == Roles.Admin.ToString())
             {
-                ViewBag.Roles = _roleService.GetAllRoles();
-                return View(saveViewModel);
+                controllerAction = "Admins";
+            }
+            else if (user.Role == Roles.Agent.ToString())
+            {
+                controllerAction = "Agents";
+            }
+            return RedirectToRoute(new { controller = "Admin", action = controllerAction });
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            SaveUserViewModel user = await _userService.GetByIdSaveViewModel(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(SaveUserViewModel user)
+        {
+            string controllerAction = "";
+
+            if (user.Role == "Agent")
+            {
+                controllerAction = "Agents";
+            }
+            else if (user.Role == "Admin")
+            {
+                controllerAction = "Admins";
             }
 
-            RegisterResponse response = await _userService.Update(saveViewModel);
-
-            if (response != null || response.HasError)
-            {
-                ModelState.AddModelError("userError", response.Error);
-                return View("Profile", saveViewModel);
-            }
-
-            return RedirectToRoute(new { controller = "User", action = "Profile" });
+            await _userService.Delete(user.Id);
+            return RedirectToRoute(new { controller = "Admin", action = controllerAction });
         }
 
         public IActionResult LogOut()
