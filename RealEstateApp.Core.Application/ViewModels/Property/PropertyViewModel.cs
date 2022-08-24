@@ -14,8 +14,6 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
     public class PropertyViewModel : BaseViewModel
     {
         public int Code { get; set; }
-
-
         public int TypeId { get; set; }
         public int SellTypeId { get; set; }
         public double Price { get; set; }
@@ -28,17 +26,10 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public DateTime Created { get; set; }
 
         #region Navigation Properties
-       // public PropertyTypeViewModel Type { get; set; }
+        public PropertyTypeViewModel Type { get; set; }
         public SellTypeViewModel SellType { get; set; }
-<<<<<<< HEAD
-=======
-
         public List<PropertyTypeViewModel> PropertyTypes { get; set; }
-
         //public ICollection<SellTypeViewModel> SellTypes { get; set; }
-        public ICollection<PropertyImgViewModel> Images { get; set; }
->>>>>>> 92f8e3d2ea8d662396ec1dbebb4e4cff2693605d
-
         public ICollection<PropertyImgViewModel> Images { get; set; }
         public ICollection<UpgradeViewModel> Upgrades { get; set; }
         public ICollection<FavoriteViewModel> Favorites { get; set; }
