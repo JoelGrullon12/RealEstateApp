@@ -41,7 +41,7 @@ namespace RealEstateApp.Core.Application.Features.Client.Queries.GetClientProper
                 if (prop.ClientId == request.ClientId)
                 {
                     var property = _mapper.Map<PropertyResponse>(prop);
-                    var client = await _userService.GetByIdViewModel(prop.ClientId);
+                    var client = await _userService.GetByIdSaveViewModel(prop.ClientId);
 
                     int propCount = 0;
 
@@ -68,5 +68,4 @@ namespace RealEstateApp.Core.Application.Features.Client.Queries.GetClientProper
             return response;
         }
     }
-
 }

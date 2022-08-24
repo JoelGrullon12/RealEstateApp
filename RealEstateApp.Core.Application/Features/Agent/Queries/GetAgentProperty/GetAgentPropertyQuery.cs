@@ -49,7 +49,7 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentProperty
                 if (prop.AgentId == request.AgentId)
                 {
                     var property = _mapper.Map<PropertyResponse>(prop);
-                    var agent = await _userService.GetByIdViewModel(prop.AgentId);
+                    var agent = await _userService.GetByIdSaveViewModel(prop.AgentId);
 
                     int propCount = 0;
 
@@ -77,5 +77,4 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentProperty
             return response;
         }
     }
-
 }

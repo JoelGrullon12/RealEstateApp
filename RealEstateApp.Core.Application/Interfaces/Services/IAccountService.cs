@@ -8,7 +8,7 @@ namespace RealEstateApp.Core.Application.Interfaces.Services
     public interface IAccountService
     {
         Task<List<UserViewModel>> GetAllUsers();
-        Task<UserViewModel> GetUserByIdViewModel(string id);
+        Task<SaveUserViewModel> GetByIdSaveUserViewModel(string id);
         Task<LoginResponse> LoginAsync(LoginRequest request);
         Task<RegisterResponse> RegisterAdminUserAsync(RegisterRequest request);
         Task<RegisterResponse> RegisterAgentUserAsync(RegisterRequest request);

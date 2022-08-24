@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.ViewModels.Property
 {
-    public class SavePropertyViewModel:BaseViewModel
+    public class SavePropertyViewModel : BaseViewModel
     {
         public int Code { get; set; }
         public int TypeId { get; set; }
@@ -16,8 +16,7 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public int Bedrooms { get; set; }
         public int Bathrooms { get; set; }
         public int Size { get; set; }
-        public int AgentId { get; set; }
-
-        public int ClientId { get; set; }
+        public string AgentId { get; set; }
+        public string ClientId { get; set; }
     }
 }

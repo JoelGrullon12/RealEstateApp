@@ -1,0 +1,121 @@
+﻿@using Microsoft.AspNetCore.Http
+@using RealEstateApp.Core.Application.Dtos.Account
+@using RealEstateApp.Core.Application.ViewModels.Property
+@using RealEstateApp.Core.Application.ViewModels.PropertyType
+@using RealEstateApp.Core.Application.ViewModels.SellType
+@using StockApp.Core.Application.Helpers
+@model SavePropertyViewModel
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    bool editMode = Model.Id != 0;
+    string title = (editMode) ? "Editar propiedad" : "Crear propiedad";
+    string action = (editMode) ? "Edit" : "Create";
+    LoginResponse user = httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
+    string userRole = user.Roles[0];
+    ViewData["Title"] = title;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2 class="text-center">@title</h2>
+                </div>
+                <div class="card-body">
+                    @{
+                        int controlCounter = 0;
+                    }
+                    @if (ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0)
+                    {
+                        controlCounter++;
+                    }
+
+                    @if (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0)
+                    {
+                        controlCounter++;
+                    }
+
+                    @if (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0)
+                    {
+                        controlCounter++;
+                    }
+
+                    @if (controlCounter == 0)
+                    {
+                        <form method="post" asp-controller="Property" asp-action="@action">
+                            <div class="mb-2">
+                                <label asp-for="TypeId" class="form-label">Tipo de propiedad</label>
+                                <select asp-for="TypeId" class="form-control">
+                                    <option value="0">Selecciona el tipo de propiedad</option>
+                                    @foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyTypes)
+                                    {
+                                        <option value="propertyType.Id">@propertyType.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" asp-for="SellTypeId">Tipo de venta</label>
+                                <select class="form-control" asp-for="SellTypeId">
+                                    <option value="0">Selecciona el tipo de venta</option>
+                                    @foreach (SellTypeViewModel sellType in ViewBag.SellTypes)
+                                    {
+                                        <option value="@sellType.Id">@sellType.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" asp-for="Price">Precio (Peso Dominicano)</label>
+                                <input class="form-control" asp-for="Price" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" asp-for="Description">Descripción</label>
+                                <textarea class="form-control" cols="40" rows="3" asp-for="Description"></textarea>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" asp-for="Size">Tamaño de la propiedad (Metros)</label>
+                                <input class="form-control" asp-for="Size" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" asp-for="Bedrooms">Cantidad de habitaciones</label>
+                                <input class="form-control" asp-for="Bedrooms" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" asp-for="Bathrooms">Cantidad de baños</label>
+                                <input class="form-control" asp-for="Bathrooms" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Mejoras</label>
+                                <select class="form-control">
+                                    <option value="0">Selecciona una o varias mejoras</option>
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Primera Imagen</label>
+                                <input class="form-control" type="file" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Primera Imagen</label>
+                                <input class="form-control" type="file" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Primera Imagen</label>
+                                <input class="form-control" type="file" />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Primera Imagen</label>
+                                <input class="form-control" type="file" />
+                            </div>
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                            <a class="btn btn-secondary" asp-controller="Agent" asp-action="Properties">Volver atrás</a>
+                        </form>
+                    }
+                    else
+                    {
+                        <h4>No puedes crear o editar una propiedad debido a que no hay tipos de propiedades, tipos de ventas o mejoras creadas en el sistema</h4>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.User
+@model SaveUserViewModel
+@{
+    ViewData["Title"] = "Mi Perfil";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2 class="text-center">Mis datos</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="User" asp-action="EditProfile">
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="FirstName">Nombre</label>
+                            <input class="form-control" asp-for="FirstName" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="LastName">Apellido</label>
+                            <input class="form-control" asp-for="LastName" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="Phone">Teléfono</label>
+                            <input class="form-control" asp-for="Phone" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Foto de usuario</label>
+                            <input class="form-control" type="file" />
+                        </div>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                        <a class="btn btn-secondary" asp-controller="Agent" asp-action="Index">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

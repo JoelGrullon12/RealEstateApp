@@ -210,13 +210,13 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             return response;
         }
 
-        public async Task<UserViewModel> GetUserByIdViewModel(string id)
+        public async Task<SaveUserViewModel> GetByIdSaveUserViewModel(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             var roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
             var role = roles[0];
 
-            UserViewModel saveViewModel = new UserViewModel
+            SaveUserViewModel saveViewModel = new SaveUserViewModel
             {
                 Id = user.Id,
                 FirstName = user.FirstName,

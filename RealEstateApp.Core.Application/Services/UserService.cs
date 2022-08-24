@@ -45,6 +45,14 @@ namespace RealEstateApp.Core.Application.Services
             {
                 response = await _accountService.RegisterClientUserAsync(request);
             }
+            else if (saveViewModel.Type == Roles.Agent.ToString())
+            {
+                response = await _accountService.RegisterAgentUserAsync(request);
+            }
+            else if (saveViewModel.Type == Roles.Developer.ToString())
+            {
+                response = await _accountService.RegisterDeveloperAsync(request);
+            }
             else
             {
                 response = new()
@@ -69,9 +77,9 @@ namespace RealEstateApp.Core.Application.Services
             return viewModelList;
         }
 
-        public async Task<UserViewModel> GetByIdViewModel(string id)
+        public async Task<SaveUserViewModel> GetByIdSaveViewModel(string id)
         {
-            UserViewModel user = await _accountService.GetUserByIdViewModel(id);
+            SaveUserViewModel user = await _accountService.GetByIdSaveUserViewModel(id);
             return user;
         }
 

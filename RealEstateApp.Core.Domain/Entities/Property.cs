@@ -28,7 +28,6 @@ namespace RealEstateApp.Core.Domain.Entities
         //Upgrades
         public ICollection<Upgrade> Upgrades { get; set; }
         public List<PropertyUpgrade> PropertyUpgrades { get; set; }
-
         public ICollection<Favorite> Favorites { get; set; }
         #endregion
     }

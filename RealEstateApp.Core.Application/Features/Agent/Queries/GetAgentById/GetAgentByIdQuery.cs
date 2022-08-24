@@ -38,7 +38,7 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById
 
         public async Task<AgentResponse> Handle(GetClientByIdQuery request, CancellationToken cancellationToken)
         {
-            var agent = await _userService.GetByIdViewModel(request.Id);
+            var agent = await _userService.GetByIdSaveViewModel(request.Id);
 
             if (agent == null || agent.Role != Roles.Agent.ToString())
                 return null;
@@ -60,5 +60,4 @@ namespace RealEstateApp.Core.Application.Features.Agent.Queries.GetAgentById
             return response;
         }
     }
-
 }

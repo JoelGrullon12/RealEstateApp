@@ -14,12 +14,14 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly LoginResponse _user;
 
         public UserController(IUserService userService, IRoleService roleService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
             _roleService = roleService;
             _httpContextAccessor = httpContextAccessor;
+            _user = _httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
         }
 
         public IActionResult Index()
@@ -65,7 +67,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(SaveUserViewModel saveViewModel)
+        public async Task<IActionResult> Register(SaveUserViewModel saveViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -73,7 +75,39 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 return View(saveViewModel);
             }
 
-            return View();
+            RegisterResponse response = await _userService.Add(saveViewModel);
+            
+            if (response != null || response.HasError)
+            {
+                ModelState.AddModelError("userError", response.Error);
+            }
+            
+            return RedirectToRoute(new { controller = "User", action = "Index" });
+        }
+
+        public async Task<IActionResult> MyProfile()
+        {
+            SaveUserViewModel user = await _userService.GetByIdSaveViewModel(_user.Id);
+            return View(user);
+        }
+
+        public async Task<IActionResult> EditProfile(SaveUserViewModel saveViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Roles = _roleService.GetAllRoles();
+                return View(saveViewModel);
+            }
+
+            RegisterResponse response = await _userService.Update(saveViewModel);
+
+            if (response != null || response.HasError)
+            {
+                ModelState.AddModelError("userError", response.Error);
+                return View("Profile", saveViewModel);
+            }
+
+            return RedirectToRoute(new { controller = "User", action = "Profile" });
         }
 
         public IActionResult LogOut()

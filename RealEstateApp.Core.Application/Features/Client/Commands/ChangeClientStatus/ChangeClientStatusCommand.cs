@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeClientStatus
 {
-    public class ChangeClientStatusCommand:IRequest<bool>
+    public class ChangeClientStatusCommand : IRequest<bool>
     {
         public string ClientId { get; set; }
         public bool Status { get; set; }
@@ -28,7 +28,7 @@ namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeClientSta
         {
             try
             {
-                var client = await _userService.GetByIdViewModel(request.ClientId);
+                var client = await _userService.GetByIdSaveViewModel(request.ClientId);
 
                 if (client == null)
                     return false;
@@ -36,11 +36,11 @@ namespace RealEstateApp.Core.Application.Features.Agent.Commands.ChangeClientSta
                 client.IsActive = request.Status;
                 await _userService.SetUserStatus(request.ClientId, request.Status);
                 return true;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }
         }
     }
-
 }

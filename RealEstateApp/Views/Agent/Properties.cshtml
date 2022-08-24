@@ -1,10 +1,15 @@
-﻿@using RealEstateApp.Core.Application.ViewModels.Property;
+﻿@using RealEstateApp.Core.Application.ViewModels.Property
 @model List<PropertyViewModel>
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Properties";
 }
 
 <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-4 offset-8">
+            <a class="btn btn-success w-100" asp-controller="Property" asp-action="Create">Crear nueva propiedad</a>
+        </div>
+    </div>
     <div class="row">
         @if (Model == null || Model.Count == 0)
         {
@@ -17,7 +22,7 @@
                 <div class="col-4 m-2">
                     <div class="card">
                         <div class="card-header">
-                            <img src="https://www.economiafinanzas.com/wp-content/uploads/2009/07/inmobiliaria.jpg" class="card-img" style="width:100%;height:auto;">
+                            <img src="https://www.economiafinanzas.com/wp-content/uploads/2009/07/inmobiliaria.jpg" style="width:100%;height:auto;">
                         </div>
                         <div class="card-body">
                             <p>@property.Type.Name</p>
@@ -30,7 +35,7 @@
                         </div>
                         <div class="btn-group">
                             <a class="btn btn-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@property.Id">Editar</a>
-                            <a class="btn btn-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@property.Id">Borrar</a>
+                            <a class="btn btn-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@property.Id"></a>
                         </div>
                     </div>
                 </div>

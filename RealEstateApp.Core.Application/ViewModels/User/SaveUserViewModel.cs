@@ -48,5 +48,7 @@ namespace RealEstateApp.Core.Application.ViewModels.User
         [Required(ErrorMessage = "Debes colocar el tipo de usuario")]
         [DataType(DataType.Text)]
         public string Type { get; set; }
+        public bool IsActive { get; set; }
+        public string Role { get; set; }
     }
 }

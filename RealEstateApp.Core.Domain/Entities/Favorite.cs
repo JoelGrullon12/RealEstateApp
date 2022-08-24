@@ -9,7 +9,7 @@ namespace RealEstateApp.Core.Domain.Entities
 {
     public class Favorite : AuditableBaseEntity
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int PropertyId { get; set; }
 
         #region Navigation Properties
