@@ -29,16 +29,21 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public string AgentId { get; set; }
         public string ClientId { get; set; }
 
-        [DataType(DataType.Upload)]
-        public IFormFile ImageUrl1 { get; set; }
+        public string ImageUrl1 { get; set; }
+        public string ImageUrl2 { get; set; }
+        public string ImageUrl3 { get; set; }
+        public string ImageUrl4 { get; set; }
 
         [DataType(DataType.Upload)]
-        public IFormFile ImageUrl2 { get; set; }
+        public IFormFile ImageFile1 { get; set; }
 
         [DataType(DataType.Upload)]
-        public IFormFile ImageUrl3 { get; set; }
+        public IFormFile ImageFile2 { get; set; }
 
         [DataType(DataType.Upload)]
-        public IFormFile ImageUrl4 { get; set; }
+        public IFormFile ImageFile3 { get; set; }
+
+        [DataType(DataType.Upload)]
+        public IFormFile ImageFile4 { get; set; }
     }
 }

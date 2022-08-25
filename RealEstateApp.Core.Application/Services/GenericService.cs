@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Services
 {
-    public class GenericService<Entity, ViewModel, SaveViewModel> : IGenericService<ViewModel, SaveViewModel> where Entity : class
+    public class GenericService<Entity, ViewModel, SaveViewModel> : IGenericService<ViewModel, SaveViewModel> 
+        where Entity : class
         where ViewModel : class
         where SaveViewModel : class
     {
@@ -22,13 +20,12 @@ namespace RealEstateApp.Core.Application.Services
             _mapper = mapper;
         }
 
-        public virtual async Task<ViewModel> Add(SaveViewModel vm)
+        public virtual async Task<SaveViewModel> Add(SaveViewModel vm)
         {
             Entity entity = _mapper.Map<Entity>(vm);
             entity = await _repository.AddAsync(entity);
-            ViewModel viewModel = _mapper.Map<ViewModel>(entity);
-
-            return viewModel;
+            SaveViewModel saveViewModel = _mapper.Map<SaveViewModel>(entity);
+            return saveViewModel;
         }
 
         public virtual async Task Update(SaveViewModel saveViewModel, int id)

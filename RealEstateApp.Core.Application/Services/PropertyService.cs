@@ -35,7 +35,6 @@ namespace RealEstateApp.Core.Application.Services
             List<PropertyViewModel> properties = await base.GetAllViewModel();
             List<PropertyViewModel> propertiesOfUserLoggedIn = properties.FindAll(property => property.AgentId == _user.Id).ToList();
             return propertiesOfUserLoggedIn;
-
         }
 
         public async Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters)
@@ -44,7 +43,6 @@ namespace RealEstateApp.Core.Application.Services
 
             var listViewModels = propertyList.Where(property => property.ClientId == _user.Id).Select(property => new PropertyViewModel
             {
-
                 Id = property.Id,
                 Code = property.Code,
                 Description = property.Description,
@@ -66,7 +64,5 @@ namespace RealEstateApp.Core.Application.Services
         {
 
         }*/
-
-
     }
 }

@@ -43,7 +43,18 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 return View("SaveProperty", saveViewModel);
             }
 
-            // Save property and related images
+            List<IFormFile> files = new List<IFormFile> { saveViewModel.ImageFile1, saveViewModel.ImageFile2, saveViewModel.ImageFile3, saveViewModel.ImageFile4 };
+            SavePropertyViewModel savePropertyViewModel = await _propertyService.Add(saveViewModel);
+
+            if (savePropertyViewModel != null && savePropertyViewModel.Id != 0)
+            {
+                List<string> imagesPath = UploadImage(files, savePropertyViewModel.Id);
+                savePropertyViewModel.ImageUrl1 = imagesPath[0];
+                savePropertyViewModel.ImageUrl2 = imagesPath[1];
+                savePropertyViewModel.ImageUrl3 = imagesPath[2];
+                savePropertyViewModel.ImageUrl4 = imagesPath[3];
+                await _propertyService.Update(savePropertyViewModel, savePropertyViewModel.Id);
+            }
 
             return RedirectToRoute(new { controller = "Agent", action = "Properties" });
         }
