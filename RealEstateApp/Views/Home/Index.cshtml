@@ -34,14 +34,13 @@
                         }*@
                         <button type="submit" class="btn btn-primary">Filtrar</button>
                     </form>
-<<<<<<< HEAD
+
                 </div> <!-- card-body -->
             </div>  <!-- card -->
         </div> <!-- col-3 -->
 
         <div class="col-9">
             <div class="row">
-=======
                 </div>
             </div>
         </div>
@@ -50,7 +49,6 @@
 
 <div class="container-fluid">
     <div class="row">
->>>>>>> f83ea9464c84dd770c5d733617ca348cbb61e76c
         @if (Model == null || Model.Count == 0)
         {
             <h2 class="text-center">No hay propiedades</h2>
@@ -65,7 +63,7 @@
                             <img src="https://conceptodefinicion.de/wp-content/uploads/2014/03/arriend.jpg" class="card-img" style="width:100%;height:auto;">
                         </div>
                         <div class="card-body">
-                            if (property.Type == null)
+                            @*if (property.Type == null)
                             {
                             <p>No existen tipos de propiedades creadas</p>
 
@@ -74,7 +72,6 @@
                             {
                             <p>@property.Type.Name</p>
                             }
-
                             if (property.SellType == null)
                             {
                             <p>No existen tipos de ventas creadas</p>
@@ -82,7 +79,7 @@
                             else
                             {
                             <p>@property.SellType.Id</p>
-                            }
+                            }*@
                             <p><b>Codigo: </b>@property.Code</p>
                             <p><b>Precio:</b> $@property.Price</p>
                             <p><b>Habitaciones:</b> @property.Bedrooms</p>
