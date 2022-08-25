@@ -8,6 +8,6 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
 {
     public class FilterPropertyViewModel
     {
-        public int? CategoriaId { get; set; }
+        public int? TypeId { get; set; }
     }
 }
