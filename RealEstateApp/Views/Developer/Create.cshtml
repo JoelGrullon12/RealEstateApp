@@ -1,8 +1,7 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.User
 @model SaveUserViewModel
 @{
-    string role = Model.Role;
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
 <div class="container-fluid">
@@ -10,11 +9,11 @@
         <div class="col-6 offset-3">
             <div class="card">
                 <div class="card-header bg-dark text-white">
-                    <h2 class="text-center">Editar usuario</h2>
+                    <h2 class="text-center">Crear usuario</h2>
                 </div>
                 <div class="card-body">
                     @Html.ValidationSummary(false, "", new {@class = "text-danger"})
-                    <form method="post" asp-controller="User" asp-action="Edit">
+                    <form method="post" asp-controller="Developer" asp-action="Create">
                         <div class="mb-2">
                             <label class="form-label" asp-for="FirstName">Nombre</label>
                             <input class="form-control" asp-for="FirstName" />
@@ -28,7 +27,7 @@
                             <input class="form-control" asp-for="DNI" />
                         </div>
                         <div class="mb-2">
-                            <label class="form-label" asp-for="Email">Email</label>
+                            <label class="form-label" asp-for="Email">Correo</label>
                             <input class="form-control" asp-for="Email" />
                         </div>
                         <div class="mb-2">
@@ -43,11 +42,10 @@
                             <label class="form-label" asp-for="ConfirmPassword">Confirmar contraseña</label>
                             <input class="form-control" asp-for="ConfirmPassword" />
                         </div>
-                        <input type="hidden" asp-for="Id" />
-                        <input type="hidden" asp-for="Phone" />
-                        <input type="hidden" asp-for="Type" value="@role" />
+                        <input type="hidden" asp-for="Phone" value="null"/>
+                        <input type="hidden" asp-for="Type" value="Developer"/>
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a class="btn btn-secondary" asp-controller="Admin" asp-action="Admins">Volver atrás</a>
+                        <a class="btn btn-secondary" asp-controller="Developer" asp-action="Index">Volver atrás</a>
                     </form>
                 </div>
             </div>

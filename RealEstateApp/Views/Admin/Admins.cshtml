@@ -1,11 +1,17 @@
-﻿@using RealEstateApp.Core.Application.ViewModels.User
+﻿@using Microsoft.AspNetCore.Http
+@using RealEstateApp.Core.Application.Dtos.Account
+@using RealEstateApp.Core.Application.ViewModels.User
+@using StockApp.Core.Application.Helpers
 @model List<UserViewModel>
+@inject IHttpContextAccessor httpContextAccessor
 @{
+    LoginResponse user = httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
+    string userId = user.Id;
     ViewData["Title"] = "Administradores";
 }
 
 <div class="container-fluid">
-    <div class="row mb-2">
+    <div class="row mb-4">
         <div class="col-4 offset-8">
             <a class="btn btn-success w-100" asp-controller="Admin" asp-action="Create">Crear administrador</a>
         </div>
@@ -19,6 +25,27 @@
         {
             @foreach (UserViewModel admin in Model)
             {
+                <div class="modal fade" id="modal-@admin.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                @if (admin.IsActive)
+                                {
+                                    <h5 class="modal-title">¿Estás seguro que quieres desactivar este usuario?</h5>
+                                }
+                                else
+                                {
+                                    <h5 class="modal-title">¿Estás seguro que quieres activar este usuario?</h5>
+                                }
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <a class="btn btn-primary" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@admin.Id">Aceptar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-4">
                     <div class="card">
                         <div class="card-header">
@@ -28,17 +55,23 @@
                             <h6>@admin.UserName</h6>
                             <h6>@admin.DNI</h6>
                             <h6>@admin.Email</h6>
-                            <div>
-                                @if (admin.IsActive)
-                                {
-                                    <a class="btn btn-danger" asp-controller="User" asp-action="SetUserStatus">Desactivar</a>
-                                }
-                                else
-                                {
-                                    <a class="btn btn-success" asp-controller="User" asp-action="SetUserStatus">Activar</a>
-                                }
-                                <a class="btn btn-warning" asp-controller="User" asp-action="Edit" asp-route-id="@admin.Id">Editar</a>
-                            </div>
+                            @if (!(userId == admin.Id))
+                            {
+                                <div>
+                                    @if (admin.IsActive)
+                                    {
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-@admin.Id">Desactivar</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-@admin.Id">Activar</button>
+                                    }
+                                    <a class="btn btn-warning" asp-controller="User" asp-action="Edit" asp-route-id="@admin.Id">Editar</a>
+                                </div>
+                            } else
+                            {
+                                <h6>(No puede modificar su propio usuario)</h6>
+                            }
                         </div>
                     </div>
                 </div>
