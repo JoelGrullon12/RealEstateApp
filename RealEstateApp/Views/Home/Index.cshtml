@@ -15,9 +15,7 @@
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">Tipos de Propiedades</h4>
-
                     <form method="post" asp-controller="Home" asp-action="Filter">
-
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" value="null" type="radio" name="TypeId" id="propertyType-all" />
@@ -36,12 +34,23 @@
                         }*@
                         <button type="submit" class="btn btn-primary">Filtrar</button>
                     </form>
+<<<<<<< HEAD
                 </div> <!-- card-body -->
             </div>  <!-- card -->
         </div> <!-- col-3 -->
 
         <div class="col-9">
             <div class="row">
+=======
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+>>>>>>> f83ea9464c84dd770c5d733617ca348cbb61e76c
         @if (Model == null || Model.Count == 0)
         {
             <h2 class="text-center">No hay propiedades</h2>
@@ -56,18 +65,23 @@
                             <img src="https://conceptodefinicion.de/wp-content/uploads/2014/03/arriend.jpg" class="card-img" style="width:100%;height:auto;">
                         </div>
                         <div class="card-body">
-                            @if(@property.Type == null) {
-                                <p>No existen tipos de propiedades creadas</p>
-                              
-                            }else{
-                                <p>@property.Type.Name</p>
+                            if (property.Type == null)
+                            {
+                            <p>No existen tipos de propiedades creadas</p>
+
                             }
-                            @if(@property.SellType == null)
+                            else
                             {
-                                <p>No existen tipos de ventas creadas</p>
-                            }else
+                            <p>@property.Type.Name</p>
+                            }
+
+                            if (property.SellType == null)
                             {
-                                <p>@property.SellType.Id</p>
+                            <p>No existen tipos de ventas creadas</p>
+                            }
+                            else
+                            {
+                            <p>@property.SellType.Id</p>
                             }
                             <p><b>Codigo: </b>@property.Code</p>
                             <p><b>Precio:</b> $@property.Price</p>
@@ -76,7 +90,6 @@
                             <p><b>Tamaño en metros:</b> @property.Size</p>
                         </div>
                         <div class="btn-group">
-                           
                         </div>
                     </div>
                 </div>

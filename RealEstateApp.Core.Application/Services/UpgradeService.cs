@@ -18,7 +18,11 @@ namespace RealEstateApp.Core.Application.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly LoginResponse _user;
 
+<<<<<<< HEAD
         public UpgradeService(IUpgradeRepository repo, IHttpContextAccessor httpContextAccessor, IMapper mapper):base(repo,mapper)
+=======
+        public UpgradeService(IUpgradeRepository repo, IMapper mapper) : base(repo, mapper)
+>>>>>>> f83ea9464c84dd770c5d733617ca348cbb61e76c
         {
             _upgradeRepository = repo;
             _mapper = mapper;

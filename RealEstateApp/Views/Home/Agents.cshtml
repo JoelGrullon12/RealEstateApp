@@ -1,0 +1,33 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.User
+@model List<UserViewModel>
+@{
+    ViewData["Title"] = "Agents";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>No hay agentes registrados en el sistema</h2>
+        }
+        else
+        {
+            foreach (UserViewModel agent in Model)
+            {
+                if (agent.IsActive)
+                {
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-header">
+                                @*Here comes the photo of the agent*@
+                            </div>
+                            <div class="card-body">
+                                <h6>@agent.FirstName @agent.LastName</h6>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
