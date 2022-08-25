@@ -1,6 +1,40 @@
-﻿
+﻿@using RealEstateApp.Core.Application.ViewModels.PropertyType
+@model List<PropertyTypeViewModel>
 @{
     ViewData["Title"] = "Tipos de propiedades";
 }
 
-<h1>Tipos de propiedades</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 offset-8">
+            <a class="btn btn-success w-100" asp-controller="PropertyType" asp-action="Create">Crear tipo de propiedad</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>No hay tipos de propiedades en el sistema</h2>
+        }
+        else
+        {
+            @foreach (PropertyTypeViewModel propertyType in Model)
+            {
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>@propertyType.Name</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>@propertyType.Description</p>
+                            <p><b>Propiedades:</b> @propertyType.Properties.Count</p>
+                            <div class="btn-group">
+                                <a class="btn btn-outline-warning" asp-controller="PropertyType" asp-action="Edit" asp-route-id="@propertyType.Id">Editar</a>
+                                <a class="btn btn-outline-danger" asp-controller="PropertyType" asp-action="Delete" asp-route-id="@propertyType.Id">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

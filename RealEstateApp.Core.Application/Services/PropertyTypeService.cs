@@ -22,7 +22,7 @@ namespace RealEstateApp.Core.Application.Services
         private readonly LoginResponse _user;
         private readonly IMapper _mapper;
 
-        public PropertyTypeService(IPropertyTypeRepository repo, IHttpContextAccessor httpContextAccessor, IMapper mapper) :base(repo,mapper)
+        public PropertyTypeService(IPropertyTypeRepository repo, IHttpContextAccessor httpContextAccessor, IMapper mapper) : base(repo, mapper)
         {
             _propTypeRepository = repo;
             _mapper = mapper;
@@ -31,6 +31,11 @@ namespace RealEstateApp.Core.Application.Services
             _mapper = mapper;
         }
 
-
+        public async Task<List<PropertyTypeViewModel>> GetAllViewModelWithInclude()
+        {
+            List<PropertyType> propertyTypes = await _propTypeRepository.GetAllWithIncludes(new List<string> { "Properties" });
+            List<PropertyTypeViewModel> viewModelList = _mapper.Map<List<PropertyTypeViewModel>>(propertyTypes);
+            return viewModelList;
+        }
     }
 }
