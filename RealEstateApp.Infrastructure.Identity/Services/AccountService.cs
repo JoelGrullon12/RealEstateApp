@@ -173,7 +173,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 if (userWithSameEmail != null)
                 {
                     response.HasError = true;
-                    response.Error = "Este email ya esta siendo usado";
+                    response.Error = "Este email ya esta siendo utilizado";
                     return response;
                 }
             }
@@ -185,7 +185,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 if (userWithSameUserName != null)
                 {
                     response.HasError = true;
-                    response.Error = $"El nombre de usuario '{request.UserName}' ya esta en uso";
+                    response.Error = $"El nombre de usuario '{request.UserName}' ya esta siendo utilizado";
                     return response;
                 }
             }
@@ -200,10 +200,17 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             var result = await _userManager.UpdateAsync(user);
             var passResult = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);
 
-            if (!result.Succeeded || !passResult.Succeeded)
+            if (!result.Succeeded)
             {
                 response.HasError = true;
                 response.Error = "Error tratando de actualizar el usuario";
+                return response;
+            }
+
+            if (!passResult.Succeeded)
+            {
+                response.HasError = true;
+                response.Error = "La contraseña actual es incorrecta";
                 return response;
             }
 

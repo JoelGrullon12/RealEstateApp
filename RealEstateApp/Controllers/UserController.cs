@@ -41,7 +41,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
             LoginResponse response = await _userService.LoginAsync(viewModel);
 
-            if (response.HasError)
+            if (response != null && response.HasError)
             {
                 ModelState.AddModelError("loginError", response.Error);
                 return View(viewModel);
@@ -75,15 +75,21 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Roles = _roleService.GetAllRoles();
+                List<RoleViewModel> roles = _roleService.GetAllRoles();
+                List<RoleViewModel> rolesFiltered = roles.FindAll(role => role.Name == "Client" || role.Name == "Agent");
+                ViewBag.Roles = rolesFiltered;
                 return View(saveViewModel);
             }
 
             RegisterResponse response = await _userService.Add(saveViewModel);
 
-            if (response != null || response.HasError)
+            if (response != null && response.HasError)
             {
                 ModelState.AddModelError("userError", response.Error);
+                List<RoleViewModel> roles = _roleService.GetAllRoles();
+                List<RoleViewModel> rolesFiltered = roles.FindAll(role => role.Name == "Client" || role.Name == "Agent");
+                ViewBag.Roles = rolesFiltered;
+                return View(saveViewModel);
             }
 
             return RedirectToRoute(new { controller = "User", action = "Index" });
@@ -104,28 +110,20 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             {
                 // ModelState.AddModelError("agentError", "Debes rellenar los campos faltantes");
                 if (oldUser.Role == Roles.Agent.ToString())
-                {
                     return View("MyProfile", saveViewModel);
-                }
-                else if (oldUser.Role == Roles.Admin.ToString())
-                {
+                else if (oldUser.Role == Roles.Admin.ToString() || oldUser.Role == Roles.Developer.ToString())
                     return View("Edit", saveViewModel);
-                }
             }
 
             RegisterResponse response = await _userService.Update(saveViewModel);
 
-            if (response != null || response.HasError)
+            if (response != null && response.HasError)
             {
                 ModelState.AddModelError("userError", response.Error);
                 if (oldUser.Role == Roles.Agent.ToString())
-                {
                     return View("MyProfile", saveViewModel);
-                }
-                else if (oldUser.Role == Roles.Admin.ToString())
-                {
+                else if (oldUser.Role == Roles.Admin.ToString() || oldUser.Role == Roles.Developer.ToString())
                     return View("Edit", saveViewModel);
-                }
             }
 
             string controller = "";
@@ -171,7 +169,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 controller = "Admin";
                 action = "Agents";
             }
-            else if(user.Role == Roles.Developer.ToString())
+            else if (user.Role == Roles.Developer.ToString())
             {
                 controller = "Developer";
                 action = "Index";
