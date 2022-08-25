@@ -1,0 +1,27 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.SellType
+@model SaveSellTypeViewModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h2>
+                        ¿Estás seguro que deseas borrar este tipo de venta
+                        y todas sus propiedades asociadas?
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="SellType" asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <button type="submit" class="btn btn-danger">Aceptar</button>
+                        <a class="btn btn-secondary" asp-controller="SellType" asp-action="Index">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

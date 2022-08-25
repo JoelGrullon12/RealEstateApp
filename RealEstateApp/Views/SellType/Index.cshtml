@@ -1,6 +1,40 @@
-﻿
+﻿@using RealEstateApp.Core.Application.ViewModels.SellType
+@model List<SellTypeViewModel>
 @{
     ViewData["Title"] = "Tipos de ventas";
 }
 
-<h1>Tipos de ventas</h1>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-4 offset-8">
+            <a class="btn btn-success w-100" asp-controller="SellType" asp-action="Create">Crear tipo de venta</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>No hay tipos de ventas en el sistema</h2>
+        }
+        else
+        {
+            foreach (SellTypeViewModel sellType in Model)
+            {
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>@sellType.Name</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>@sellType.Description</p>
+                            <p><b>Propiedades:</b> @sellType.Properties.Count</p>
+                            <div class="btn-group">
+                                <a class="btn btn-warning" asp-controller="SellType" asp-action="Edit" asp-route-id="@sellType.Id">Editar</a>
+                                <a class="btn btn-danger" asp-controller="SellType" asp-action="Delete" asp-route-id="@sellType.Id">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

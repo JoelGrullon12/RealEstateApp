@@ -22,7 +22,7 @@ namespace RealEstateApp.Core.Application.Services
         private readonly LoginResponse _user;
         private readonly IMapper _mapper;
 
-        public SellTypeService(ISellTypeRepository repo, IHttpContextAccessor httpContextAccessor, IMapper mapper):base(repo,mapper)
+        public SellTypeService(ISellTypeRepository repo, IHttpContextAccessor httpContextAccessor, IMapper mapper) : base(repo, mapper)
         {
             _sellRepository = repo;
             _mapper = mapper;
@@ -30,5 +30,11 @@ namespace RealEstateApp.Core.Application.Services
             _user = _httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
         }
 
+        public async Task<List<SellTypeViewModel>> GetAllViewModelWithInclude()
+        {
+            List<SellType> sellTypes = await _sellRepository.GetAllWithIncludes(new List<string> { "Properties" });
+            List<SellTypeViewModel> viewModelList = _mapper.Map<List<SellTypeViewModel>>(sellTypes);
+            return viewModelList;
+        }
     }
 }
