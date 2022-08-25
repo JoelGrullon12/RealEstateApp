@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealEstateApp.Core.Application.Interfaces.Services;
+using RealEstateApp.Core.Application.ViewModels.Property;
+using RealEstateApp.Core.Application.ViewModels.Upgrade;
+using System.Collections.Generic;
 using RealEstateApp.Core.Application.ViewModels.Upgrade;
 using System.Threading.Tasks;
 
@@ -8,20 +11,23 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
     public class UpgradeController : Controller
     {
         private readonly IUpgradeService _upgradeService;
+        private readonly IPropertyService _propertyService;
 
-        public UpgradeController(IUpgradeService upgradeService)
+        public UpgradeController(IUpgradeService upgradeService, IPropertyService propertyService)
         {
             _upgradeService = upgradeService;
+            _propertyService = propertyService;
         }
-
         public async Task<IActionResult> Index()
         {
-            return View(await _upgradeService.GetAllViewModel());
+            return View(await _upgradeService.GetAllViewModelWithInclude());
+
         }
 
         public IActionResult Create()
         {
-            return View(new SaveUpgradeViewModel());
+            return View("SaveUpgrade", new SaveUpgradeViewModel());
+
         }
 
         [HttpPost]
@@ -36,6 +42,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
+           
             return View("SaveUpgrade", await _upgradeService.GetByIdSaveViewModel(id));
         }
 
@@ -60,5 +67,6 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             await _upgradeService.Delete(saveViewModel.Id);
             return RedirectToRoute(new { controller = "Upgrade", action = "Index" });
         }
+
     }
 }

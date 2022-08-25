@@ -23,7 +23,7 @@
                             </div>
                         </div>
 
-                        @foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyType)
+                        @*@foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyType)
                         {
                             <div class="mb-3">
                                 <div class="form-check">
@@ -31,10 +31,16 @@
                                     <label class="form-check-label" for="categoria-@propertyType.Id">@propertyType.Name</label>
                                 </div>
                             </div>
-                        }
-
+                        }*@
                         <button type="submit" class="btn btn-primary">Filtrar</button>
                     </form>
+
+                </div> <!-- card-body -->
+            </div>  <!-- card -->
+        </div> <!-- col-3 -->
+
+        <div class="col-9">
+            <div class="row">
                 </div>
             </div>
         </div>
@@ -57,7 +63,7 @@
                             <img src="https://conceptodefinicion.de/wp-content/uploads/2014/03/arriend.jpg" class="card-img" style="width:100%;height:auto;">
                         </div>
                         <div class="card-body">
-                            if (property.Type == null)
+                            @*if (property.Type == null)
                             {
                             <p>No existen tipos de propiedades creadas</p>
 
@@ -66,7 +72,6 @@
                             {
                             <p>@property.Type.Name</p>
                             }
-
                             if (property.SellType == null)
                             {
                             <p>No existen tipos de ventas creadas</p>
@@ -74,12 +79,12 @@
                             else
                             {
                             <p>@property.SellType.Id</p>
-                            }
+                            }*@
                             <p><b>Codigo: </b>@property.Code</p>
                             <p><b>Precio:</b> $@property.Price</p>
                             <p><b>Habitaciones:</b> @property.Bedrooms</p>
                             <p><b>Baños:</b> @property.Bathrooms</p>
-                            <p>Tamaño en metros: @property.Size</p>
+                            <p><b>Tamaño en metros:</b> @property.Size</p>
                         </div>
                         <div class="btn-group">
                         </div>
@@ -88,4 +93,6 @@
             }
         }
     </div>
+    </div> 
+</div>
 </div>

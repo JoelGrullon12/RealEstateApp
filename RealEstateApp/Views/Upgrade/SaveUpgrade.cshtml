@@ -1,0 +1,36 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.Upgrade
+@model SaveUpgradeViewModel
+@{
+    bool editMode = (Model.Id != 0);
+    string title = (editMode) ? "Editando Mejora" : "Creando Mejora";
+    string action = (editMode) ? "Edit" : "Create";
+    ViewData["Title"] = title;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2 class="text-center">@title</h2>
+                </div>
+                <div class="card-body">
+                    @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                    <form method="post" asp-controller="Upgrade" asp-action="@action">
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="Name">Nombre</label>
+                            <input class="form-control" asp-for="Name" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" asp-for="Description">Descripción</label>
+                            <input class="form-control" asp-for="Description" />
+                        </div>
+                        <input type="hidden" asp-for="Id" />
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a class="btn btn-secondary" asp-controller="Upgrade" asp-action="Index">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -25,6 +25,7 @@ namespace RealEstateApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+
             //var properties = 
             /* List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
             var properties = PropertyViewModel.inc
@@ -52,7 +53,10 @@ namespace RealEstateApp.Controllers
 
         public async Task<IActionResult> Filter(FilterPropertyViewModel vm)
         {
-            ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
+
+
+           // ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModelWithInclude();
+
             return View(await _propertyService.GetAllViewModelWithFilters(vm));
         }
 
