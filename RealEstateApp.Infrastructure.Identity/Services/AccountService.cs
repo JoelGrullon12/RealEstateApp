@@ -195,7 +195,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             user.UserName = request.UserName;
             user.Email = request.Email;
             user.DNI = request.DNI;
-            user.ImgUrl = "imagen XD";
+            user.ImgUrl = "";
 
             var result = await _userManager.UpdateAsync(user);
             var passResult = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);

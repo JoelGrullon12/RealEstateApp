@@ -102,6 +102,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
             if (!ModelState.IsValid)
             {
+                // ModelState.AddModelError("agentError", "Debes rellenar los campos faltantes");
                 if (oldUser.Role == Roles.Agent.ToString())
                 {
                     return View("MyProfile", saveViewModel);
@@ -139,6 +140,11 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 controller = "User";
                 action = "MyProfile";
             }
+            else if (oldUser.Role == Roles.Developer.ToString())
+            {
+                controller = "Developer";
+                action = "Index";
+            }
 
             return RedirectToRoute(new { controller = controller, action = action });
         }
@@ -153,16 +159,24 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         {
             SaveUserViewModel user = await _userService.GetByIdSaveViewModel(id);
             await _userService.SetUserStatus(user.Id, !user.IsActive);
-            string controllerAction = "";
+            string controller = "";
+            string action = "";
             if (user.Role == Roles.Admin.ToString())
             {
-                controllerAction = "Admins";
+                controller = "Admin";
+                action = "Admins";
             }
             else if (user.Role == Roles.Agent.ToString())
             {
-                controllerAction = "Agents";
+                controller = "Admin";
+                action = "Agents";
             }
-            return RedirectToRoute(new { controller = "Admin", action = controllerAction });
+            else if(user.Role == Roles.Developer.ToString())
+            {
+                controller = "Developer";
+                action = "Index";
+            }
+            return RedirectToRoute(new { controller = controller, action = action });
         }
 
         public async Task<IActionResult> Delete(string id)

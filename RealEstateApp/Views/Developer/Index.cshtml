@@ -1,6 +1,69 @@
-﻿
+﻿@using RealEstateApp.Core.Application.ViewModels.User
+@model List<UserViewModel>
 @{
-    ViewData["Title"] = "Desarolladores";
+    ViewData["Title"] = "Desarrolladores";
 }
 
-<h1>Desarolladores</h1>
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-4 offset-8">
+            <a class="btn btn-success w-100" asp-controller="Developer" asp-action="Create">Crear desarrollador</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>No hay usuarios desarrolladores en el sistema</h2>
+        }
+        else
+        {
+            foreach (UserViewModel developer in Model)
+            {
+                <div class="modal fade" id="modal-@developer.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                @if (developer.IsActive)
+                                {
+                                    <h5 class="modal-title">¿Estás seguro que quieres desactivar este usuario?</h5>
+                                }
+                                else
+                                {
+                                    <h5 class="modal-title">¿Estás seguro que quieres activar este usuario?</h5>
+                                }
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <a class="btn btn-primary" asp-controller="User" asp-action="SetUserStatus" asp-route-id="@developer.Id">Aceptar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>@developer.FirstName @developer.LastName</h4>
+                        </div>
+                        <div class="card-body">
+                            <h6>@developer.UserName</h6>
+                            <h6>@developer.DNI</h6>
+                            <h6>@developer.Email</h6>
+                            <div>
+                                @if (developer.IsActive)
+                                {
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-@developer.Id">Desactivar</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-@developer.Id">Activar</button>
+                                }
+                                <a class="btn btn-warning" asp-controller="User" asp-action="Edit" asp-route-id="@developer.Id">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
