@@ -1,7 +1,7 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Upgrade
 @model List<UpgradeViewModel>
 @{
-    ViewData["Title"] = "Mejora";
+    ViewData["Title"] = "Mejoras";
 }
 
 <div class="container-fluid">
@@ -26,10 +26,9 @@
                         </div>
                         <div class="card-body">
                             <p>@upgrade.Description</p>
-                            <p><b>Propiedades:</b> @upgrade.Properties.Count</p>
                             <div class="btn-group">
-                                <a class="btn btn-warning" asp-controller="SellType" asp-action="Edit" asp-route-id="@upgrade.Id">Editar</a>
-                                <a class="btn btn-danger" asp-controller="SellType" asp-action="Delete" asp-route-id="@upgrade.Id">Eliminar</a>
+                                <a class="btn btn-outline-warning" asp-controller="Upgrade" asp-action="Edit" asp-route-id="@upgrade.Id">Editar</a>
+                                <a class="btn btn-outline-danger" asp-controller="Upgrade" asp-action="Delete" asp-route-id="@upgrade.Id">Eliminar</a>
                             </div>
                         </div>
                     </div>

@@ -22,14 +22,14 @@
                 <div class="col-4">
                     <div class="card">
                         <div class="card-header">
-                            <h2>@sellType.Name</h2>
+                            <h3>@sellType.Name</h3>
                         </div>
                         <div class="card-body">
                             <p>@sellType.Description</p>
                             <p><b>Propiedades:</b> @sellType.Properties.Count</p>
                             <div class="btn-group">
-                                <a class="btn btn-warning" asp-controller="SellType" asp-action="Edit" asp-route-id="@sellType.Id">Editar</a>
-                                <a class="btn btn-danger" asp-controller="SellType" asp-action="Delete" asp-route-id="@sellType.Id">Eliminar</a>
+                                <a class="btn btn-outline-warning" asp-controller="SellType" asp-action="Edit" asp-route-id="@sellType.Id">Editar</a>
+                                <a class="btn btn-outline-danger" asp-controller="SellType" asp-action="Delete" asp-route-id="@sellType.Id">Eliminar</a>
                             </div>
                         </div>
                     </div>
