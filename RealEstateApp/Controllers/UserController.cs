@@ -15,13 +15,15 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
     {
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
+        private readonly IPropertyService _propertyService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly LoginResponse _user;
 
-        public UserController(IUserService userService, IRoleService roleService, IHttpContextAccessor httpContextAccessor)
+        public UserController(IUserService userService, IRoleService roleService, IPropertyService propertyService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
             _roleService = roleService;
+            _propertyService = propertyService;
             _httpContextAccessor = httpContextAccessor;
             _user = _httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
         }
@@ -186,19 +188,28 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(SaveUserViewModel user)
         {
-            string controllerAction = "";
+            string controller = "";
+            string action = "";
 
-            if (user.Role == "Agent")
+            if (user.Role == Roles.Agent.ToString())
             {
-                controllerAction = "Agents";
+                controller = "Admin";
+                action = "Agents";
+                List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
+                List<PropertyViewModel> propertiesOfTheAgent = properties.FindAll(property => property.AgentId == user.Id);
+                foreach(PropertyViewModel property in propertiesOfTheAgent)
+                {
+                    await _propertyService.Delete(property.Id);
+                }
             }
-            else if (user.Role == "Admin")
+            else if (user.Role == Roles.Admin.ToString())
             {
-                controllerAction = "Admins";
+                controller = "Admin";
+                action = "Admins";
             }
 
             await _userService.Delete(user.Id);
-            return RedirectToRoute(new { controller = "Admin", action = controllerAction });
+            return RedirectToRoute(new { controller = controller, action = action });
         }
 
         public IActionResult LogOut()

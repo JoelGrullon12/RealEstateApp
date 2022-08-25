@@ -26,17 +26,10 @@
                     @{
                         int controlCounter = 0;
                     }
-                    @if (ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0)
-                    {
-                        controlCounter++;
-                    }
 
-                    @if (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0)
-                    {
-                        controlCounter++;
-                    }
-
-                    @if (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0)
+                    @if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) || 
+                         (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) || 
+                         (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0))
                     {
                         controlCounter++;
                     }
@@ -91,20 +84,20 @@
                                 </select>
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Primera Imagen</label>
-                                <input class="form-control" type="file" />
+                                <label class="form-label" asp-for="ImageUrl1">Primera Imagen</label>
+                                <input class="form-control" asp-for="ImageUrl1" required />
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Primera Imagen</label>
-                                <input class="form-control" type="file" />
+                                <label class="form-label" asp-for="ImageUrl2">Segunda Imagen</label>
+                                <input class="form-control" asp-for="ImageUrl2" />
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Primera Imagen</label>
-                                <input class="form-control" type="file" />
+                                <label class="form-label" asp-for="ImageUrl3">Tercera Imagen</label>
+                                <input class="form-control" asp-for="ImageUrl3" />
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Primera Imagen</label>
-                                <input class="form-control" type="file" />
+                                <label class="form-label" asp-for="ImageUrl4">Cuarta Imagen</label>
+                                <input class="form-control" asp-for="ImageUrl4" />
                             </div>
                             <button class="btn btn-primary" type="submit">Guardar</button>
                             <a class="btn btn-secondary" asp-controller="Agent" asp-action="Properties">Volver atrás</a>

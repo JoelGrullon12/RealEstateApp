@@ -17,7 +17,7 @@ namespace RealEstateApp.Core.Application.Services
         private readonly IUpgradeRepository _upgradeRepository;
         private readonly IMapper _mapper;
 
-        public UpgradeService(IUpgradeRepository repo, IMapper mapper):base(repo,mapper)
+        public UpgradeService(IUpgradeRepository repo, IMapper mapper) : base(repo, mapper)
         {
             _upgradeRepository = repo;
             _mapper = mapper;

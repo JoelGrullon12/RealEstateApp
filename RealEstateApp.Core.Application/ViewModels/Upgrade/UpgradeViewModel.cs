@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.ViewModels.Upgrade
 {
-    public class UpgradeViewModel:BaseViewModel
+    public class UpgradeViewModel : BaseViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
