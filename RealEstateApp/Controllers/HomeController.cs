@@ -66,5 +66,13 @@ namespace RealEstateApp.Controllers
             return View(await _propertyService.GetAllViewModel());
 
         }
+
+        public async Task<IActionResult> Filter(FilterPropertyViewModel vm)
+        {
+
+            ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
+            return View(await _propertyService.GetAllViewModelWithFilters(vm));
+
+        }
     }
 }

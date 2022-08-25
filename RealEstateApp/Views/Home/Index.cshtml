@@ -6,6 +6,46 @@
     ViewData["Title"] = "Inicio";
 }
 
+<div class="container-fluid"
+    <div class="row">
+        <div class="col-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-light">
+                    <h4>Filtros</h4>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Tipos de Propiedades</h4>
+
+                    <form method="post" asp-controller="Home" asp-action="Filter">
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" value="null" type="radio" name="TypeId" id="propertyType-all" />
+                                <label class="form-check-label" for="propertyType-all">Todas</label>
+                            </div>
+                        </div>
+
+                        @foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyType)
+                        {
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="@propertyType.Id" type="radio" name="TypeId" id="category-@propertyType.Id" />
+                                    <label class="form-check-label" for="categoria-@propertyType.Id">@propertyType.Name</label>
+                                </div>
+                            </div>
+                        }
+
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+</div>
+
+
 <div class="container-fluid">
     <div class="row">
         @if (Model == null || Model.Count == 0)
@@ -16,7 +56,6 @@
         {
             foreach (PropertyViewModel property in Model)
             {
-             
                 <div class="col-4 m-2">
                     <div class="card">
                         <div class="card-header">

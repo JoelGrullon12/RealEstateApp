@@ -11,6 +11,7 @@ namespace RealEstateApp.Core.Domain.Entities
     {
         public int Code { get; set; }
         public int TypeId { get; set; }
+        // navigation propertly
         public int SellTypeId { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }

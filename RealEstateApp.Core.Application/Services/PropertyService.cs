@@ -38,32 +38,35 @@ namespace RealEstateApp.Core.Application.Services
 
         }
 
+        public async Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters)
+        {
+            var propertyList = await _propRepository.GetAllWithIncludes(new List<string> { "PropertyTypes" });
+
+            var listViewModels = propertyList.Where(property => property.ClientId == _user.Id).Select(property => new PropertyViewModel
+            {
+
+                Id = property.Id,
+                Code = property.Code,
+                Description = property.Description,
+                Bedrooms = property.Bedrooms,
+                Bathrooms = property.Bathrooms,
+                Size = property.Size,
+                TypeId = property.Type.Id
+            }).ToList();
+
+            if (filters.TypeId != null)
+            {
+                listViewModels = listViewModels.Where(property => property.TypeId == filters.TypeId.Value).ToList();
+            }
+
+            return listViewModels;
+        }
+
         /*public async Task<List<FavoriteViewModel>> GetFavoriteViews()
         {
 
         }*/
 
-        // No es necesario utilizar este metodo ya que se tiene el GetAllViewModel desde la interfaz
-        public async Task<List<PropertyViewModel>> GetProperties()
-        {
 
-            List<PropertyViewModel> properties = await base.GetAllViewModel();
-
-            // var properties = new List<PropertyViewModel>();
-            /*var result = from s in properties
-                     where s.TypeId == s.Type.Id
-                     select s;*/
-
-            //List<PropertyViewModel> propertiesFind = properties.FindAll(prop => prop.TypeId == prop.Type.Id).ToList();
-
-            //properties = properties.Equals(property => property.TypeId == property.Type.Id)
-
-            // return(properties);
-
-
-            return (properties);
-
-
-        }
     }
 }
