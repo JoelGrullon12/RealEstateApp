@@ -1,6 +1,40 @@
-﻿
+﻿@using RealEstateApp.Core.Application.ViewModels.Upgrade
+@model List<UpgradeViewModel>
 @{
-    ViewData["Title"] = "Mejoras";
+    ViewData["Title"] = "Mejora";
 }
 
-<h1>Mejoras</h1>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-4 offset-8">
+            <a class="btn btn-success w-100" asp-controller="Upgrade" asp-action="Create">Crear mejora</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2>No hay mejoras en el sistema</h2>
+        }
+        else
+        {
+            foreach (UpgradeViewModel upgrade in Model)
+            {
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>@upgrade.Name</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>@upgrade.Description</p>
+                            <p><b>Propiedades:</b> @upgrade.Properties.Count</p>
+                            <div class="btn-group">
+                                <a class="btn btn-warning" asp-controller="SellType" asp-action="Edit" asp-route-id="@upgrade.Id">Editar</a>
+                                <a class="btn btn-danger" asp-controller="SellType" asp-action="Delete" asp-route-id="@upgrade.Id">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
