@@ -3,6 +3,7 @@
 @using RealEstateApp.Core.Application.ViewModels.Property
 @using RealEstateApp.Core.Application.ViewModels.PropertyType
 @using RealEstateApp.Core.Application.ViewModels.SellType
+@using RealEstateApp.Core.Application.ViewModels.Upgrade;
 @using StockApp.Core.Application.Helpers
 @model SavePropertyViewModel
 @inject IHttpContextAccessor httpContextAccessor
@@ -81,6 +82,10 @@
                                 <label class="form-label">Mejoras</label>
                                 <select class="form-control">
                                     <option value="0">Selecciona una o varias mejoras</option>
+                                    @foreach (UpgradeViewModel upgrade in ViewBag.Upgrades)
+                                    {
+                                        <option value="@upgrade.Id">@upgrade.Name</option>
+                                    }
                                 </select>
                             </div>
                             <div class="mb-2">
