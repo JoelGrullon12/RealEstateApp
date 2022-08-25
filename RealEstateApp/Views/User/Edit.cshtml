@@ -1,7 +1,6 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.User
 @model SaveUserViewModel
 @{
-    string role = Model.Role;
     ViewData["Title"] = "Edit";
 }
 
@@ -36,6 +35,10 @@
                             <input class="form-control" asp-for="UserName" />
                         </div>
                         <div class="mb-2">
+                            <label class="form-label" asp-for="CurrentPassword">Contraseña actual</label>
+                            <input class="form-control" asp-for="CurrentPassword" />
+                        </div>
+                        <div class="mb-2">
                             <label class="form-label" asp-for="Password">Contraseña</label>
                             <input class="form-control" asp-for="Password" />
                         </div>
@@ -44,8 +47,8 @@
                             <input class="form-control" asp-for="ConfirmPassword" />
                         </div>
                         <input type="hidden" asp-for="Id" />
-                        <input type="hidden" asp-for="Phone" />
-                        <input type="hidden" asp-for="Type" value="@role" />
+                        <input type="hidden" asp-for="Phone" value="null" />
+                        <input type="hidden" asp-for="Role" />
                         <button type="submit" class="btn btn-primary">Guardar</button>
                         <a class="btn btn-secondary" asp-controller="Admin" asp-action="Admins">Volver atrás</a>
                     </form>

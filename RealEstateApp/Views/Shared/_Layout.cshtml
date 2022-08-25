@@ -32,7 +32,7 @@
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Agent" asp-action="Index">RealEstateApp</a>
                 }
-                else if(role == "Client")
+                else if (role == "Client")
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Client" asp-action="Index">RealEstateApp</a>
                 }
@@ -78,7 +78,8 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogOut">Cerrar Sesión</a>
                             </li>
-                        }else if(role == "Agent")
+                        }
+                        else if (role == "Agent")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="MyProfile">Mi Perfil</a>

@@ -49,8 +49,8 @@
                             <input asp-for="ConfirmPassword" class="form-control" />
                         </div>
                         <div class="mb-3">
-                            <label asp-for="Type" class="form-label">Tipo de usuario</label>
-                            <select asp-for="Type" class="form-control">
+                            <label asp-for="Role" class="form-label">Tipo de usuario</label>
+                            <select asp-for="Role" class="form-control">
                                 <option>Elige el tipo de usuario</option>
                                 @foreach (RoleViewModel rol in ViewBag.Roles)
                                 {
@@ -58,6 +58,7 @@
                                 }
                             </select>
                         </div>
+                        <input type="hidden" asp-for="CurrentPassword" value="null"/>
                         @*<div class="mb-3">
                         <label asp-for="FirstName" class="form-label">Nombre</label>
                         <input asp-for="FirstName" class="form-control"/>

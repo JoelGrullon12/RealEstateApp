@@ -42,13 +42,13 @@ namespace RealEstateApp.Core.Application.Services
             RegisterRequest request = _mapper.Map<RegisterRequest>(saveViewModel);
             RegisterResponse response;
 
-            if (saveViewModel.Type == Roles.Admin.ToString())
+            if (saveViewModel.Role == Roles.Admin.ToString())
                 response = await _accountService.RegisterAdminUserAsync(request);
-            else if (saveViewModel.Type == Roles.Client.ToString())
+            else if (saveViewModel.Role == Roles.Client.ToString())
                 response = await _accountService.RegisterClientUserAsync(request);
-            else if (saveViewModel.Type == Roles.Agent.ToString())
+            else if (saveViewModel.Role == Roles.Agent.ToString())
                 response = await _accountService.RegisterAgentUserAsync(request);
-            else if (saveViewModel.Type == Roles.Developer.ToString())
+            else if (saveViewModel.Role == Roles.Developer.ToString())
                 response = await _accountService.RegisterDeveloperAsync(request);
             else
             {
