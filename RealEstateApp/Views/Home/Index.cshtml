@@ -1,16 +1,11 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property;
-<<<<<<< HEAD
 @using RealEstateApp.Core.Application.ViewModels.PropertyType;
-=======
->>>>>>> d80c5103b2763170a9f3faa408d11734dd2f954e
+
 @model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Inicio";
 }
 
-<h1>Hola</h1>
-
-<<<<<<< HEAD
 <div class="container-fluid">
     <div class="row">
         @if (Model == null || Model.Count == 0)
@@ -54,81 +49,7 @@
                 </div>
             }
         }
-=======
-@*@foreach (var properties in Model.PropertyTypes)
-{
-    <h1>@properties.Name</h1>
-}
 
-@foreach (var properties in Model.SellTypes)
-{
-    <h1>@properties.Name</h1>
-}*@
 
-<div class="my-3 row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card">
-            <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-                 alt="Hollywood Sign on The Hill" />
-            <div class="card-body">
-                @*                @foreach (var properties in Model.PropertyTypes)
-                {*@
-                <h5 class="card-title">@*@properties.Type.Name*@ Name</h5>
-                @*                }*@
-                <p class="card-text">
-                    Descripcion
-                </p>
-                <h5 class="card-title">Codigo</h5>
-                <p class="card-text">
-                    148984
-                </p>
-                <h5 class="card-title">Venta</h5>
-                <p class="card-text">
-                    500,000
-                </p>
-                <h5 class="card-title">Habitaciones</h5>
-                <p class="card-text">
-                </p>
-                <h5 class="card-title">Baños</h5>
-                <p class="card-text">
-                </p>
-                <h5 class="card-title">Tamaño</h5>
-                <p class="card-text">
-                    500 mt
-                </p>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top"
-                     alt="Hollywood Sign on The Hill" />
-                <div class="card-body">
-
-                    <p class="card-text">
-                        Descripcion
-                    </p>
-                    <h5 class="card-title">Codigo</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <h5 class="card-title">Venta</h5>
-                    <p class="card-text">
-                        500,000
-                    </p>
-                    <h5 class="card-title">Habitaciones</h5>
-                    <p class="card-text">
-                    </p>
-                    <h5 class="card-title">Baños</h5>
-                    <p class="card-text">
-                    </p>
-                    <h5 class="card-title">Tamaño</h5>
-                    <p class="card-text">
-                        500 mt
-                    </p>
-                </div>
-            </div>
-        </div>
->>>>>>> d80c5103b2763170a9f3faa408d11734dd2f954e
     </div>
 </div>

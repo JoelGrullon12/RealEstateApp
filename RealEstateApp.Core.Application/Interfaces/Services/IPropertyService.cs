@@ -10,7 +10,7 @@ namespace RealEstateApp.Core.Application.Interfaces.Services
         Task<List<PropertyViewModel>> GetAllViewModelFromUser();
         Task<List<PropertyViewModel>> GetProperties();
 
-        Task<List<PropertyViewModel> GetAllViewModelsWithFilters(FilterPropertyViewModel);
+        //Task<List<PropertyViewModel> GetAllViewModelsWithFilters(FilterPropertyViewModel filters);
 
         //Task<List<PropertyViewModel>> GetAllViewModel();
     }
