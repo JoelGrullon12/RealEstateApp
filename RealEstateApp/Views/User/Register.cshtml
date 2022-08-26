@@ -54,7 +54,7 @@
                         <div class="mb-3">
                             <label asp-for="Role" class="form-label">Tipo de usuario</label>
                             <select asp-for="Role" class="form-control">
-                                <option>Elige el tipo de usuario</option>
+                                <option value="">Elige el tipo de usuario</option>
                                 @foreach (RoleViewModel rol in ViewBag.Roles)
                                 {
                                     <option value="@rol.Name">@rol.Name</option>
