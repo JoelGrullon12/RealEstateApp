@@ -19,6 +19,10 @@
     <title>@ViewData["Title"] - RealEstateApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/home.css"/>
+    <link type="text/css" rel="stylesheet" href="~/css/details.css"/>
+
+    <script src="https://use.fontawesome.com/170f540db9.js"></script>
 </head>
 <body>
     <header>
@@ -32,7 +36,7 @@
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Agent" asp-action="Index">RealEstateApp</a>
                 }
-                else if(role == "Client")
+                else if (role == "Client")
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Client" asp-action="Index">RealEstateApp</a>
                 }
@@ -73,12 +77,16 @@
                         else if (role == "Client")
                         {
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Agents">Agentes</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Properties">Propiedades Favoritas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LogOut">Cerrar Sesión</a>
                             </li>
-                        }else if(role == "Agent")
+                        }
+                        else if (role == "Agent")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="MyProfile">Mi Perfil</a>
@@ -93,7 +101,7 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Agentes</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Agents">Agentes</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Unete a la app</a>

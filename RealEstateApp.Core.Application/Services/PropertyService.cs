@@ -36,35 +36,31 @@ namespace RealEstateApp.Core.Application.Services
             List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(props);
             List<PropertyViewModel> propertiesOfUserLoggedIn = properties.FindAll(property => property.AgentId == _user.Id).ToList();
             return propertiesOfUserLoggedIn;
+        }
 
+        /*public async Task<List<PropertyViewModel>> GetAllVieModelById()
+        {
+            List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(await _propRepository.GetByIdAsync(id)).ToList();
+            return properties;
+
+        }*/
+
+        public async Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters)
+        {
+            List<Property> propertyList = await _propRepository.GetAllWithIncludes(new List<string> { "Type" });
+            List<PropertyViewModel> listViewModels = _mapper.Map<List<PropertyViewModel>>(propertyList);
+
+            if (filters.TypeId != null)
+            {
+                listViewModels = listViewModels.Where(property => property.TypeId == filters.TypeId.Value).ToList();
+            }
+
+            return listViewModels;
         }
 
         /*public async Task<List<FavoriteViewModel>> GetFavoriteViews()
         {
 
         }*/
-
-        // No es necesario utilizar este metodo ya que se tiene el GetAllViewModel desde la interfaz
-        public async Task<List<PropertyViewModel>> GetProperties()
-        {
-
-            List<PropertyViewModel> properties = await base.GetAllViewModel();
-
-            // var properties = new List<PropertyViewModel>();
-            /*var result = from s in properties
-                     where s.TypeId == s.Type.Id
-                     select s;*/
-
-            //List<PropertyViewModel> propertiesFind = properties.FindAll(prop => prop.TypeId == prop.Type.Id).ToList();
-
-            //properties = properties.Equals(property => property.TypeId == property.Type.Id)
-
-            // return(properties);
-
-
-            return (properties);
-
-
-        }
     }
 }

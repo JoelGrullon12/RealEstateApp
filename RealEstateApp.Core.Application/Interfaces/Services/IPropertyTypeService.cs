@@ -7,6 +7,6 @@ namespace RealEstateApp.Core.Application.Interfaces.Services
 {
     public interface IPropertyTypeService : IGenericService<PropertyTypeViewModel, SavePropertyTypeViewModel>
     {
-        
+        Task<List<PropertyTypeViewModel>> GetAllViewModelWithInclude();
     }
 }

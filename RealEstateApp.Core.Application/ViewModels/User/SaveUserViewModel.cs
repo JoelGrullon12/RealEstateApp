@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -36,19 +37,26 @@ namespace RealEstateApp.Core.Application.ViewModels.User
         [DataType(DataType.Text)]
         public string UserName { get; set; }
 
+        [Required(ErrorMessage = "Debes colocar tu contraseña actual")]
+        [DataType(DataType.Password)]
+        public string CurrentPassword { get; set; }
+
         [Required(ErrorMessage = "Debes colocar tu contraseña")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Debes colocar tu contraseña")]
+        [Required(ErrorMessage = "Debes confirmar tu contraseña")]
         [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Ambas contraseñas deben coincidir")]
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Debes colocar el tipo de usuario")]
         [DataType(DataType.Text)]
-        public string Type { get; set; }
-        public bool IsActive { get; set; }
         public string Role { get; set; }
+        public string ImgUrl { get; set; }
+        public bool IsActive { get; set; }
+
+        [DataType(DataType.Upload)]
+        public IFormFile ImageFile { get; set; }
     }
 }

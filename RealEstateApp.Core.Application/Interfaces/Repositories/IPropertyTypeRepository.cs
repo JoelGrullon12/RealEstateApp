@@ -6,6 +6,5 @@ namespace RealEstateApp.Core.Application.Interfaces.Repositories
 {
     public interface IPropertyTypeRepository : IGenericRepository<PropertyType>
     {
-
     }
 }

@@ -23,7 +23,8 @@
                 </div>
                 <div class="card-body">
                     <form method="post" asp-controller="User" asp-action="Delete">
-                        <input type="hidden" asp-action="Id" />
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Role" />
                         <button type="submit" class="btn btn-danger">Aceptar</button>
                         <a class="btn btn-secondary" asp-controller="Admin" asp-action="@action">Volver atrás</a>
                     </form>

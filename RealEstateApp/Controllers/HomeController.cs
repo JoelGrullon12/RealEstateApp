@@ -1,70 +1,54 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Services;
-using RealEstateApp.Core.Application.Services;
-using RealEstateApp.Core.Application.ViewModels.PropertyType;
-using RealEstateApp.Core.Application.ViewModels.SellType;
 using RealEstateApp.Core.Application.ViewModels.Property;
-using RealEstateApp.Models;
-using System;
+using RealEstateApp.Core.Application.ViewModels.PropertyType;
+using RealEstateApp.Core.Application.ViewModels.User;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace RealEstateApp.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly IPropertyService _propertyService;
         private readonly IPropertyTypeService _propertyTypeService;
         private readonly ISellTypeService _sellTypeService;
+        private readonly IUpgradeService _upgradeService;
+        private readonly IUserService _userService;
 
-        public HomeController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, ISellTypeService sellTypeService)
+        public HomeController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, IUpgradeService upgradeService, IUserService userService, ISellTypeService sellTypeService)
         {
-
             _propertyService = propertyService;
             _propertyTypeService = propertyTypeService;
             _sellTypeService = sellTypeService;
-
+            _upgradeService = upgradeService;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
+            ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
+            ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
+            return View(await _propertyService.GetAllViewModel()); 
+        }
 
+        public async Task<IActionResult> Filter(FilterPropertyViewModel vm)
+        {
+            // ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModelWithInclude();
+            ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
+            ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
+            ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
+            ViewBag.Properties = await _propertyService.GetAllViewModel();
+            return View("Index", await _propertyService.GetAllViewModelWithFilters(vm));
+        }
 
-
-            //var properties = 
-            /* List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
-            var properties = PropertyViewModel.inc
-             //var types = ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
-             /*var sells = ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
-             List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
-             var propertiesFiltered = properties.FindAll(prop => types = sells).ToList();
-             return View(propertiesFiltered);*/
-
-
-            //var properties = new List<PropertyViewModel>();
-
-            //get all students whose name is Bill
-
-
-
-
-            /*foreach (var student in result)
-                Console.WriteLine(properties);*/
-            //List<PropertyViewModel> propertiesFiltered = properties.FindAll(prop => prop.TypeId == prop.Type.Id || prop.SellTypeId == prop.SellType.Id);
-            //ViewBag.Properties = propertiesFiltered;
-            //return View(new PropertyViewModel());
-            // List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
-            //List<PropertyTypeViewModel> propertyTypes = await _propertyTypeService.GetAllViewModel();
-            //properties.AddRange(types);*/
-
-
-            return View(await _propertyService.GetAllViewModel());
-
+        public async Task<IActionResult> Agents()
+        {
+            List<UserViewModel> users = await _userService.GetAllViewModel();
+            List<UserViewModel> agents = users.FindAll(user => user.Role == Roles.Agent.ToString());
+            return View(agents);
         }
     }
 }

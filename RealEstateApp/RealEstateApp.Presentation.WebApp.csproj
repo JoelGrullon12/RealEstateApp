@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -21,6 +21,10 @@
     <ProjectReference Include="..\RealEstateApp.Infrastructure.Shared\RealEstateApp.Infrastructure.Shared.csproj" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Users\" />
+    <Folder Include="wwwroot\images\Properties\" />
+    <Folder Include="wwwroot\images\Users\d723d332-c8c2-4f61-8f85-aa9b8fa01121\" />
+  </ItemGroup>
 
 </Project>

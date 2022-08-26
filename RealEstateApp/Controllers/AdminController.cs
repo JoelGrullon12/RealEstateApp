@@ -63,6 +63,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             return View(agents);
         }
 
+
         public async Task<IActionResult> Admins()
         {
             List<UserViewModel> users = await _userService.GetAllViewModel();

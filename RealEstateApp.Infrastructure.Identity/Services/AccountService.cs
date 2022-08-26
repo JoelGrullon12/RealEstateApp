@@ -173,7 +173,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 if (userWithSameEmail != null)
                 {
                     response.HasError = true;
-                    response.Error = "Este email ya esta siendo usado";
+                    response.Error = "Este email ya esta siendo utilizado";
                     return response;
                 }
             }
@@ -185,7 +185,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 if (userWithSameUserName != null)
                 {
                     response.HasError = true;
-                    response.Error = $"El nombre de usuario '{request.UserName}' ya esta en uso";
+                    response.Error = $"El nombre de usuario '{request.UserName}' ya esta siendo utilizado";
                     return response;
                 }
             }
@@ -195,15 +195,24 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             user.UserName = request.UserName;
             user.Email = request.Email;
             user.DNI = request.DNI;
-            user.ImgUrl = "";
+            user.ImgUrl = request.ImgUrl;
 
-            var result = await _userManager.UpdateAsync(user);
-            var passResult = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);
+            IdentityResult result = await _userManager.UpdateAsync(user);
+            IdentityResult passResult = null;
+            if (!(request.CurrentPassword == null) && !(request.Password == null))
+                passResult = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);
 
-            if (!result.Succeeded || !passResult.Succeeded)
+            if (!result.Succeeded)
             {
                 response.HasError = true;
                 response.Error = "Error tratando de actualizar el usuario";
+                return response;
+            }
+
+            if (passResult != null && !passResult.Succeeded)
+            {
+                response.HasError = true;
+                response.Error = "La contraseña actual es incorrecta";
                 return response;
             }
 
@@ -226,6 +235,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 Phone = user.PhoneNumber,
                 UserName = user.UserName,
                 IsActive = user.EmailConfirmed,
+                ImgUrl = user.ImgUrl,
                 Role = role
             };
 
@@ -304,7 +314,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 LastName = request.LastName,
                 DNI = request.DNI,
                 PhoneNumber = request.Phone,
-                ImgUrl = ""
+                ImgUrl = request.ImgUrl
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);

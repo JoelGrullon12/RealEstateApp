@@ -3,6 +3,7 @@
 @using RealEstateApp.Core.Application.ViewModels.Property
 @using RealEstateApp.Core.Application.ViewModels.PropertyType
 @using RealEstateApp.Core.Application.ViewModels.SellType
+@using RealEstateApp.Core.Application.ViewModels.Upgrade;
 @using StockApp.Core.Application.Helpers
 @model SavePropertyViewModel
 @inject IHttpContextAccessor httpContextAccessor
@@ -26,24 +27,18 @@
                     @{
                         int controlCounter = 0;
                     }
-                    @if (ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0)
-                    {
-                        controlCounter++;
-                    }
 
-                    @if (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0)
-                    {
-                        controlCounter++;
-                    }
-
-                    @if (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0)
+                    @if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) || 
+                         (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) || 
+                         (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0))
                     {
                         controlCounter++;
                     }
 
                     @if (controlCounter == 0)
                     {
-                        <form method="post" asp-controller="Property" asp-action="@action">
+                        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                        <form method="post" asp-controller="Property" asp-action="@action" enctype="multipart/form-data">
                             <div class="mb-2">
                                 <label asp-for="TypeId" class="form-label">Tipo de propiedad</label>
                                 <select asp-for="TypeId" class="form-control">
@@ -69,6 +64,10 @@
                                 <input class="form-control" asp-for="Price" />
                             </div>
                             <div class="mb-2">
+                                <label class="form-label" asp-for="Code">Codigo</label>
+                                <input class="form-control" asp-for="Code" />
+                            </div>
+                            <div class="mb-2">
                                 <label class="form-label" asp-for="Description">Descripción</label>
                                 <textarea class="form-control" cols="40" rows="3" asp-for="Description"></textarea>
                             </div>
@@ -88,24 +87,29 @@
                                 <label class="form-label">Mejoras</label>
                                 <select class="form-control">
                                     <option value="0">Selecciona una o varias mejoras</option>
+                                    @foreach (UpgradeViewModel upgrade in ViewBag.Upgrades)
+                                    {
+                                        <option value="@upgrade.Id">@upgrade.Name</option>
+                                    }
                                 </select>
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Primera Imagen</label>
-                                <input class="form-control" type="file" />
+                                <label class="form-label" asp-for="ImageFile1">Primera Imagen</label>
+                                <input class="form-control" asp-for="ImageFile1" required />
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Primera Imagen</label>
-                                <input class="form-control" type="file" />
+                                <label class="form-label" asp-for="ImageFile2">Segunda Imagen</label>
+                                <input class="form-control" asp-for="ImageFile2" />
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Primera Imagen</label>
-                                <input class="form-control" type="file" />
+                                <label class="form-label" asp-for="ImageFile3">Tercera Imagen</label>
+                                <input class="form-control" asp-for="ImageFile3" />
                             </div>
                             <div class="mb-2">
-                                <label class="form-label">Primera Imagen</label>
-                                <input class="form-control" type="file" />
+                                <label class="form-label" asp-for="ImageFile4">Cuarta Imagen</label>
+                                <input class="form-control" asp-for="ImageFile4" />
                             </div>
+                            <input type="hidden" asp-for="AgentId" value="@user.Id"/>
                             <button class="btn btn-primary" type="submit">Guardar</button>
                             <a class="btn btn-secondary" asp-controller="Agent" asp-action="Properties">Volver atrás</a>
 

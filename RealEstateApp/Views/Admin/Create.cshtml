@@ -42,8 +42,9 @@
                             <label class="form-label" asp-for="ConfirmPassword">Confirmar contraseña</label>
                             <input class="form-control" asp-for="ConfirmPassword" />
                         </div>
-                        <input type="hidden" asp-for="Phone" value="0101"/>
-                        <input type="hidden" asp-for="Type" value="Admin" />
+                        <input type="hidden" asp-for="CurrentPassword" value="null"/>
+                        <input type="hidden" asp-for="Phone" value="null"/>
+                        <input type="hidden" asp-for="Role" value="Admin" />
                         <button type="submit" class="btn btn-primary">Guardar</button>
                         <a class="btn btn-secondary" asp-controller="Admin" asp-action="Admins">Volver atrás</a>
                     </form>

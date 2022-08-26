@@ -8,10 +8,6 @@ namespace RealEstateApp.Core.Application.Interfaces.Services
     public interface IPropertyService : IGenericService<PropertyViewModel, SavePropertyViewModel>
     {
         Task<List<PropertyViewModel>> GetAllViewModelFromUser();
-        Task<List<PropertyViewModel>> GetProperties();
-
-        //Task<List<PropertyViewModel> GetAllViewModelsWithFilters(FilterPropertyViewModel filters);
-
-        //Task<List<PropertyViewModel>> GetAllViewModel();
+        Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters);
     }
 }

@@ -23,17 +23,17 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public int Bathrooms { get; set; }
         public int Size { get; set; }
         public string AgentId { get; set; }
+        public string ImageUrl1 { get; set; }
+        public string ImageUrl2 { get; set; }
+        public string ImageUrl3 { get; set; }
+        public string ImageUrl4 { get; set; }
 
         public DateTime Created { get; set; }
-
         //PropertyType = new PropertyType();
 
         #region Navigation Properties
         public PropertyTypeViewModel Type { get; set; }
-        //public PropertyTypeViewModel Type = new PropertyTypeViewModel()
         public SellTypeViewModel SellType { get; set; }
-        //public List<PropertyTypeViewModel> PropertyTypes { get; set; }
-        //public ICollection<SellTypeViewModel> SellTypes { get; set; }
         public ICollection<PropertyImgViewModel> Images { get; set; }
         public ICollection<UpgradeViewModel> Upgrades { get; set; }
         public ICollection<FavoriteViewModel> Favorites { get; set; }

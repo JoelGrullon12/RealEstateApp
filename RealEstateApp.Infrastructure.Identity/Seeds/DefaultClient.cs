@@ -19,6 +19,7 @@ namespace RealEstateApp.Infrastructure.Identity.Seeds
                 LastName = "User",
                 UserName = "ClientUser",
                 Email = "clientuser@email.com",
+                DNI = null,
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
