@@ -39,7 +39,7 @@ namespace RealEstateApp.Core.Application.Services
 
         public async Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters)
         {
-            var propertyList = await _propRepository.GetAllWithIncludes(new List<string> { "PropertyTypes" });
+            var propertyList = await _propRepository.GetAllWithIncludes(new List<string> { "Type" });
 
             var listViewModels = propertyList.Where(property => property.ClientId == _user.Id).Select(property => new PropertyViewModel
             {
