@@ -28,8 +28,6 @@ namespace RealEstateApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-            //List<PropertyTypeViewModel> propertyTypes = await _propertyTypeService.GetAllViewModel();
             ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
             ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
             ViewBag.Upgrades = await _upgradeService.GetAllViewModel();

@@ -12,7 +12,7 @@
     }
 
         .container-home .box:first-of-type:before {
-            content: "Featured";
+            content: "Exclusiva";
             background-color: #ea723d;
             color: white;
             font-size: 13px;
@@ -57,7 +57,7 @@
             }
 
             .container-home .box .top:after {
-                content: "View Property";
+                content: "Ver Propiedad";
                 color: white;
                 font-size: 12px;
                 padding: 10px;
@@ -98,7 +98,7 @@
         }
 
         .container-home .box:not(:last-of-type) .bottom:before {
-            content: "Hot";
+            content: "Exclusiva";
             background-color: #ea723d;
             color: white;
             font-size: 11px;
