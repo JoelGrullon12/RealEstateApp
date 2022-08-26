@@ -1,14 +1,18 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property;
 @using RealEstateApp.Core.Application.ViewModels.PropertyType;
+@using RealEstateApp.Core.Application.ViewModels.SellType;
+@using RealEstateApp.Core.Application.ViewModels.Upgrade;
 
 @model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Inicio";
 }
 
+
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-3">
+       <div class="col-6">
             <div class="card shadow-sm">
                 <div class="card-header bg-dark text-light">
                     <h4>Filtros</h4>
@@ -22,8 +26,7 @@
                                 <label class="form-check-label" for="propertyType-all">Todas</label>
                             </div>
                         </div>
-
-                        @*@foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyType)
+                        @foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyTypes)
                         {
                             <div class="mb-3">
                                 <div class="form-check">
@@ -31,68 +34,122 @@
                                     <label class="form-check-label" for="categoria-@propertyType.Id">@propertyType.Name</label>
                                 </div>
                             </div>
-                        }*@
+                        }
                         <button type="submit" class="btn btn-primary">Filtrar</button>
                     </form>
 
                 </div> <!-- card-body -->
             </div>  <!-- card -->
-        </div> <!-- col-3 -->
-
-        <div class="col-9">
-            <div class="row">
+        </div> <!-- col-6 --> 
+        @*<div class="col-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-light">
+                    <h4>Filtros</h4>
                 </div>
-            </div>
+                <div class="card-body">
+                    <h4 class="card-title">Tipos de Propiedades</h4>
+                    <form method="post" asp-controller="Home" asp-action="Filter">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" value="null" type="radio" name="TypeId" id="propertyType-all" />
+                                <label class="form-check-label" for="propertyType-all">Todas</label>
+                            </div>
+                        </div>
+                        @foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyTypes)
+                        {
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="@propertyType.Id" type="radio" name="TypeId" id="category-@propertyType.Id" />
+                                    <label class="form-check-label" for="categoria-@propertyType.Id">@propertyType.Name</label>
+                                </div>
+                            </div>
+                        }
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </form>
+
+                </div> <!-- card-body -->
+            </div>  <!-- card -->
+        </div>*@ <!-- col-6 --> 
+    </div>
+</div>
+
+@{
+    int Counter = 0;
+}
+                     @if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) || 
+                         (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) || 
+                         (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0) || 
+                         (ViewBag.Properties == null || ViewBag.Properties.Count == 0))
+                    {
+                        Counter++;
+                    }
+
+@if (Counter == 0)
+{
+    @*foreach(PropertyTypeViewModel propertyType in ViewBag.PropertyTypes)
+    {
+        <p>@propertyType.Name.ToString()</p>
+    }
+
+    @foreach(SellTypeViewModel sellType in ViewBag.SellTypes)
+    {
+        <p>@sellType.Name.ToString()</p>
+    }
+    @foreach(UpgradeViewModel upgrade in ViewBag.Upgrades)
+    {
+        <p>@upgrade.Name.ToString()</p>
+    }*@
+
+    
+ <div class="container-home">
+     @foreach(PropertyViewModel property in ViewBag.Properties) {
+      <div class="box">
+        <div class="top">
+          <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
+          <span
+            ><i class="fas fa-heart"></i><i class="fas fa-exchange-alt"></i
+          ></span>
         </div>
-    </div>
-</div>
+        <div class="bottom">
+          <h3>@property.Type.Name</h3>
+          <p>
+           @property.Description
+          </p>
+          <div class="advants">
+            <div>
+              <span>Habitaciones</span>
+              <div><i class="fa fa-th" aria-hidden="true"></i><span>@property.Bedrooms</span></div>
+            </div>
+            <div>
+              <span>Baños</span>
+              <div><i class="fa fa-bath" aria-hidden="true"></i><span>@property.Bathrooms</span></div>
+            </div>
+            <div>
+              <span>Area</span>
+              <div>
+                <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
+              </div>
+            </div>
+          </div>
+          <div class="price">
+            <span>@property.SellType.Name</span>
+            <span>$@property.Price</span>
+          </div>
+        </div>
+      </div>
+      }
+   </div> <!-- Final -->
+       
+} 
+else
+{
+    <h2>No existen Propiedades Creadas</h2>
+ 
+}
 
-<div class="container-fluid">
-    <div class="row">
-        @if (Model == null || Model.Count == 0)
-        {
-            <h2 class="text-center">No hay propiedades</h2>
-        }
-        else
-        {
-            foreach (PropertyViewModel property in Model)
-            {
-                <div class="col-4 m-2">
-                    <div class="card">
-                        <div class="card-header">
-                            <img src="https://conceptodefinicion.de/wp-content/uploads/2014/03/arriend.jpg" class="card-img" style="width:100%;height:auto;">
-                        </div>
-                        <div class="card-body">
-                            @*if (property.Type == null)
-                            {
-                            <p>No existen tipos de propiedades creadas</p>
+@*@foreach(PropertyTypeViewModel property in ViewBag.PropertyTypes )
+{
+    <h1>@property.Name.ToString()</h1>
+}*@
 
-                            }
-                            else
-                            {
-                            <p>@property.Type.Name</p>
-                            }
-                            if (property.SellType == null)
-                            {
-                            <p>No existen tipos de ventas creadas</p>
-                            }
-                            else
-                            {
-                            <p>@property.SellType.Id</p>
-                            }*@
-                            <p><b>Codigo: </b>@property.Code</p>
-                            <p><b>Precio:</b> $@property.Price</p>
-                            <p><b>Habitaciones:</b> @property.Bedrooms</p>
-                            <p><b>Baños:</b> @property.Bathrooms</p>
-                            <p><b>Tamaño en metros:</b> @property.Size</p>
-                        </div>
-                        <div class="btn-group">
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-    </div>
-    </div> 
-</div>
-</div>
+

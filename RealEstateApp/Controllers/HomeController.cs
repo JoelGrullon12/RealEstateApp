@@ -2,6 +2,7 @@
 using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Application.ViewModels.Property;
+using RealEstateApp.Core.Application.ViewModels.PropertyType;
 using RealEstateApp.Core.Application.ViewModels.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,42 +14,27 @@ namespace RealEstateApp.Controllers
         private readonly IPropertyService _propertyService;
         private readonly IPropertyTypeService _propertyTypeService;
         private readonly ISellTypeService _sellTypeService;
+        private readonly IUpgradeService _upgradeService;
         private readonly IUserService _userService;
 
-        public HomeController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, IUserService userService, ISellTypeService sellTypeService)
+        public HomeController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, IUpgradeService upgradeService, IUserService userService, ISellTypeService sellTypeService)
         {
             _propertyService = propertyService;
             _propertyTypeService = propertyTypeService;
             _sellTypeService = sellTypeService;
+            _upgradeService = upgradeService;
             _userService = userService;
         }
 
         public async Task<IActionResult> Index()
         {
 
-            //var properties = 
-            /* List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
-            var properties = PropertyViewModel.inc
-             //var types = ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
-             /*var sells = ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
-             List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
-             var propertiesFiltered = properties.FindAll(prop => types = sells).ToList();
-             return View(propertiesFiltered);*/
-
-            //var properties = new List<PropertyViewModel>();
-
-            //get all students whose name is Bill
-
-            /*foreach (var student in result)
-                Console.WriteLine(properties);*/
-            //List<PropertyViewModel> propertiesFiltered = properties.FindAll(prop => prop.TypeId == prop.Type.Id || prop.SellTypeId == prop.SellType.Id);
-            //ViewBag.Properties = propertiesFiltered;
-            //return View(new PropertyViewModel());
-            // List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
             //List<PropertyTypeViewModel> propertyTypes = await _propertyTypeService.GetAllViewModel();
-            //properties.AddRange(types);*/
-
-            return View(await _propertyService.GetAllViewModel());
+            ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
+            ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
+            ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
+            ViewBag.Properties = await _propertyService.GetAllViewModel();
+            return View(); 
         }
 
         public async Task<IActionResult> Filter(FilterPropertyViewModel vm)
