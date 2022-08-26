@@ -51,6 +51,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             return View("SaveProperty", saveViewModel);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Edit(SavePropertyViewModel saveViewModel)
         {
             if (!ModelState.IsValid)

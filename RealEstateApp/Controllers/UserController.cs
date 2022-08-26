@@ -81,9 +81,13 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
             RegisterResponse response = await _userService.Add(saveViewModel);
 
-            if (response != null || response.HasError)
+            if (response == null || response.HasError)
             {
-                ModelState.AddModelError("userError", response.Error);
+                ModelState.AddModelError("userError", response.HasError ? response.Error : "Se ha producido un error inesperado tratando de guardar el usuario");
+                List<RoleViewModel> roles = _roleService.GetAllRoles();
+                List<RoleViewModel> rolesFiltered = roles.FindAll(role => role.Name == "Client" || role.Name == "Agent");
+                ViewBag.Roles = rolesFiltered;
+                return View(saveViewModel);
             }
 
             return RedirectToRoute(new { controller = "User", action = "Index" });
