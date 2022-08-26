@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Application.ViewModels.Property;
 using System;
@@ -12,23 +13,41 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
     public class PropertyController : Controller
     {
         private readonly IPropertyService _propertyService;
+        private readonly IPropertyRepository _propertyRepository;
+        private readonly IPropertyTypeRepository _propertyTypeRepository;
         private readonly IPropertyTypeService _propertyTypeService;
         private readonly ISellTypeService _sellTypeService;
+        private readonly ISellTypeRepository _sellTypeRepository;
         private readonly IUpgradeService _upgradeService;
-
-        public PropertyController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, ISellTypeService sellTypeService, IUpgradeService upgradeService)
+        private readonly IUpgradeRepository _upgradeRepository;
+        public PropertyController(IPropertyService propertyService, IPropertyRepository propertyRepository, IPropertyTypeService propertyTypeService, IPropertyTypeRepository propertyTypeRepository, ISellTypeService sellTypeService, ISellTypeRepository sellTypeRepository, IUpgradeService upgradeService, IUpgradeRepository upgradeRepository)
         {
             _propertyService = propertyService;
+            _propertyRepository = propertyRepository;
             _propertyTypeService = propertyTypeService;
+            _propertyTypeRepository = propertyTypeRepository;
             _sellTypeService = sellTypeService;
+            _sellTypeRepository = sellTypeRepository;
             _upgradeService = upgradeService;
+            _upgradeRepository = upgradeRepository;
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            ViewBag.Properties = await _propertyRepository.GetByIdAsync(id);
+            ViewBag.PropertyTypes = await _propertyTypeRepository.GetByIdAsync(id);
+            ViewBag.SellTypes = await _sellTypeRepository.GetByIdAsync(id);
+           // ViewBag.Upgrades = await _upgradeRepository.GetByIdAsync(id);
+            //ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
+
+            return View();
         }
 
         public async Task<IActionResult> Create()
         {
             ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
             ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
-            ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
+            //ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
             return View("SaveProperty", new SavePropertyViewModel());
         }
 

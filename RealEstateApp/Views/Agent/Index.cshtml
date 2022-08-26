@@ -27,6 +27,9 @@
             ><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
         </div>
         <div class="bottom">
+            <div class="mb-2">
+                <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
+            </div>
           <h3><b>@property.Type.Name</b></h3>
           <p>
            @property.Description

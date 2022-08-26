@@ -40,6 +40,8 @@ namespace RealEstateApp.Core.Application.Services
             return _mapper.Map<List<ViewModel>>(entities);
         }
 
+       
+
         public virtual async Task<SaveViewModel> GetByIdSaveViewModel(int id)
         {
             Entity entity = await _repository.GetByIdAsync(id);

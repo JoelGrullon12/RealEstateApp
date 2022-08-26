@@ -71,9 +71,11 @@
                 opacity: 0;
             }
 
-            .container-home .box .top:hover:after {
-                opacity: 1;
-            }
+​
+
+.container-home .box .top:hover:after {
+    opacity: 1;
+}
 
             .container-home .box .top img {
                 width: 100%;
