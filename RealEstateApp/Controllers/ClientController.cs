@@ -10,25 +10,30 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
     {
        
         private readonly IPropertyService _propertyService;
+        private readonly IUserService _userService;
+        private readonly IPropertyTypeService _propertyTypeService;
+        private readonly ISellTypeService _sellTypeService;
+        private readonly IUpgradeService _upgradeService;
 
-        public ClientController(IPropertyService propertyService)
+        public ClientController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, IUpgradeService upgradeService, ISellTypeService sellTypeService, IUserService userService)
         {
 
             _propertyService = propertyService;
+            _propertyTypeService = propertyTypeService;
+            _sellTypeService = sellTypeService;
+            _upgradeService = upgradeService;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index()
         {
 
-            // List<PropertyViewModel> properties = _propertyService.GetAllProperties();
-            //ViewBag.Properties = properties;
-
-            return View(await _propertyService.GetAllViewModel());
+            return View();
         }
 
         public async Task<IActionResult> Properties()
         {
-            return View(await _propertyService.GetAllViewModel());
+            return View();
         }
 
     }
