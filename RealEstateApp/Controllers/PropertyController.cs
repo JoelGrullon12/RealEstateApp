@@ -31,11 +31,9 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         public async Task<IActionResult> Details(int id)
         {
             ViewBag.Properties = await _propertyRepository.GetByIdAsync(id);
-           // ViewBag.Upgrades = await _upgradeRepository.GetByIdAsync(id);
             ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
             ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
             ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
-
             return View();
         }
 

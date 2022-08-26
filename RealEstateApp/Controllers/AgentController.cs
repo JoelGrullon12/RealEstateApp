@@ -30,20 +30,12 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
-            ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
-            ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
-            ViewBag.Properties = await _propertyService.GetAllViewModelFromUser();
-            return View();
+            return View(await _propertyService.GetAllViewModelFromUser());
         }
 
         public async Task<IActionResult> Properties()
         {
-            ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
-            ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
-            ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
-            ViewBag.Properties = await _propertyService.GetAllViewModelFromUser();
-            return View();
+            return View(await _propertyService.GetAllViewModelFromUser());
         }
     }
 }

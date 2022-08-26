@@ -31,8 +31,7 @@ namespace RealEstateApp.Controllers
             ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
             ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
             ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
-            ViewBag.Properties = await _propertyService.GetAllViewModel();
-            return View(); 
+            return View(await _propertyService.GetAllViewModel()); 
         }
 
         public async Task<IActionResult> Filter(FilterPropertyViewModel vm)
