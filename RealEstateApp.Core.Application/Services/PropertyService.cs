@@ -39,18 +39,8 @@ namespace RealEstateApp.Core.Application.Services
 
         public async Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters)
         {
-            var propertyList = await _propRepository.GetAllWithIncludes(new List<string> { "Type" });
-
-            var listViewModels = propertyList.Where(property => property.ClientId == _user.Id).Select(property => new PropertyViewModel
-            {
-                Id = property.Id,
-                Code = property.Code,
-                Description = property.Description,
-                Bedrooms = property.Bedrooms,
-                Bathrooms = property.Bathrooms,
-                Size = property.Size,
-                TypeId = property.Type.Id
-            }).ToList();
+            List<Property> propertyList = await _propRepository.GetAllWithIncludes(new List<string> { "Type" });
+            List<PropertyViewModel> listViewModels = _mapper.Map<List<PropertyViewModel>>(propertyList);
 
             if (filters.TypeId != null)
             {

@@ -1,8 +1,7 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property;
 @using RealEstateApp.Core.Application.ViewModels.PropertyType;
 @using RealEstateApp.Core.Application.ViewModels.SellType;
-@using RealEstateApp.Core.Application.ViewModels.Upgrade;
-
+@using RealEstateApp.Core.Application.ViewModels.Upgrade
 @model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Inicio";
@@ -69,67 +68,52 @@
         </div>  <!-- card -->
         </div>*@ <!-- col-6 -->
     </div>
-</div>
-
-@{
-    int Counter = 0;
-}
-@if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) ||
- (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) ||
- (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0) ||
- (ViewBag.Properties == null || ViewBag.Properties.Count == 0))
-{
-    Counter++;
-}
-
-@if (Counter == 0)
-{
-    <div class="container-home">
-        @foreach (PropertyViewModel property in ViewBag.Properties)
+    <div class="row">
+        @if (Model != null && Model.Count > 0)
         {
-            <div class="box">
-                <div class="top">
-                    <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
-                    <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
-                </div>
-                <div class="bottom">
-                    <h3><b>@property.Type.Name</b></h3>
-                    <p>
-                        @property.Description
-                    </p>
-                    <h3>Codigo</h3><b>@property.Code</b>
-                    <div class="advants">
-                        <div>
-                            <span>Habitaciones</span>
-                            <div><i class="fa fa-th" aria-hidden="true"></i><span>@property.Bedrooms</span></div>
+            <div class="container-home">
+                @foreach (PropertyViewModel property in Model)
+                {
+                    <div class="box">
+                        <div class="top">
+                            <img src="@property.ImageUrl1" alt="Imagen principal" />
+                            <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
                         </div>
-                        <div>
-                            <span>Baños</span>
-                            <div><i class="fa fa-bath" aria-hidden="true"></i><span>@property.Bathrooms</span></div>
-                        </div>
-                        <div>
-                            <span>Area</span>
-                            <div>
-                                <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
+                        <div class="bottom">
+                            <h3><b>@property.Type.Name</b></h3>
+                            <p>
+                                @property.Description
+                            </p>
+                            <h3>Codigo</h3>
+                            <b>@property.Code</b>
+                            <div class="advants">
+                                <div>
+                                    <span>Habitaciones</span>
+                                    <div><i class="fa fa-th" aria-hidden="true"></i><span>@property.Bedrooms</span></div>
+                                </div>
+                                <div>
+                                    <span>Baños</span>
+                                    <div><i class="fa fa-bath" aria-hidden="true"></i><span>@property.Bathrooms</span></div>
+                                </div>
+                                <div>
+                                    <span>Area</span>
+                                    <div>
+                                        <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="price">
+                                <span>@property.SellType.Name</span>
+                                <span>$@property.Price</span>
                             </div>
                         </div>
                     </div>
-                    <div class="price">
-                        <span>@property.SellType.Name</span>
-                        <span>$@property.Price</span>
-                    </div>
-                </div>
-            </div>
+                }
+            </div> <!-- Final -->
         }
-    </div> <!-- Final -->
-}
-else
-{
-    <h2>No existen Propiedades Creadas</h2>
-
-}
-
-@*@foreach(PropertyTypeViewModel property in ViewBag.PropertyTypes )
-{
-    <h1>@property.Name.ToString()</h1>
-}*@
+        else
+        {
+            <h2>No existen propiedades registradas en el sistema</h2>
+        }
+    </div>
+</div>
