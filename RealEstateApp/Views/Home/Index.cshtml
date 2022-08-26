@@ -80,12 +80,14 @@
                             <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
                         </div>
                         <div class="bottom">
+                            <div class="mb-2">
+                                <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
+                            </div>
                             <h3><b>@property.Type.Name</b></h3>
                             <p>
                                 @property.Description
                             </p>
-                            <h3>Codigo</h3>
-                            <b>@property.Code</b>
+                            <h3>Codigo</h3><b>@property.Code</b>
                             <div class="advants">
                                 <div>
                                     <span>Habitaciones</span>
@@ -100,16 +102,18 @@
                                     <div>
                                         <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
                                     </div>
+                                    <div class="container-home">
+                                    </div> <!-- Final -->
+                                    <div class="price">
+                                        <span>@property.SellType.Name</span>
+                                        <span>$@property.Price</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="price">
-                                <span>@property.SellType.Name</span>
-                                <span>$@property.Price</span>
                             </div>
                         </div>
                     </div>
                 }
-            </div> <!-- Final -->
+            </div>
         }
         else
         {

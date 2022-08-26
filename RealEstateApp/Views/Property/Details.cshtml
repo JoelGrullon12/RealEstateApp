@@ -1,0 +1,41 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.Property
+@using RealEstateApp.Core.Application.ViewModels.PropertyType;
+@using RealEstateApp.Core.Application.ViewModels.SellType;
+@model List<PropertyViewModel>
+@{
+    ViewData["Title"] = "Detalles propiedad";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+           
+
+            <div class="project-info-box">
+                <p><b>Codigo:</b> @ViewBag.Properties.Code</p>
+                <p><b>Habitaciones:</b> @ViewBag.Properties.Bedrooms</p>
+                <p><b>Baños:</b> @ViewBag.Properties.Bathrooms</p>
+                <p><b>Area:</b> @ViewBag.Properties.Size</p>
+                <p class="mb-0"><b>Precio:</b> $@ViewBag.Properties.Price</p>
+            </div><!-- / project-info-box -->
+
+            <div class="project-info-box mt-0 mb-0">
+                
+                    <div class="">
+                         <a class="btn btn-secondary" href='javascript:history.go(-1)'>Volver atrás</a>
+                        
+                       </div>
+  
+            </div><!-- / project-info-box -->
+        </div><!-- / column -->
+
+        <div class="col-md-7">
+            <img src="https://via.placeholder.com/400x300/FFB6C1/000000" alt="project-image" class="rounded">
+            <div class="project-info-box">
+                <p><b>Tipo de Propiedad:</b> @ViewBag.PropertyTypes.Name</p>
+               
+            </div><!-- / project-info-box -->
+        </div><!-- / column -->
+       
+    </div>
+</div>
