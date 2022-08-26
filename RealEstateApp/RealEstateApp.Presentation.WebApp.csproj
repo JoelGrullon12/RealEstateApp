@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\Users\" />
     <Folder Include="wwwroot\images\Properties\" />
+    <Folder Include="wwwroot\images\Users\d723d332-c8c2-4f61-8f85-aa9b8fa01121\" />
   </ItemGroup>
 
 </Project>

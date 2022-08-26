@@ -74,6 +74,7 @@
 @{
     int Counter = 0;
 }
+
 @if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) ||
  (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) ||
  (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0) ||
@@ -83,12 +84,14 @@
 }
 
 @if (Counter == 0)
+
 {
-<<<<<<< HEAD
+
+
    
 
 
- <div class="container-home">
+ @*<div class="container-home">
      @foreach(PropertyViewModel property in ViewBag.Properties) {
       <div class="box">
         <div class="top">
@@ -118,8 +121,7 @@
               <span>Area</span>
               <div>
                 <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
-              </div>
-=======
+              </div>*@
     <div class="container-home">
         @foreach (PropertyViewModel property in ViewBag.Properties)
         {
@@ -129,6 +131,9 @@
                     <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
                 </div>
                 <div class="bottom">
+                     <div class="mb-2">
+                        <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
+                     </div>
                     <h3><b>@property.Type.Name</b></h3>
                     <p>
                         @property.Description
@@ -155,7 +160,7 @@
                         <span>$@property.Price</span>
                     </div>
                 </div>
->>>>>>> 76f880e9961530671043455e906b64052bcee7fb
+
             </div>
         }
     </div> <!-- Final -->

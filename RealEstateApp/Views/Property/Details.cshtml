@@ -1,6 +1,7 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property
 @using RealEstateApp.Core.Application.ViewModels.PropertyType;
 @using RealEstateApp.Core.Application.ViewModels.SellType;
+@using RealEstateApp.Core.Application.ViewModels.Upgrade;
 @model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Detalles propiedad";
@@ -32,8 +33,15 @@
         <div class="col-md-7">
             <img src="https://via.placeholder.com/400x300/FFB6C1/000000" alt="project-image" class="rounded">
             <div class="project-info-box">
-                <p><b>Tipo de Propiedad:</b> @ViewBag.PropertyTypes.Name</p>
-               
+                <p><b>Tipo de Propiedad:</b> @ViewBag.Properties.Type.Name</p>
+                <p><b>Tipo de Venta:</b> @ViewBag.Properties.SellType</p>
+                @foreach(UpgradeViewModel upgrade in ViewBag.Upgrades)
+                {
+                    <p><b>Tipo de Mejora:</b> @upgrade.Name</p>
+                }
+                
+                
+              
             </div><!-- / project-info-box -->
         </div><!-- / column -->
        
