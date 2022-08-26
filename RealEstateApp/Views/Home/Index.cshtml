@@ -38,76 +38,39 @@
                 </div> <!-- card-body -->
             </div>  <!-- card -->
         </div> <!-- col-6 -->
-        @*<div class="col-6">
-        <div class="card shadow-sm">
-        <div class="card-header bg-dark text-light">
-        <h4>Filtros</h4>
-        </div>
-        <div class="card-body">
-        <h4 class="card-title">Tipos de Propiedades</h4>
-        <form method="post" asp-controller="Home" asp-action="Filter">
-        <div class="mb-3">
-        <div class="form-check">
-        <input class="form-check-input" value="null" type="radio" name="TypeId" id="propertyType-all" />
-        <label class="form-check-label" for="propertyType-all">Todas</label>
-        </div>
-        </div>
-        @foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyTypes)
-        {
-        <div class="mb-3">
-        <div class="form-check">
-        <input class="form-check-input" value="@propertyType.Id" type="radio" name="TypeId" id="category-@propertyType.Id" />
-        <label class="form-check-label" for="categoria-@propertyType.Id">@propertyType.Name</label>
-        </div>
-        </div>
-        }
-        <button type="submit" class="btn btn-primary">Filtrar</button>
-        </form>
-
-        </div> <!-- card-body -->
-        </div>  <!-- card -->
-        </div>*@ <!-- col-6 -->
     </div>
-<<<<<<< HEAD
 </div>
 
 @{
     int Counter = 0;
 }
-
-@if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) ||
- (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) ||
- (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0) ||
- (ViewBag.Properties == null || ViewBag.Properties.Count == 0))
-{
-    Counter++;
-}
+                     @if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) || 
+                         (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) || 
+                         (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0) || 
+                         (ViewBag.Properties == null || ViewBag.Properties.Count == 0))
+                    {
+                        Counter++;
+                    }
 
 @if (Counter == 0)
-
 {
-
-
-   
-
-
- @*<div class="container-home">
+ <div class="container-home">
      @foreach(PropertyViewModel property in ViewBag.Properties) {
       <div class="box">
         <div class="top">
-            <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
+          <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
           <span
-            ><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
+            ><i class="fas fa-heart"></i><i class="fas fa-exchange-alt"></i
+          ></span>
         </div>
         <div class="bottom">
-            <div class="mb-2">
+             <div class="mb-2">
                 <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
-            </div>
-          <h3><b>@property.Type.Name</b></h3>
+             </div>
+          <h3>@property.Type.Name</h3>
           <p>
            @property.Description
           </p>
-          <h3>Codigo</h3><b>@property.Code</b>
           <div class="advants">
             <div>
               <span>Habitaciones</span>
@@ -121,89 +84,22 @@
               <span>Area</span>
               <div>
                 <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
-              </div>*@
-    <div class="container-home">
-        @foreach (PropertyViewModel property in ViewBag.Properties)
-        {
-            <div class="box">
-                <div class="top">
-                    <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
-                    <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
-                </div>
-                <div class="bottom">
-                     <div class="mb-2">
-                        <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
-                     </div>
-                    <h3><b>@property.Type.Name</b></h3>
-                    <p>
-                        @property.Description
-                    </p>
-                    <h3>Codigo</h3><b>@property.Code</b>
-                    <div class="advants">
-                        <div>
-                            <span>Habitaciones</span>
-                            <div><i class="fa fa-th" aria-hidden="true"></i><span>@property.Bedrooms</span></div>
-=======
-    <div class="row">
-        @if (Model != null && Model.Count > 0)
-        {
-            <div class="container-home">
-                @foreach (PropertyViewModel property in Model)
-                {
-                    <div class="box">
-                        <div class="top">
-                            <img src="@property.ImageUrl1" alt="Imagen principal" />
-                            <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
->>>>>>> 41079dad6ca1a29dec35bc866412acaf6da7e333
-                        </div>
-                        <div class="bottom">
-                            <div class="mb-2">
-                                <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
-                            </div>
-                            <h3><b>@property.Type.Name</b></h3>
-                            <p>
-                                @property.Description
-                            </p>
-                            <h3>Codigo</h3><b>@property.Code</b>
-                            <div class="advants">
-                                <div>
-                                    <span>Habitaciones</span>
-                                    <div><i class="fa fa-th" aria-hidden="true"></i><span>@property.Bedrooms</span></div>
-                                </div>
-                                <div>
-                                    <span>Baños</span>
-                                    <div><i class="fa fa-bath" aria-hidden="true"></i><span>@property.Bathrooms</span></div>
-                                </div>
-                                <div>
-                                    <span>Area</span>
-                                    <div>
-                                        <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
-                                    </div>
-                                    <div class="container-home">
-                                    </div> <!-- Final -->
-                                    <div class="price">
-                                        <span>@property.SellType.Name</span>
-                                        <span>$@property.Price</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-<<<<<<< HEAD
-                    <div class="price">
-                        <span>@property.SellType.Name</span>
-                        <span>$@property.Price</span>
-                    </div>
-                </div>
-
-=======
-                }
->>>>>>> 41079dad6ca1a29dec35bc866412acaf6da7e333
+              </div>
             </div>
-        }
-        else
-        {
-            <h2>No existen propiedades registradas en el sistema</h2>
-        }
+          </div>
+          <div class="price">
+            <span>@property.SellType.Name</span>
+            <span>$@property.Price</span>
+          </div>
+        </div>
     </div>
-</div>
+      }
+   </div> <!-- Final -->
+
+} 
+else
+{
+    <h2>No existen Propiedades Creadas</h2>
+
+}
+

@@ -41,7 +41,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         {
             ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
             ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
-            //ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
+            ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
             return View("SaveProperty", new SavePropertyViewModel());
         }
 
