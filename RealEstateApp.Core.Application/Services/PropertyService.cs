@@ -32,7 +32,7 @@ namespace RealEstateApp.Core.Application.Services
 
         public async Task<List<PropertyViewModel>> GetAllViewModelFromUser()
         {
-            List<PropertyViewModel> properties = await base.GetAllViewModel();
+            List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(await _propRepository.GetAllWithIncludes(new List<string> { "Type" }));
             List<PropertyViewModel> propertiesOfUserLoggedIn = properties.FindAll(property => property.AgentId == _user.Id).ToList();
             return propertiesOfUserLoggedIn;
         }

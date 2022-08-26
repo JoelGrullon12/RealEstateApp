@@ -48,6 +48,7 @@ namespace RealEstateApp.Core.Application.Mappings
             /// </Entity>
             CreateMap<SaveUserViewModel, RegisterRequest>()
                 .ReverseMap()
+                .ForMember(dest => dest.ImageFile, opt => opt.Ignore())
                 .ForMember(dest => dest.ConfirmPassword, opt => opt.Ignore());
 
 

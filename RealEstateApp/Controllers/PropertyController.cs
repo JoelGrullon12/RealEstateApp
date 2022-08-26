@@ -44,6 +44,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             }
 
             List<IFormFile> files = new List<IFormFile> { saveViewModel.ImageFile1, saveViewModel.ImageFile2, saveViewModel.ImageFile3, saveViewModel.ImageFile4 };
+            saveViewModel.ImageUrl1 = "termporary-data";
             SavePropertyViewModel savePropertyViewModel = await _propertyService.Add(saveViewModel);
 
             if (savePropertyViewModel != null && savePropertyViewModel.Id != 0)
@@ -68,6 +69,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             return View("SaveProperty", saveViewModel);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Edit(SavePropertyViewModel saveViewModel)
         {
             if (!ModelState.IsValid)
@@ -78,7 +80,21 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 return View("SaveProperty", saveViewModel);
             }
 
-            await _propertyService.Update(saveViewModel, saveViewModel.Id);
+            List<IFormFile> files = new List<IFormFile> { saveViewModel.ImageFile1, saveViewModel.ImageFile2, saveViewModel.ImageFile3, saveViewModel.ImageFile4 };
+            SavePropertyViewModel oldSaveViewModel = await _propertyService.GetByIdSaveViewModel(saveViewModel.Id);
+
+            if (saveViewModel != null && saveViewModel.Id != 0)
+            {
+                List<string> oldImagesPath = new List<string> { oldSaveViewModel.ImageUrl1, oldSaveViewModel.ImageUrl2, oldSaveViewModel.ImageUrl3, oldSaveViewModel.ImageUrl4 };
+
+                List<string> imagesPath = UploadImage(files, saveViewModel.Id, true, oldImagesPath);
+                saveViewModel.ImageUrl1 = imagesPath[0] == null ? oldImagesPath[0] : imagesPath[0];
+                saveViewModel.ImageUrl2 = imagesPath[1] == null ? oldImagesPath[1] : imagesPath[1];
+                saveViewModel.ImageUrl3 = imagesPath[2] == null ? oldImagesPath[2] : imagesPath[2];
+                saveViewModel.ImageUrl4 = imagesPath[3] == null ? oldImagesPath[3] : imagesPath[3];
+                await _propertyService.Update(saveViewModel, saveViewModel.Id);
+            }
+
             return RedirectToRoute(new { controller = "Agent", action = "Properties" });
         }
 
@@ -90,6 +106,26 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(SavePropertyViewModel saveViewModel)
         {
+            string basePath = $"/images/Properties/{saveViewModel.Id}";
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/{basePath}");
+
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo directoryInfo = new(path);
+
+                foreach (FileInfo file in directoryInfo.GetFiles())
+                {
+                    file.Delete();
+                }
+
+                foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+                {
+                    directory.Delete();
+                }
+
+                Directory.Delete(path);
+            }
+
             await _propertyService.Delete(saveViewModel.Id);
             return RedirectToRoute(new { controller = "Agent", action = "Properties" });
         }

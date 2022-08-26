@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -52,6 +53,10 @@ namespace RealEstateApp.Core.Application.ViewModels.User
         [Required(ErrorMessage = "Debes colocar el tipo de usuario")]
         [DataType(DataType.Text)]
         public string Role { get; set; }
+        public string ImgUrl { get; set; }
         public bool IsActive { get; set; }
+
+        [DataType(DataType.Upload)]
+        public IFormFile ImageFile { get; set; }
     }
 }

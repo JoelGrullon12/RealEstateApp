@@ -195,10 +195,12 @@ namespace RealEstateApp.Infrastructure.Identity.Services
             user.UserName = request.UserName;
             user.Email = request.Email;
             user.DNI = request.DNI;
-            user.ImgUrl = "";
+            user.ImgUrl = request.ImgUrl;
 
-            var result = await _userManager.UpdateAsync(user);
-            var passResult = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);
+            IdentityResult result = await _userManager.UpdateAsync(user);
+            IdentityResult passResult = null;
+            if (!(request.CurrentPassword == null) && !(request.Password == null))
+                passResult = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.Password);
 
             if (!result.Succeeded)
             {
@@ -207,7 +209,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 return response;
             }
 
-            if (!passResult.Succeeded)
+            if (passResult != null && !passResult.Succeeded)
             {
                 response.HasError = true;
                 response.Error = "La contraseña actual es incorrecta";
@@ -233,6 +235,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 Phone = user.PhoneNumber,
                 UserName = user.UserName,
                 IsActive = user.EmailConfirmed,
+                ImgUrl = user.ImgUrl,
                 Role = role
             };
 
@@ -311,7 +314,7 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 LastName = request.LastName,
                 DNI = request.DNI,
                 PhoneNumber = request.Phone,
-                ImgUrl = ""
+                ImgUrl = request.ImgUrl
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);

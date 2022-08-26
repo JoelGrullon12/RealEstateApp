@@ -37,14 +37,15 @@
 
                     @if (controlCounter == 0)
                     {
-                        <form method="post" asp-controller="Property" asp-action="@action">
+                        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                        <form method="post" asp-controller="Property" asp-action="@action" enctype="multipart/form-data">
                             <div class="mb-2">
                                 <label asp-for="TypeId" class="form-label">Tipo de propiedad</label>
                                 <select asp-for="TypeId" class="form-control">
                                     <option value="0">Selecciona el tipo de propiedad</option>
                                     @foreach (PropertyTypeViewModel propertyType in ViewBag.PropertyTypes)
                                     {
-                                        <option value="propertyType.Id">@propertyType.Name</option>
+                                        <option value="@propertyType.Id">@propertyType.Name</option>
                                     }
                                 </select>
                             </div>
@@ -104,6 +105,7 @@
                                 <label class="form-label" asp-for="ImageFile4">Cuarta Imagen</label>
                                 <input class="form-control" asp-for="ImageFile4" />
                             </div>
+                            <input type="hidden" asp-for="AgentId" value="@user.Id"/>
                             <button class="btn btn-primary" type="submit">Guardar</button>
                             <a class="btn btn-secondary" asp-controller="Agent" asp-action="Properties">Volver atrás</a>
                         </form>

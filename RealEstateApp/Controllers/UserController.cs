@@ -6,7 +6,9 @@ using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Application.ViewModels.Property;
 using RealEstateApp.Core.Application.ViewModels.User;
 using StockApp.Core.Application.Helpers;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApp.Controllers
@@ -94,6 +96,14 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 return View(saveViewModel);
             }
 
+            string id = response.UserId;
+            string baseImagePath = $"\\images\\Users\\{id}\\";
+            string imageUrl = UploadImage(saveViewModel.ImageFile, baseImagePath);
+            saveViewModel.Id = response.UserId;
+            saveViewModel.ImgUrl = imageUrl;
+            saveViewModel.CurrentPassword = saveViewModel.Password;
+            await _userService.Update(saveViewModel);
+
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
 
@@ -110,13 +120,18 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
             if (!ModelState.IsValid)
             {
-                // ModelState.AddModelError("agentError", "Debes rellenar los campos faltantes");
                 if (oldUser.Role == Roles.Agent.ToString())
                     return View("MyProfile", saveViewModel);
                 else if (oldUser.Role == Roles.Admin.ToString() || oldUser.Role == Roles.Developer.ToString())
                     return View("Edit", saveViewModel);
             }
 
+            if (oldUser.Role == Roles.Agent.ToString())
+            {
+                saveViewModel.CurrentPassword = null;
+                saveViewModel.Password = null;
+            }
+            
             RegisterResponse response = await _userService.Update(saveViewModel);
 
             if (response != null && response.HasError)
@@ -126,6 +141,19 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                     return View("MyProfile", saveViewModel);
                 else if (oldUser.Role == Roles.Admin.ToString() || oldUser.Role == Roles.Developer.ToString())
                     return View("Edit", saveViewModel);
+            }
+
+            if (saveViewModel.ImageFile != null)
+            {
+                string id = saveViewModel.Id;
+                SaveUserViewModel oldSaveViewModel = await _userService.GetByIdSaveViewModel(id);
+                string oldImageUrl = oldSaveViewModel.ImgUrl;
+                string baseImagePath = $"\\images\\Users\\{id}\\";
+                string imageUrl = UploadImage(saveViewModel.ImageFile, baseImagePath, oldImageUrl, true);
+                saveViewModel.ImgUrl = imageUrl;
+                saveViewModel.CurrentPassword = null;
+                saveViewModel.Password = null;
+                await _userService.Update(saveViewModel);
             }
 
             string controller = "";
@@ -208,6 +236,30 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 action = "Admins";
             }
 
+            SaveUserViewModel saveViewModel = await _userService.GetByIdSaveViewModel(user.Id);
+
+            if (saveViewModel.ImgUrl != null)
+            {
+                string directoryOfImages = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Images\\Users\\{saveViewModel.Id}\\");
+
+                if (Directory.Exists(directoryOfImages))
+                {
+                    DirectoryInfo directoryInfo = new(directoryOfImages);
+
+                    foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+                    {
+                        directory.Delete();
+                    }
+
+                    foreach (FileInfo file in directoryInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
+                    Directory.Delete(directoryOfImages);
+                }
+            }
+
             await _userService.Delete(user.Id);
             return RedirectToRoute(new { controller = controller, action = action });
         }
@@ -217,6 +269,48 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             _userService.LogOut();
             _httpContextAccessor.HttpContext.Session.Remove("user");
             return RedirectToRoute(new { controller = "Home", action = "Index" });
+        }
+
+        private string UploadImage(IFormFile file, string basePath, string oldImage = null, bool editMode = false)
+        {
+            if (editMode && file == null)
+            {
+                return oldImage;
+            }
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot{basePath}");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            Guid guid = Guid.NewGuid();
+            FileInfo fileInfo = new(file.FileName);
+            string filename = guid + fileInfo.Extension;
+
+            string fullFilePath = Path.Combine(path, filename);
+            string relativeFilePath = Path.Combine(basePath, filename);
+
+            using (var stream = new FileStream(fullFilePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            if (editMode)
+            {
+                string[] textSplitted = oldImage.Split("\\");
+                oldImage = textSplitted[^1];
+
+                string oldImagePath = Path.Combine(path, oldImage);
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+            }
+
+            return relativeFilePath;
         }
     }
 }
