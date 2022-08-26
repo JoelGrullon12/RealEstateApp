@@ -4,74 +4,42 @@
     ViewData["Title"] = "Properties";
 }
 
-@{
-    int Counter = 0;
-}
-                     @if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) || 
-                         (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) || 
-                         (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0) || 
-                         (ViewBag.Properties == null || ViewBag.Properties.Count == 0))
-                    {
-                        Counter++;
-                    }
-
-@if (Counter == 0)
-{
-   
-
-    <div class="container-fluid">
+<div class="container-fluid">
     <div class="row mb-2">
         <div class="col-4 offset-8">
             <a class="btn btn-success w-100" asp-controller="Property" asp-action="Create">Crear nueva propiedad</a>
         </div>
     </div>
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2 class="text-center">No hay propiedades registradas</h2>
+        }
+        else
+        {
+            foreach (PropertyViewModel property in Model)
+            {
+                <div class="col-4 m-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="https://www.economiafinanzas.com/wp-content/uploads/2009/07/inmobiliaria.jpg" style="width:100%;height:auto;">
+                        </div>
+                        <div class="card-body">
+                            <p>@property.Type.Name</p>
+                            <p><b>Codigo</b> <br /> @property.Code</p>
+                            <p>Alquiler</p>
+                            <p>RD $@property.Price</p>
+                            <p>Habitaciones: @property.Bedrooms</p>
+                            <p>Baños: @property.Bathrooms</p>
+                            <p>Tamaño en metros: @property.Size&sup2;</p>
+                            <div class="btn-group">
+                                <a class="btn btn-outline-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@property.Id">Editar</a>
+                                <a class="btn btn-outline-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@property.Id">Borrar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </div>
- <div class="container-home">
-     @foreach(PropertyViewModel property in ViewBag.Properties) {
-      <div class="box">
-        <div class="top">
-          <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
-          <span
-            ><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
-        </div>
-        <div class="bottom">
-         <h3><b>@property.Type.Name</b></h3>
-          <p>
-           @property.Description
-          </p>
-          <h3>Codigo</h3><b>@property.Code</b>
-          <div class="advants">
-            <div>
-              <span>Habitaciones</span>
-              <div><i class="fa fa-th" aria-hidden="true"></i><span>@property.Bedrooms</span></div>
-            </div>
-            <div>
-              <span>Baños</span>
-              <div><i class="fa fa-bath" aria-hidden="true"></i><span>@property.Bathrooms</span></div>
-            </div>
-            <div>
-              <span>Area</span>
-              <div>
-                <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
-              </div>
-            </div>
-          </div>
-          <div class="price">
-            <span>@property.SellType.Name</span>
-            <span>$@property.Price</span>
-          </div>
-        </div>
-         <div class="">
-                            <a class="btn btn-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@property.Id">Editar</a>
-                            <a class="btn btn-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@property.Id">Borrar</a>
-        </div>
-      </div>
-      }
-   </div> <!-- Final -->
-       
-} 
-else
-{
-    <h2>No existen Propiedades Creadas</h2>
- 
-}
+</div>
