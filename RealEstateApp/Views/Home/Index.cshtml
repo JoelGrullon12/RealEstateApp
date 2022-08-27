@@ -58,10 +58,8 @@
      @foreach(PropertyViewModel property in ViewBag.Properties) {
       <div class="box">
         <div class="top">
-          <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
-          <span
-            ><i class="fas fa-heart"></i><i class="fas fa-exchange-alt"></i
-          ></span>
+          <img src="@property.ImageUrl1" alt="" class="img-thumbnail"/>
+          <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
         </div>
         <div class="bottom">
              <div class="mb-2">
