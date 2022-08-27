@@ -36,11 +36,9 @@ namespace RealEstateApp.Core.Application.Services
 
         public virtual async Task<List<ViewModel>> GetAllViewModel()
         {
-            var entities = await _repository.GetAllAsync();
+            List<Entity> entities = await _repository.GetAllAsync();
             return _mapper.Map<List<ViewModel>>(entities);
         }
-
-       
 
         public virtual async Task<SaveViewModel> GetByIdSaveViewModel(int id)
         {

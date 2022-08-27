@@ -30,6 +30,12 @@ namespace RealEstateApp.Core.Application.Services
             _mapper = mapper;
         }
 
+        public async Task<List<PropertyViewModel>> GetAllViewModel()
+        {
+            List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(await _propRepository.GetAllWithIncludes(new List<string> { "Type", "SellType" }));
+            return properties;
+        }
+
         public async Task<List<PropertyViewModel>> GetAllViewModelFromUser()
         {
             List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(await _propRepository.GetAllWithIncludes(new List<string> { "Type", "SellType" }));

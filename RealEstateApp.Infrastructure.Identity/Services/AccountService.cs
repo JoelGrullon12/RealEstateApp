@@ -51,6 +51,13 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 }
             }
 
+            if (!user.EmailConfirmed)
+            {
+                response.HasError = true;
+                response.Error = "Su cuenta no ha sido activada, contacte a su administrador para la activación";
+                return response;
+            }
+
             var result = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
 
             if (!result.Succeeded)
@@ -254,7 +261,8 @@ namespace RealEstateApp.Infrastructure.Identity.Services
                 Email = user.Email,
                 Phone = user.PhoneNumber,
                 UserName = user.UserName,
-                IsActive = user.EmailConfirmed
+                IsActive = user.EmailConfirmed,
+                ImgUrl = user.ImgUrl
             }).ToList();
 
             int counter = 0;
