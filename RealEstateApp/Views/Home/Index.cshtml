@@ -65,10 +65,11 @@
              <div class="mb-2">
                 <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
              </div>
-          <h3>@property.Type.Name</h3>
-          <p>
-           @property.Description
+          <h3><b>@property.Type.Name</b></h3>
+           <p>
+            @property.Description
           </p>
+         <h3>Codigo</h3><b>@property.Code</b>
           <div class="advants">
             <div>
               <span>Habitaciones</span>
