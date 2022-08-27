@@ -37,12 +37,12 @@ namespace RealEstateApp.Core.Application.Services
             return propertiesOfUserLoggedIn;
         }
 
-        /*public async Task<List<PropertyViewModel>> GetAllVieModelById()
+        public async Task<List<PropertyViewModel>> GetAllViewModelFromClient()
         {
-            List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(await _propRepository.GetByIdAsync(id)).ToList();
-            return properties;
-
-        }*/
+            List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(await _propRepository.GetAllWithIncludes(new List<string> { "Type", "SellType" }));
+            List<PropertyViewModel> propertiesOfClientLoggedIn = properties.FindAll(property => property.ClientId == _user.Id).ToList();
+            return propertiesOfClientLoggedIn;
+        }
 
         public async Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters)
         {

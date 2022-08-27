@@ -2,21 +2,18 @@
 @using RealEstateApp.Core.Application.ViewModels.PropertyType;
 @using RealEstateApp.Core.Application.ViewModels.SellType;
 @using RealEstateApp.Core.Application.ViewModels.Upgrade;
-@*inject IHttpContextAccessor httpContextAccessor;*@
+@using RealEstateApp.Core.Application.Dtos.Account;
 @model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Detalles propiedad";
-}
 
-
-@*{
-   
-    string role = "";
-    if (user != null)
+     //LoginResponse user = httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
+   // string role = "";
+   /*if (user != null)
     {
         role = user.Roles[0];
-    }
-}*@
+    }*/ 
+}
 
 <div class="container">
     <div class="row">
@@ -29,7 +26,16 @@
                 <p><b>Baños:</b> @ViewBag.Properties.Bathrooms</p>
                 <p><b>Area:</b> @ViewBag.Properties.Size</p>
                 <p class="mb-0"><b>Precio:</b> $@ViewBag.Properties.Price</p>
+               @*if (role == "Client")
+                {
+                    <h1>Hola</h1>
+                }
+                else
+                {
+                   
+                }*@
             </div><!-- / project-info-box -->
+            
 
             <div class="project-info-box mt-0 mb-0">
                 
