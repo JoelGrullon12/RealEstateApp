@@ -131,7 +131,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 saveViewModel.CurrentPassword = null;
                 saveViewModel.Password = null;
             }
-            
+
             RegisterResponse response = await _userService.Update(saveViewModel);
 
             if (response != null && response.HasError)
@@ -218,14 +218,13 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         {
             string controller = "";
             string action = "";
-
             if (user.Role == Roles.Agent.ToString())
             {
                 controller = "Admin";
                 action = "Agents";
                 List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
                 List<PropertyViewModel> propertiesOfTheAgent = properties.FindAll(property => property.AgentId == user.Id);
-                foreach(PropertyViewModel property in propertiesOfTheAgent)
+                foreach (PropertyViewModel property in propertiesOfTheAgent)
                 {
                     await _propertyService.Delete(property.Id);
                 }
@@ -241,21 +240,17 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             if (saveViewModel.ImgUrl != null)
             {
                 string directoryOfImages = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Images\\Users\\{saveViewModel.Id}\\");
-
                 if (Directory.Exists(directoryOfImages))
                 {
                     DirectoryInfo directoryInfo = new(directoryOfImages);
-
                     foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
                     {
                         directory.Delete();
                     }
-
                     foreach (FileInfo file in directoryInfo.GetFiles())
                     {
                         file.Delete();
                     }
-
                     Directory.Delete(directoryOfImages);
                 }
             }

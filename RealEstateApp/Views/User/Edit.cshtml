@@ -1,9 +1,9 @@
-﻿@using RealEstateApp.Core.Application.ViewModels.User
+﻿@using RealEstateApp.Core.Application.Enums
+@using RealEstateApp.Core.Application.ViewModels.User
 @model SaveUserViewModel
 @{
     ViewData["Title"] = "Edit";
 }
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-6 offset-3">
@@ -50,7 +50,14 @@
                         <input type="hidden" asp-for="Phone" value="null" />
                         <input type="hidden" asp-for="Role" />
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a class="btn btn-secondary" asp-controller="Admin" asp-action="Admins">Volver atrás</a>
+                        @if (Model.Role == Roles.Admin.ToString())
+                        {
+                            <a class="btn btn-secondary" asp-controller="Admin" asp-action="Admins">Volver atrás</a>
+                        }
+                        else if (Model.Role == Roles.Developer.ToString())
+                        {
+                            <a class="btn btn-secondary" asp-controller="Developer" asp-action="Index">Volver atrás</a>
+                        }
                     </form>
                 </div>
             </div>

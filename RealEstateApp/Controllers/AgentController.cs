@@ -8,6 +8,7 @@ using RealEstateApp.Core.Application.ViewModels.Property;
 using RealEstateApp.Core.Application.ViewModels.PropertyType;
 using StockApp.Core.Application.Helpers;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace RealEstateApp.Presentation.WebApp.Controllers
 {
@@ -36,6 +37,14 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         public async Task<IActionResult> Properties()
         {
             return View(await _propertyService.GetAllViewModelFromUser());
+        }
+
+        public async Task<IActionResult> PropertiesOfTheAgent(string id)
+        {
+            SaveUserViewModel agent = await _userService.GetByIdSaveViewModel(id);
+            List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
+            ViewBag.PropertiesOfTheAgent = properties.FindAll(property => property.AgentId == agent.Id);
+            return View(agent);
         }
     }
 }

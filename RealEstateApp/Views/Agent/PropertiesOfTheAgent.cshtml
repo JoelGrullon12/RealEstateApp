@@ -1,24 +1,23 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property
-@model List<PropertyViewModel>
+@using RealEstateApp.Core.Application.ViewModels.User
+@model SaveUserViewModel
 @{
-    ViewData["Title"] = "Properties";
+    ViewData["Title"] = "Propiedades del agente";
 }
 
 <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-4 offset-8">
-            <a class="btn btn-success w-100" asp-controller="Property" asp-action="Create">Crear nueva propiedad</a>
-        </div>
+    <div class="row">
+        <h4 class="text-center">Propiedades del agente @Model.FirstName</h4>
     </div>
     <div class="row">
-        @if (Model != null && Model.Count > 0)
+        @if (ViewBag.PropertiesOfTheAgent != null && ViewBag.PropertiesOfTheAgent.Count > 0)
         {
             <div class="container-home">
-                @foreach (PropertyViewModel property in Model)
+                @foreach (PropertyViewModel property in ViewBag.PropertiesOfTheAgent)
                 {
                     <div class="box">
                         <div class="top">
-                           <img src="@property.ImageUrl1" alt="" class="img-thumbnail"/>
+                            <img src="@property.ImageUrl1" alt="" class="img-thumbnail" />
                             <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
                         </div>
                         <div class="bottom">
@@ -51,17 +50,13 @@
                                 <span>$@property.Price</span>
                             </div>
                         </div>
-                        <div class="">
-                            <a class="btn btn-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@property.Id">Editar</a>
-                            <a class="btn btn-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@property.Id">Borrar</a>
-                        </div>
                     </div>
                 }
             </div> <!-- Final -->
         }
         else
         {
-            <h2>No existen Propiedades Creadas</h2>
+            <h4>No existen Propiedades Creadas</h4>
         }
     </div>
 </div>

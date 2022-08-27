@@ -5,10 +5,27 @@
 }
 
 <div class="container-fluid">
+    <div class="row mb-2">
+        <h3 class="text-center">Listado de agentes</h3>
+    </div>
+    <div class="row">
+        <div class="col-4 offset-8 mb-2">
+            <form method="post" asp-controller="Home" asp-action="SearchAgent">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <input type="text" placeholder="Fulano" name="Name" class="form-control" />
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row">
         @if (Model == null || Model.Count == 0)
         {
-            <h2>No hay agentes registrados en el sistema</h2>
+            <h4>No hay agentes registrados en el sistema</h4>
         }
         else
         {
@@ -16,15 +33,19 @@
             {
                 if (agent.IsActive)
                 {
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-header">
-                                @*Here comes the photo of the agent*@
+                    <div class="col-4 mb-3">
+                        <a asp-controller="Agent" asp-action="PropertiesOfTheAgent" asp-route-id="@agent.Id">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div style="width:100px;height:100px;">
+                                        <img class="agent-img img-fluid" src="@agent.ImgUrl" alt="Imagen del agente @agent.FirstName" style="width:100%;height:100%;" />
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h6>@agent.FirstName @agent.LastName</h6>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h6>@agent.FirstName @agent.LastName</h6>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 }
             }
