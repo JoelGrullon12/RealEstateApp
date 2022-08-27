@@ -30,9 +30,17 @@ namespace RealEstateApp.Core.Application.Services
             _mapper = mapper;
         }
 
+        public override async Task<SavePropertyViewModel> Add(SavePropertyViewModel vm)
+        {
+            Random rdm = new Random();
+            int code = rdm.Next(999999);
+            vm.Code = code;
+            return await base.Add(vm);
+        }
+
         public async Task<List<PropertyViewModel>> GetAllViewModelFromUser()
         {
-            var props = await _propRepository.GetAllWithIncludes(new List<string> { "Type" });
+            var props = await _propRepository.GetAllWithIncludes(new List<string> { "Type", "SellType" });
             List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(props);
             List<PropertyViewModel> propertiesOfUserLoggedIn = properties.FindAll(property => property.AgentId == _user.Id).ToList();
             return propertiesOfUserLoggedIn;
@@ -62,5 +70,11 @@ namespace RealEstateApp.Core.Application.Services
         {
 
         }*/
+
+        public async Task<PropertyViewModel> GetDetailsById(int id)
+        {
+            var prop = await _propRepository.GetByIdWithIncludes(id, new List<string> { "Type", "SellType" }, new List<string> { "Upgrades" });
+            return _mapper.Map<PropertyViewModel>(prop);
+        }
     }
 }

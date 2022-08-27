@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Application.ViewModels.Property;
+using RealEstateApp.Core.Application.ViewModels.PropertyUpgrade;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApp.Controllers
@@ -18,7 +20,10 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         private readonly ISellTypeService _sellTypeService;
         private readonly IUpgradeService _upgradeService;
         private readonly IUpgradeRepository _upgradeRepository;
-        public PropertyController(IPropertyService propertyService, IPropertyRepository propertyRepository, IPropertyTypeService propertyTypeService, ISellTypeService sellTypeService, IUpgradeService upgradeService, IUpgradeRepository upgradeRepository)
+        private readonly IPropertyUpgradeService _propUpService;
+        public PropertyController(IPropertyService propertyService, IPropertyRepository propertyRepository, 
+            IPropertyTypeService propertyTypeService, ISellTypeService sellTypeService, IUpgradeService upgradeService, 
+            IUpgradeRepository upgradeRepository, IPropertyUpgradeService propUpService)
         {
             _propertyService = propertyService;
             _propertyRepository = propertyRepository;
@@ -26,11 +31,12 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             _sellTypeService = sellTypeService;
             _upgradeService = upgradeService;
             _upgradeRepository = upgradeRepository;
+            _propUpService = propUpService;
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            ViewBag.Properties = await _propertyRepository.GetByIdAsync(id);
+            ViewBag.Properties = await _propertyService.GetDetailsById(id);
             ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
             ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
             ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
@@ -68,6 +74,20 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 savePropertyViewModel.ImageUrl3 = imagesPath[2];
                 savePropertyViewModel.ImageUrl4 = imagesPath[3];
                 await _propertyService.Update(savePropertyViewModel, savePropertyViewModel.Id);
+
+                if (saveViewModel.Upgrades != null)
+                {
+                    string[] upgrades = saveViewModel.Upgrades.Split(",");
+
+                    for (int i = 1; i < upgrades.Length; i++)
+                    {
+                        await _propUpService.Add(new SavePropertyUpgradeViewModel
+                        {
+                            PropertyId = savePropertyViewModel.Id,
+                            UpgradeId = Convert.ToInt32(upgrades[i])
+                        });
+                    }
+                }
             }
 
             return RedirectToRoute(new { controller = "Agent", action = "Properties" });
@@ -79,6 +99,13 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             ViewBag.PropertyTypes = await _propertyTypeService.GetAllViewModel();
             ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
             ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
+
+            var upgrades = await _propUpService.GetPropertyUpgrades(id);
+
+            foreach(var upgrade in upgrades)
+            {
+                saveViewModel.Upgrades += $",{upgrade.UpgradeId}";
+            }
             return View("SaveProperty", saveViewModel);
         }
 
@@ -106,6 +133,45 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                 saveViewModel.ImageUrl3 = imagesPath[2] == null ? oldImagesPath[2] : imagesPath[2];
                 saveViewModel.ImageUrl4 = imagesPath[3] == null ? oldImagesPath[3] : imagesPath[3];
                 await _propertyService.Update(saveViewModel, saveViewModel.Id);
+
+                if (saveViewModel.Upgrades != null)
+                {
+                    var oldUps= await _propUpService.GetPropertyUpgrades(saveViewModel.Id);
+                    List<string> newUpgrades = saveViewModel.Upgrades.Split(",").ToList();
+
+                    List<int> toAdd = new();
+                    List<int> toDel = new();
+
+                    for (int i = 1; i < newUpgrades.Count; i++)
+                    {
+                        if (!oldUps.Any(t => t.UpgradeId.ToString() == newUpgrades[i]))
+                            toAdd.Add(Convert.ToInt32(newUpgrades[i]));
+                    }
+
+                    foreach (var oldUpgrade in oldUps)
+                    {
+                        if (!newUpgrades.Contains(oldUpgrade.UpgradeId.ToString()))
+                            toDel.Add(oldUpgrade.UpgradeId);
+                    }
+
+                    foreach(var add in toAdd)
+                    {
+                        await _propUpService.Add(new SavePropertyUpgradeViewModel
+                        {
+                            PropertyId = saveViewModel.Id,
+                            UpgradeId = add
+                        });
+                    }
+
+                    foreach(var del in toDel)
+                    {
+                        await _propUpService.DeleteByPropAndUpgrade(saveViewModel.Id, del);
+                    }
+                }
+                else
+                {
+                    await _propUpService.DeleteUpgradesByPropertyId(saveViewModel.Id);
+                }
             }
 
             return RedirectToRoute(new { controller = "Agent", action = "Properties" });
