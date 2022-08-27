@@ -13,6 +13,8 @@ namespace RealEstateApp.Core.Application.Interfaces.Services
 
         Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters);
         Task<SavePropertyViewModel> Add(SavePropertyViewModel vm);
+
+        Task<SavePropertyViewModel> AddClient(SavePropertyViewModel vm);
         Task<PropertyViewModel> GetDetailsById(int id);
     }
 }

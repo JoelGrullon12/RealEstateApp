@@ -1,10 +1,68 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property
 @using RealEstateApp.Core.Application.ViewModels.User
-@model PropertyViewModel
+@model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Propiedades Favoritas";
    
 }
 
-<h1>Propiedades</h1>
+<div class="container-fluid">
+    <div class="row">
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="container-home">
+                @foreach (PropertyViewModel property in Model)
+                {
+                    <div class="box">
+                        <div class="top">
+                            <img src="@property.ImageUrl1" alt="" class="img-thumbnail"/>
+                            <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
+                        </div>
+                        <div class="bottom">
+                            <div class="mb-2">
+                                <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
+                            </div>
+                            <h3><b>@property.Type.Name</b></h3>
+                            <p>
+                                @property.Description
+                            </p>
+                            <h3>Codigo</h3><b>@property.Code</b>
+                            <div class="advants">
+                                <div>
+                                    <span>Habitaciones</span>
+                                    <div><i class="fa fa-th" aria-hidden="true"></i><span>@property.Bedrooms</span></div>
+                                </div>
+                                <div>
+                                    <span>Baños</span>
+                                    <div><i class="fa fa-bath" aria-hidden="true"></i><span>@property.Bathrooms</span></div>
+                                </div>
+                                <div>
+                                    <span>Area</span>
+                                    <div>
+                                        <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="price">
+                                <span>@property.SellType.Name</span>
+                                <span>$@property.Price</span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <a class="btn btn-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@property.Id">Editar</a>
+                            <a class="btn btn-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@property.Id">Borrar</a>
+                        </div>
+                    </div>
+                }
+            </div> <!-- Final -->
+        }
+        else
+        {
+            <h2>No existen Propiedades Creadas</h2>
+        }
+    </div>
+</div>
+
+
+
 
