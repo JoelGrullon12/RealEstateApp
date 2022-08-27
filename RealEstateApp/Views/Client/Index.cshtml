@@ -3,11 +3,9 @@
 @using RealEstateApp.Core.Application.ViewModels.Upgrade; 
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property;
 @using RealEstateApp.Core.Application.ViewModels.User;
-LoginResponse user = httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
 @model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Home";
-   LoginResponse user = httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
 }
 
 <div class="container-fluid">
@@ -94,7 +92,7 @@ LoginResponse user = httpContextAccessor.HttpContext.Session.Get<LoginResponse>(
             <span>$@property.Price</span>
           </div>
           <div class="mt-3">
-                <a class="btn btn-warning" asp-controller="Client" asp-action="properties" asp-route-id="@User.i">Agregar a Favoritos</a>
+                <a class="btn btn-warning" asp-controller="Client" asp-action="properties" asp-route-id="@property.Id">Agregar a Favoritos</a>
           </div>
         </div>
     </div>

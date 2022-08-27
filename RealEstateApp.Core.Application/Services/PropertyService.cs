@@ -38,13 +38,13 @@ namespace RealEstateApp.Core.Application.Services
             return await base.Add(vm);
         }
 
-        public override async Task<SavePropertyViewModel> AddClient(SavePropertyViewModel vm)
+        /*public override async Task<SavePropertyViewModel> AddClient(SavePropertyViewModel vm)
         {
             var user = _user.Id;
             //int code = rdm.Next(999999);
             vm.ClientId = user;
             return await base.AddClient(vm);
-        }
+        }*/
 
         public async Task<List<PropertyViewModel>> GetAllViewModelFromUser()
         {
