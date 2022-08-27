@@ -45,5 +45,7 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
 
         [DataType(DataType.Upload)]
         public IFormFile ImageFile4 { get; set; }
+
+        public string Upgrades { get; set; }
     }
 }

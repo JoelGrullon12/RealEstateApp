@@ -23,5 +23,30 @@ namespace RealEstateApp.Core.Application.Services
             _propUpgradeRepository = repo;
             _mapper = mapper;
         }
+
+        public async Task<List<PropertyUpgradeViewModel>> GetPropertyUpgrades(int id)
+        {
+            var ups = await _propUpgradeRepository.GetAllAsync();
+            var propUps = ups.Where(t => t.PropertyId == id);
+            return _mapper.Map<List<PropertyUpgradeViewModel>>(propUps);
+        }
+
+        public async Task DeleteByPropAndUpgrade(int propId, int upId)
+        {
+            var props = await _propUpgradeRepository.GetAllAsync();
+            var propUp = props.FirstOrDefault(t => t.PropertyId == propId && t.UpgradeId == upId);
+            await _propUpgradeRepository.DeleteAsync(propUp);
+        }
+
+        public async Task DeleteUpgradesByPropertyId(int propId)
+        {
+            var props = await _propUpgradeRepository.GetAllAsync();
+            var propUps = props.Where(t => t.PropertyId == propId);
+
+            foreach(var prop in propUps)
+            {
+                await _propUpgradeRepository.DeleteAsync(prop);
+            }
+        }
     }
 }

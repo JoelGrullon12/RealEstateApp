@@ -16,6 +16,7 @@ namespace RealEstateApp.Core.Application.ViewModels.User
         public string DNI { get; set; }
         public string UserName { get; set; }
         public string Role { get; set; }
+        public string ImgUrl { get; set; }
         public bool IsActive { get; set; }
         public int PropertiesCount { get; set; }
     }

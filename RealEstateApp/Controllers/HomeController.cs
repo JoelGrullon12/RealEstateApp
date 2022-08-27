@@ -32,7 +32,7 @@ namespace RealEstateApp.Controllers
             ViewBag.SellTypes = await _sellTypeService.GetAllViewModel();
             ViewBag.Upgrades = await _upgradeService.GetAllViewModel();
             ViewBag.Properties = await _propertyService.GetAllViewModel();
-            return View(); 
+            return View();
         }
 
         public async Task<IActionResult> Filter(FilterPropertyViewModel vm)
@@ -49,7 +49,21 @@ namespace RealEstateApp.Controllers
         {
             List<UserViewModel> users = await _userService.GetAllViewModel();
             List<UserViewModel> agents = users.FindAll(user => user.Role == Roles.Agent.ToString());
+            agents.Sort((x, y) => string.Compare(x.FirstName, y.FirstName));
             return View(agents);
+        }
+
+        public async Task<IActionResult> SearchAgent(FilterAgentViewModel filter)
+        {
+            if (filter.Name == null || filter.Name == "")
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Agents" });
+            }
+            List<UserViewModel> users = await _userService.GetAllViewModel();
+            List<UserViewModel> agents = users.FindAll(user => user.Role == Roles.Agent.ToString());
+            List<UserViewModel> agentsWithSimilarMatches = agents.FindAll(agent => ((agent.FirstName + ' ' + agent.LastName).ToLower()).Contains(filter.Name.ToLower()));
+            agents.Sort((x, y) => string.Compare(x.FirstName, y.FirstName));
+            return View("Agents", agentsWithSimilarMatches);
         }
     }
 }

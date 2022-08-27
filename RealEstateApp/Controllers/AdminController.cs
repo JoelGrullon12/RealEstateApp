@@ -2,9 +2,11 @@
 using RealEstateApp.Core.Application.Dtos.Account;
 using RealEstateApp.Core.Application.Enums;
 using RealEstateApp.Core.Application.Interfaces.Services;
+using RealEstateApp.Core.Application.ViewModels.Admin;
 using RealEstateApp.Core.Application.ViewModels.Property;
 using RealEstateApp.Core.Application.ViewModels.User;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApp.Controllers
@@ -20,9 +22,28 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             _propertyService = propertyService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var users = await _userService.GetAllViewModel();
+
+            var props = await _propertyService.GetAllViewModel();
+            var agents = users.FindAll(t => t.Role == Roles.Agent.ToString());
+            var clients = users.FindAll(t => t.Role == Roles.Client.ToString());
+            var devs = users.FindAll(t => t.Role == Roles.Developer.ToString());
+
+            return View(new DashboardViewModel
+            {
+                Properties = props.Count,
+
+                ActiveAgents = agents.FindAll(a => a.IsActive).Count,
+                InactiveAgents = agents.FindAll(a => !a.IsActive).Count,
+
+                ActiveClients = clients.FindAll(a => a.IsActive).Count,
+                InactiveClients = clients.FindAll(a => !a.IsActive).Count,
+
+                ActiveDevelopers = devs.FindAll(a => a.IsActive).Count,
+                InactiveDevelopers = devs.FindAll(a => !a.IsActive).Count
+            });
         }
 
         public IActionResult Create()

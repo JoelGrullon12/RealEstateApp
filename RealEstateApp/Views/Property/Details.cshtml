@@ -82,11 +82,17 @@
             <div class="project-info-box">
                 <p><b>Tipo de Propiedad:</b> @ViewBag.Properties.Type.Name</p>
                 <p><b>Tipo de Venta:</b> @ViewBag.Properties.SellType.Name</p>
-                @foreach(UpgradeViewModel upgrade in ViewBag.Upgrades)
-                {
-                    <p><b>Tipo de Mejora:</b> @upgrade.Name</p>
+                <p><b>Mejoras:</b><br />
+
+                @if(ViewBag.Properties.Upgrades.Count==0 || ViewBag.Properties.Upgrades==null){
+                    <span>Ninguna</span>
+                }else{
+                    @foreach(UpgradeViewModel upgrade in ViewBag.Properties.Upgrades)
+                    {
+                        @upgrade.Name<br />
+                    }
                 }
-                
+                </p>
                 
               
             </div><!-- / project-info-box -->

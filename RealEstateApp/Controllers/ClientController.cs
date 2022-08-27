@@ -46,7 +46,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
         public async Task<IActionResult> Properties()
         {
-            return View(await _propertyService.GetAllViewModelFromClientUser());
+            return View(await _propertyService.GetAllViewModelFromClient());
         }
 
     }

@@ -14,6 +14,7 @@
     LoginResponse user = httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
     string userRole = user.Roles[0];
     ViewData["Title"] = title;
+
 }
 
 <div class="container-fluid">
@@ -64,10 +65,6 @@
                                 <input class="form-control" asp-for="Price" />
                             </div>
                             <div class="mb-2">
-                                <label class="form-label" asp-for="Code">Codigo</label>
-                                <input class="form-control" asp-for="Code" />
-                            </div>
-                            <div class="mb-2">
                                 <label class="form-label" asp-for="Description">Descripción</label>
                                 <textarea class="form-control" cols="40" rows="3" asp-for="Description"></textarea>
                             </div>
@@ -85,15 +82,17 @@
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Mejoras</label>
-                                <select class="form-control">
-                                    <option value="0">Selecciona una o varias mejoras</option>
-                                    @foreach (UpgradeViewModel upgrade in ViewBag.Upgrades)
-                                    {
-                                        <option value="@upgrade.Id">@upgrade.Name</option>
-                                    }
-                                </select>
+                                    
                             </div>
-                            <div class="mb-2">
+                            @foreach (UpgradeViewModel upgrade in ViewBag.Upgrades)
+                            {
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" onclick="addUpgrade(@upgrade.Id)" id="upgrade-@upgrade.Id">
+                                    <label class="form-check-label" for="upgrade+@upgrade.Id">@upgrade.Name</label>
+                                </div>
+                            }
+                            <input type="hidden" asp-for="Upgrades" id="txtUpgrades">
+                            <div class="mb-2 mt-5">
                                 <label class="form-label" asp-for="ImageFile1">Primera Imagen</label>
                                 <input class="form-control" asp-for="ImageFile1" required />
                             </div>
@@ -112,6 +111,10 @@
                             <input type="hidden" asp-for="AgentId" value="@user.Id"/>
                             <button class="btn btn-primary" type="submit">Guardar</button>
                             <a class="btn btn-secondary" asp-controller="Agent" asp-action="Properties">Volver atrás</a>
+
+                            <input type="hidden" asp-for="Id">
+                            <input type="hidden" asp-for="AgentId">
+                            <input type="hidden" asp-for="Code">
                         </form>
                     }
                     else
@@ -123,3 +126,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/js/saveProperty.js"></script>
