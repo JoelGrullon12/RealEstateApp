@@ -1,7 +1,7 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property;
 @model List<PropertyViewModel>
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Inicio";
 }
 
 <div class="container-fluid">
@@ -13,7 +13,7 @@
                 {
                     <div class="box">
                         <div class="top">
-                            <img src="@property.ImageUrl1" alt="Imagen principal" />
+                            <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
                             <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
                         </div>
                         <div class="bottom">
@@ -46,13 +46,17 @@
                                 <span>$@property.Price</span>
                             </div>
                         </div>
+                        <div class="">
+                            <a class="btn btn-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@property.Id">Editar</a>
+                            <a class="btn btn-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@property.Id">Borrar</a>
+                        </div>
                     </div>
                 }
             </div> <!-- Final -->
         }
         else
         {
-            <h2>No existen propiedades registradas en el sistema</h2>
+            <h2>No existen Propiedades Creadas</h2>
         }
     </div>
 </div>
