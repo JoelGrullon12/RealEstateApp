@@ -21,5 +21,16 @@ namespace RealEstateApp.Core.Application.Services
             _favRepository = repo;
             _mapper = mapper;
         }
+
+        public async Task DeleteByPropAndUserId(int propId, string userId)
+        {
+            var favs = await _favRepository.GetAllAsync();
+            var fav = favs.FirstOrDefault(f => f.PropertyId == propId && f.UserId == userId);
+
+            if (fav != null)
+            {
+                await _favRepository.DeleteAsync(fav);
+            }
+        }
     }
 }

@@ -42,8 +42,8 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         public async Task<IActionResult> PropertiesOfTheAgent(string id)
         {
             SaveUserViewModel agent = await _userService.GetByIdSaveViewModel(id);
-            List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
-            ViewBag.PropertiesOfTheAgent = properties.FindAll(property => property.AgentId == agent.Id);
+            List<PropertyViewModel> properties = await _propertyService.GetPropertiesOfAgent(agent.Id);
+            ViewBag.PropertiesOfTheAgent = properties;
             return View(agent);
         }
     }

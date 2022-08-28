@@ -22,11 +22,11 @@ namespace RealEstateApp.Core.Application.Services
         private readonly LoginResponse _user;
         private readonly IMapper _mapper;
 
-        public PropertyService(IPropertyRepository repo, IHttpContextAccessor httpContextAccessor, IMapper mapper) : base(repo, mapper)
+        public PropertyService(IPropertyRepository repo, IMapper mapper, IHttpContextAccessor httpContextAccessor) : base(repo, mapper)
         {
             _propRepository = repo;
             _httpContextAccessor = httpContextAccessor;
-            _user = _httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
+            _user = _httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user") == null ? new LoginResponse() : _httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
             _mapper = mapper;
         }
 
@@ -75,6 +75,19 @@ namespace RealEstateApp.Core.Application.Services
         {
             var prop = await _propRepository.GetByIdWithIncludes(id, new List<string> { "Type", "SellType" }, new List<string> { "Upgrades" });
             return _mapper.Map<PropertyViewModel>(prop);
+        }
+
+        public async Task<List<PropertyViewModel>> GetPropertiesOfAgent(string agentId)
+        {
+            var props = await _propRepository.GetAllWithIncludes(new List<string> { "Type", "SellType", "Upgrades" });
+            var agentProps = props.FindAll(props => props.AgentId == agentId);
+            return _mapper.Map<List<PropertyViewModel>>(agentProps);
+        }
+
+        public async Task<List<PropertyViewModel>> GetAllWithDetails()
+        {
+            var props = await _propRepository.GetAllWithIncludes(new List<string> { "Type", "SellType", "Upgrades", "Favorites" });
+            return _mapper.Map<List<PropertyViewModel>>(props);
         }
     }
 }

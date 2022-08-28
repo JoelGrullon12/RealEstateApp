@@ -1,11 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using RealEstateApp.Core.Application.Dtos.Account;
 using RealEstateApp.Core.Application.Interfaces.Services;
+using RealEstateApp.Core.Application.ViewModels.Favorite;
 using RealEstateApp.Core.Application.ViewModels.Property;
+using StockApp.Core.Application.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApp.Controllers
 {
+
     public class ClientController : Controller
     {
        
@@ -14,8 +20,12 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         private readonly IPropertyTypeService _propertyTypeService;
         private readonly ISellTypeService _sellTypeService;
         private readonly IUpgradeService _upgradeService;
+        private readonly IFavoriteService _favService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly LoginResponse _user;
 
-        public ClientController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, IUpgradeService upgradeService, ISellTypeService sellTypeService, IUserService userService)
+        public ClientController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, IUpgradeService upgradeService, 
+            ISellTypeService sellTypeService, IUserService userService, IHttpContextAccessor httpContextAccessor, IFavoriteService favoriteService)
         {
 
             _propertyService = propertyService;
@@ -23,17 +33,41 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             _sellTypeService = sellTypeService;
             _upgradeService = upgradeService;
             _userService = userService;
+            _favService = favoriteService;
+
+            _httpContextAccessor = httpContextAccessor;
+            _user = _httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
         }
 
         public async Task<IActionResult> Index()
         {
-
-            return View();
+            return View(await _propertyService.GetAllWithDetails());
         }
 
         public async Task<IActionResult> Properties()
         {
-            return View();
+            var props = await _propertyService.GetAllWithDetails();
+            var favs = props.FindAll(p => p.Favorites.Any(f => f.UserId == _user.Id));
+            return View(favs);
+        }
+
+        public async Task<IActionResult> AddFavorite(int propId)
+        {
+            var fav = await _favService.Add(new SaveFavoriteViewModel
+            {
+                PropertyId = propId,
+                UserId = _user.Id
+            });
+
+            return RedirectToAction("Index");
+            
+        }
+
+        public async Task<IActionResult> RemoveFavorite(int propId)
+        {
+            await _favService.DeleteByPropAndUserId(propId, _user.Id);
+            return RedirectToAction("Properties");
+
         }
 
     }

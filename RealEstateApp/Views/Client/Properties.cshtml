@@ -1,10 +1,42 @@
 ﻿@using RealEstateApp.Core.Application.ViewModels.Property
 @using RealEstateApp.Core.Application.ViewModels.User
-@model PropertyViewModel
+@model List<PropertyViewModel>
 @{
-    ViewData["Title"] = "Propiedades Favoritas";
+    ViewData["Title"] = "Favoritas";
    
 }
 
-<h1>Propiedades</h1>
+<h3 class="mb-4">Propiedades Favoritas</h3>
 
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    @if(Model==null || Model.Count == 0)
+    {
+        <h4>No tienes propiedades favoritas</h4>
+    }else{
+        @foreach (var prop in Model)
+        {
+            string meters = prop.Size + "mt";
+            <div class="col">
+                <div class="card">
+                    <img src="@prop.ImageUrl1" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@prop.Type.Name</h5>
+                        <p class="card-text">
+                            <b>Codigo</b><br />
+                            @prop.Code<br /><br />
+
+                            <b>@prop.SellType.Name</b><br />
+                            RD$@prop.Price
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <p><i class="fa-solid fa-bed"></i> @prop.Bedrooms <i class="fa-solid fa-bath"></i> @prop.Bathrooms <i class="fa-solid fa-maximize"></i> @meters</p>
+                        <h5><a asp-action="RemoveFavorite" asp-controller="Client" asp-route-propId="@prop.Id" class="text-danger"><i class="fa-solid fa-heart"></i></a></h5>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+
+</div>
