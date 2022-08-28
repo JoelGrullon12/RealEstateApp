@@ -38,6 +38,14 @@ namespace RealEstateApp.Core.Application.Services
             return await base.Add(vm);
         }
 
+        /*public override async Task<SavePropertyViewModel> AddClient(SavePropertyViewModel vm)
+        {
+            var user = _user.Id;
+            //int code = rdm.Next(999999);
+            vm.ClientId = user;
+            return await base.AddClient(vm);
+        }*/
+
         public async Task<List<PropertyViewModel>> GetAllViewModelFromUser()
         {
             var props = await _propRepository.GetAllWithIncludes(new List<string> { "Type", "SellType" });
@@ -46,12 +54,12 @@ namespace RealEstateApp.Core.Application.Services
             return propertiesOfUserLoggedIn;
         }
 
-        /*public async Task<List<PropertyViewModel>> GetAllVieModelById()
+        public async Task<List<PropertyViewModel>> GetAllViewModelFromClient()
         {
-            List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(await _propRepository.GetByIdAsync(id)).ToList();
-            return properties;
-
-        }*/
+            List<PropertyViewModel> properties = _mapper.Map<List<PropertyViewModel>>(await _propRepository.GetAllWithIncludes(new List<string> { "Type", "SellType" }));
+            List<PropertyViewModel> propertiesOfClientLoggedIn = properties.FindAll(property => property.ClientId == _user.Id).ToList();
+            return propertiesOfClientLoggedIn;
+        }
 
         public async Task<List<PropertyViewModel>> GetAllViewModelWithFilters(FilterPropertyViewModel filters)
         {

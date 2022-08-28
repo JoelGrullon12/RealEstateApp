@@ -10,20 +10,24 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 {
     public class FavoriteController : Controller
     {
-        private readonly IPropertyService _propertyService;
-        private readonly IFavoriteService _favService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly LoginResponse _user;
 
-        public FavoriteController(IPropertyService propertyService, IFavoriteService favoriteService, IHttpContextAccessor httpContext)
+        private readonly IPropertyService _propertyService;
+        private readonly IUserService _userService;
+        private readonly IPropertyTypeService _propertyTypeService;
+        private readonly ISellTypeService _sellTypeService;
+        private readonly IUpgradeService _upgradeService;
+
+        public FavoriteController(IPropertyService propertyService, IPropertyTypeService propertyTypeService, IUpgradeService upgradeService, ISellTypeService sellTypeService, IUserService userService)
         {
-            _propertyService=propertyService;
-            _favService = favoriteService;
-            _httpContextAccessor=httpContext;
-            _user = _httpContextAccessor.HttpContext.Session.Get<LoginResponse>("user");
+
+            _propertyService = propertyService;
+            _propertyTypeService = propertyTypeService;
+            _sellTypeService = sellTypeService;
+            _upgradeService = upgradeService;
+            _userService = userService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexAsync()
         {
             var props = await _propertyService.GetAllWithDetails();
             var favs = props.FindAll(p => p.Favorites.Any(f => f.UserId == _user.Id));
