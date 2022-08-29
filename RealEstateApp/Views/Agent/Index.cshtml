@@ -1,62 +1,43 @@
-﻿@using RealEstateApp.Core.Application.ViewModels.Property;
+﻿@using RealEstateApp.Core.Application.ViewModels.Property
+@using RealEstateApp.Core.Application.ViewModels.User
 @model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Inicio";
+   
 }
 
-<div class="container-fluid">
-    <div class="row">
-        @if (Model != null && Model.Count > 0)
+<h3 class="mb-4">Inicio</h3>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    @if(Model==null || Model.Count == 0)
+    {
+        <h4>No hay propiedades agregadas en el sistema</h4>
+    }else{
+        @foreach (var prop in Model)
         {
-            <div class="container-home">
-                @foreach (PropertyViewModel property in Model)
-                {
-                    <div class="box">
-                        <div class="top">
-                            <img src="@property.ImageUrl1" alt="" class="img-thumbnail"/>
-                            <span><i class="fa fa-heart" aria-hidden="true"></i><i class="fa fa-exchange" aria-hidden="true"></i></span>
-                        </div>
-                        <div class="bottom">
-                            <div class="mb-2">
-                                <a class="btn btn-outline-primary" asp-controller="Property" asp-action="Details" asp-route-id="@property.Id">Ver Propiedad</a>
-                            </div>
-                            <h3><b>@property.Type.Name</b></h3>
-                            <p>
-                                @property.Description
-                            </p>
-                            <h3>Codigo</h3><b>@property.Code</b>
-                            <div class="advants">
-                                <div>
-                                    <span>Habitaciones</span>
-                                    <div><i class="fa fa-th" aria-hidden="true"></i><span>@property.Bedrooms</span></div>
-                                </div>
-                                <div>
-                                    <span>Baños</span>
-                                    <div><i class="fa fa-bath" aria-hidden="true"></i><span>@property.Bathrooms</span></div>
-                                </div>
-                                <div>
-                                    <span>Area</span>
-                                    <div>
-                                        <i class="fa fa-microchip" aria-hidden="true"></i><span>@property.Size<span>mt</span></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="price">
-                                <span>@property.SellType.Name</span>
-                                <span>$@property.Price</span>
-                            </div>
-                        </div>
-                        <div class="">
-                            <a class="btn btn-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@property.Id">Editar</a>
-                            <a class="btn btn-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@property.Id">Borrar</a>
-                        </div>
+            string meters = prop.Size + "mt";
+            <div class="col">
+                <div class="card">
+                    <img src="@prop.ImageUrl1" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@prop.Type.Name</h5>
+                        <p class="card-text">
+                            <b>Codigo</b><br />
+                            @prop.Code<br /><br />
+
+                            <b>@prop.SellType.Name</b><br />
+                            RD$@prop.Price
+                        </p>
                     </div>
-                }
-            </div> <!-- Final -->
+                    <div class="card-footer d-flex justify-content-between">
+                        <p><i class="fa-solid fa-bed"></i> @prop.Bedrooms <i class="fa-solid fa-bath"></i> @prop.Bathrooms <i class="fa-solid fa-maximize"></i> @meters</p>
+                        
+                    </div>
+                </div>
+            </div>
         }
-        else
-        {
-            <h2>No existen Propiedades Creadas</h2>
-        }
-    </div>
+    }
+
+
 </div>
+

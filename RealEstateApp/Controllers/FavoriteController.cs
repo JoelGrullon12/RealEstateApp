@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using RealEstateApp.Core.Application.Dtos.Account;
 using RealEstateApp.Core.Application.Interfaces.Services;
-using RealEstateApp.Core.Application.ViewModels.Property;
-using System.Collections.Generic;
+using StockApp.Core.Application.Helpers;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApp.Controllers
@@ -27,7 +29,9 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-            return View(await _propertyService.GetAllViewModelFromClient());
+            var props = await _propertyService.GetAllWithDetails();
+            var favs = props.FindAll(p => p.Favorites.Any(f => f.UserId == _user.Id));
+            return View(favs);
         }
     }
 }
