@@ -14,38 +14,38 @@
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">
-    @if(Model==null || Model.Count == 0)
-    {
-        <h4>No tienes propiedades favoritas</h4>
-    }else{
-        @foreach (var prop in Model)
+        @if (Model == null || Model.Count == 0)
         {
-            string meters = prop.Size + "mt";
-            <div class="col">
-                <div class="card">
-                    <img src="@prop.ImageUrl1" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">@prop.Type.Name</h5>
-                        <p class="card-text">
-                            <b>Codigo</b><br />
-                            @prop.Code<br /><br />
+            <h4>No tienes propiedades favoritas</h4>
+        }
+        else
+        {
+            @foreach (var prop in Model)
+            {
+                string meters = prop.Size + "mt";
+                <div class="col">
+                    <div class="card">
+                        <img src="@prop.ImageUrl1" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@prop.Type.Name</h5>
+                            <p class="card-text">
+                                <b>Codigo</b><br />
+                                @prop.Code<br /><br />
 
-                            <b>@prop.SellType.Name</b><br />
-                            RD$@prop.Price
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <p><i class="fa-solid fa-bed"></i> @prop.Bedrooms <i class="fa-solid fa-bath"></i> @prop.Bathrooms <i class="fa-solid fa-maximize"></i> @meters</p>
-                        <div class="btn-group">
-                            <a class="btn btn-outline-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@prop.Id">Editar</a>
-                            <a class="btn btn-outline-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@prop.Id">Eliminar</a>
+                                <b>@prop.SellType.Name</b><br />
+                                RD$@prop.Price
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <p><i class="fa-solid fa-bed"></i> @prop.Bedrooms <i class="fa-solid fa-bath"></i> @prop.Bathrooms <i class="fa-solid fa-maximize"></i> @meters</p>
+                            <div class="btn-group">
+                                <a class="btn btn-outline-warning" asp-controller="Property" asp-action="Edit" asp-route-id="@prop.Id">Editar</a>
+                                <a class="btn btn-outline-danger" asp-controller="Property" asp-action="Delete" asp-route-id="@prop.Id">Eliminar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-    }
-
-
-</div>
+    </div>
 </div>

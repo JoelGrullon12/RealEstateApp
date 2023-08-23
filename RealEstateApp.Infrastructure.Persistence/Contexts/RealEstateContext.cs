@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RealEstateApp.Core.Domain.Common;
-using RealEstateApp.Core.Domain.Entities;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using RealEstateApp.Core.Domain.Common;
+using RealEstateApp.Core.Domain.Entities;
 
 namespace RealEstateApp.Infrastructure.Persistence.Contexts
 {
-    public class RealEstateContext:DbContext
+    public class RealEstateContext : DbContext
     {
         public RealEstateContext(DbContextOptions<RealEstateContext> options) : base(options) { }
 

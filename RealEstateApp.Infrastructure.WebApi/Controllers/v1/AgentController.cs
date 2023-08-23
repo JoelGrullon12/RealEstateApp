@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace RealEstateApp.Presentation.WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
-    [Authorize(Roles="Admin,Developer")]
+    [Authorize(Roles = "Admin,Developer")]
     [SwaggerTag("Listar y activar/desactivar Agentes")]
     public class AgentController : BaseApiController
     {
@@ -28,8 +28,8 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [SwaggerOperation(
-            Summary ="Listado de agentes",
-            Description ="Lista todos los agentes mostrando la cantidad de propiedades que ha creado cada agente"
+            Summary = "Listado de agentes",
+            Description = "Lista todos los agentes mostrando la cantidad de propiedades que ha creado cada agente"
             )]
         public async Task<IActionResult> Get()
         {
@@ -113,7 +113,7 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPut("ChangeStatus")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

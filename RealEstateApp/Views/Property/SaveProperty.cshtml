@@ -29,9 +29,9 @@
                         int controlCounter = 0;
                     }
 
-                    @if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) || 
-                         (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) || 
-                         (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0))
+                    @if ((ViewBag.PropertyTypes == null || ViewBag.PropertyTypes.Count == 0) ||
+                    (ViewBag.SellTypes == null || ViewBag.SellTypes.Count == 0) ||
+                    (ViewBag.Upgrades == null || ViewBag.Upgrades.Count == 0))
                     {
                         controlCounter++;
                     }
@@ -82,7 +82,7 @@
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Mejoras</label>
-                                    
+
                             </div>
                             @foreach (UpgradeViewModel upgrade in ViewBag.Upgrades)
                             {
@@ -108,7 +108,7 @@
                                 <label class="form-label" asp-for="ImageFile4">Cuarta Imagen</label>
                                 <input class="form-control" asp-for="ImageFile4" />
                             </div>
-                            <input type="hidden" asp-for="AgentId" value="@user.Id"/>
+                            <input type="hidden" asp-for="AgentId" value="@user.Id" />
                             <button class="btn btn-primary" type="submit">Guardar</button>
                             <a class="btn btn-secondary" asp-controller="Agent" asp-action="Properties">Volver atrás</a>
 

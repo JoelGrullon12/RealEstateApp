@@ -66,7 +66,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             await _propertyTypeService.Delete(saveViewModel.Id);
             List<PropertyViewModel> properties = await _propertyService.GetAllViewModel();
             List<PropertyViewModel> propertiesOfTheCurrentType = properties.FindAll(property => property.TypeId == saveViewModel.Id);
-            foreach(var property in propertiesOfTheCurrentType)
+            foreach (var property in propertiesOfTheCurrentType)
             {
                 await _propertyService.Delete(property.Id);
             }

@@ -1,9 +1,5 @@
 ﻿using RealEstateApp.Core.Domain.Common;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Domain.Entities
 {
@@ -11,7 +7,6 @@ namespace RealEstateApp.Core.Domain.Entities
     {
         public int Code { get; set; }
         public int TypeId { get; set; }
-        // navigation propertly
         public int SellTypeId { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
@@ -30,7 +25,7 @@ namespace RealEstateApp.Core.Domain.Entities
         public SellType SellType { get; set; }
         public ICollection<PropertyImg> Images { get; set; }
 
-        //Upgrades
+        // Upgrades
         public ICollection<Upgrade> Upgrades { get; set; }
         public List<PropertyUpgrade> PropertyUpgrades { get; set; }
         public ICollection<Favorite> Favorites { get; set; }

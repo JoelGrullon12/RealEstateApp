@@ -1,5 +1,4 @@
 ﻿using RealEstateApp.Core.Application.ViewModels.Favorite;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Interfaces.Services

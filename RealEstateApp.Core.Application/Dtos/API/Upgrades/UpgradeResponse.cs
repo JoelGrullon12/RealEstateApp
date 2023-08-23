@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RealEstateApp.Core.Application.Dtos.API.Upgrades
+﻿namespace RealEstateApp.Core.Application.Dtos.API.Upgrades
 {
     public class UpgradeResponse
     {

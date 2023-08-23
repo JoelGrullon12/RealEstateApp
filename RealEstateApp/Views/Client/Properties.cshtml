@@ -3,16 +3,17 @@
 @model List<PropertyViewModel>
 @{
     ViewData["Title"] = "Favoritas";
-   
 }
 
 <h3 class="mb-4">Propiedades Favoritas</h3>
 
 <div class="row row-cols-1 row-cols-md-4 g-4">
-    @if(Model==null || Model.Count == 0)
+    @if (Model == null || Model.Count == 0)
     {
         <h4>No tienes propiedades favoritas</h4>
-    }else{
+    }
+    else
+    {
         @foreach (var prop in Model)
         {
             string meters = prop.Size + "mt";
@@ -37,6 +38,4 @@
             </div>
         }
     }
-
-
 </div>

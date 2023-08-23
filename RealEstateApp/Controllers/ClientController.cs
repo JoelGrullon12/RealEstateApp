@@ -1,20 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateApp.Core.Application.Dtos.Account;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Application.ViewModels.Favorite;
-using RealEstateApp.Core.Application.ViewModels.Property;
 using StockApp.Core.Application.Helpers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RealEstateApp.Presentation.WebApp.Controllers
 {
-
     public class ClientController : Controller
-    {
-       
+    {      
         private readonly IPropertyService _propertyService;
         private readonly IUserService _userService;
         private readonly IPropertyTypeService _propertyTypeService;
@@ -69,7 +65,5 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
             return RedirectToAction("Properties");
 
         }
-
     }
- 
 }

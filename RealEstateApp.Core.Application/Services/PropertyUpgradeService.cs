@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
 using RealEstateApp.Core.Application.Interfaces.Repositories;
 using RealEstateApp.Core.Application.Interfaces.Services;
-using RealEstateApp.Core.Application.ViewModels.Favorite;
-using RealEstateApp.Core.Application.ViewModels.PropertyType;
 using RealEstateApp.Core.Application.ViewModels.PropertyUpgrade;
 using RealEstateApp.Core.Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Services
@@ -18,7 +14,7 @@ namespace RealEstateApp.Core.Application.Services
         private readonly IPropertyUpgradeRepository _propUpgradeRepository;
         private readonly IMapper _mapper;
 
-        public PropertyUpgradeService(IPropertyUpgradeRepository repo, IMapper mapper):base(repo,mapper)
+        public PropertyUpgradeService(IPropertyUpgradeRepository repo, IMapper mapper) : base(repo, mapper)
         {
             _propUpgradeRepository = repo;
             _mapper = mapper;
@@ -43,7 +39,7 @@ namespace RealEstateApp.Core.Application.Services
             var props = await _propUpgradeRepository.GetAllAsync();
             var propUps = props.Where(t => t.PropertyId == propId);
 
-            foreach(var prop in propUps)
+            foreach (var prop in propUps)
             {
                 await _propUpgradeRepository.DeleteAsync(prop);
             }

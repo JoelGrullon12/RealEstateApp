@@ -21,8 +21,9 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         private readonly IUpgradeService _upgradeService;
         private readonly IUpgradeRepository _upgradeRepository;
         private readonly IPropertyUpgradeService _propUpService;
-        public PropertyController(IPropertyService propertyService, IPropertyRepository propertyRepository, 
-            IPropertyTypeService propertyTypeService, ISellTypeService sellTypeService, IUpgradeService upgradeService, 
+
+        public PropertyController(IPropertyService propertyService, IPropertyRepository propertyRepository,
+            IPropertyTypeService propertyTypeService, ISellTypeService sellTypeService, IUpgradeService upgradeService,
             IUpgradeRepository upgradeRepository, IPropertyUpgradeService propUpService)
         {
             _propertyService = propertyService;
@@ -102,7 +103,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
             var upgrades = await _propUpService.GetPropertyUpgrades(id);
 
-            foreach(var upgrade in upgrades)
+            foreach (var upgrade in upgrades)
             {
                 saveViewModel.Upgrades += $",{upgrade.UpgradeId}";
             }
@@ -136,7 +137,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
 
                 if (saveViewModel.Upgrades != null)
                 {
-                    var oldUps= await _propUpService.GetPropertyUpgrades(saveViewModel.Id);
+                    var oldUps = await _propUpService.GetPropertyUpgrades(saveViewModel.Id);
                     List<string> newUpgrades = saveViewModel.Upgrades.Split(",").ToList();
 
                     List<int> toAdd = new();
@@ -154,7 +155,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                             toDel.Add(oldUpgrade.UpgradeId);
                     }
 
-                    foreach(var add in toAdd)
+                    foreach (var add in toAdd)
                     {
                         await _propUpService.Add(new SavePropertyUpgradeViewModel
                         {
@@ -163,7 +164,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
                         });
                     }
 
-                    foreach(var del in toDel)
+                    foreach (var del in toDel)
                     {
                         await _propUpService.DeleteByPropAndUpgrade(saveViewModel.Id, del);
                     }

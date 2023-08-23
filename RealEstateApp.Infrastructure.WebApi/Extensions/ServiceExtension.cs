@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
@@ -61,7 +60,6 @@ namespace RealEstateApp.Presentation.WebApi.Extensions
                 });
             });
         }
-
 
         public static void AddApiVersioningExtension(this IServiceCollection service)
         {

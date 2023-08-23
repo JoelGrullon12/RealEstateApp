@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using RealEstateApp.Core.Application.Dtos.Account;
+﻿using Microsoft.AspNetCore.Mvc;
 using RealEstateApp.Core.Application.Interfaces.Services;
-using RealEstateApp.Core.Application.Services;
 using RealEstateApp.Core.Application.ViewModels.User;
 using RealEstateApp.Core.Application.ViewModels.Property;
-using RealEstateApp.Core.Application.ViewModels.PropertyType;
-using StockApp.Core.Application.Helpers;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 

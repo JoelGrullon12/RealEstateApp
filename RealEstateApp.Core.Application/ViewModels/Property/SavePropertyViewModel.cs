@@ -20,7 +20,7 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
 
         [Range(1, int.MaxValue, ErrorMessage = "Debes colocar la cantidad de habitaciones")]
         public int Bedrooms { get; set; }
-        
+
         [Range(1, int.MaxValue, ErrorMessage = "Debes colocar la cantidad de baños")]
         public int Bathrooms { get; set; }
 
@@ -45,7 +45,6 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
 
         [DataType(DataType.Upload)]
         public IFormFile ImageFile4 { get; set; }
-
         public string Upgrades { get; set; }
     }
 }

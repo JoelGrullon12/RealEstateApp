@@ -3,12 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RealEstateApp.Core.Application.Interfaces.Services;
 using RealEstateApp.Core.Application.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application
 {
@@ -19,7 +14,7 @@ namespace RealEstateApp.Core.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
-            #region dependency injections
+            #region Dependency Injection
             services.AddTransient(typeof(IGenericService<,>), typeof(GenericService<,,>));
             services.AddTransient<IFavoriteService, FavoriteService>();
             services.AddTransient<IPropertyImgService, PropertyImgService>();

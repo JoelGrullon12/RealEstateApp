@@ -30,7 +30,7 @@ namespace RealEstateApp.Presentation.WebApp.Controllers
         public async Task<IActionResult> IndexAsync()
         {
             var props = await _propertyService.GetAllWithDetails();
-            var favs = props.FindAll(p => p.Favorites.Any(f => f.UserId == _user.Id));
+            var favs = props.FindAll(p => p.Favorites.Any(f => f.UserId == ""));
             return View(favs);
         }
     }

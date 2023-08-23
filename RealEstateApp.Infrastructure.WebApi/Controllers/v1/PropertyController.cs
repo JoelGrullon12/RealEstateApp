@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace RealEstateApp.Presentation.WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
-    [Authorize(Roles="Admin,Developer")]
+    [Authorize(Roles = "Admin,Developer")]
     [SwaggerTag("Listar y consultar datos de las propiedades")]
     public class PropertyController : BaseApiController
     {
@@ -107,6 +107,6 @@ namespace RealEstateApp.Presentation.WebApi.Controllers.v1
             }
         }
 
-        
+
     }
 }

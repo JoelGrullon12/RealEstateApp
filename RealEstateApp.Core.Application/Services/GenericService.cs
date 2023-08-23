@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Services
 {
-    public class GenericService<Entity, ViewModel, SaveViewModel> : IGenericService<ViewModel, SaveViewModel> 
+    public class GenericService<Entity, ViewModel, SaveViewModel> : IGenericService<ViewModel, SaveViewModel>
         where Entity : class
         where ViewModel : class
         where SaveViewModel : class

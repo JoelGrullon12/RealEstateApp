@@ -1,5 +1,3 @@
-using System;
-
 namespace RealEstateApp.Models
 {
     public class ErrorViewModel

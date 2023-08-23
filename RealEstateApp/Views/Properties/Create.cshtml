@@ -1,5 +1,4 @@
 ﻿@model RealEstateApp.Core.Domain.Entities.Property
-
 @{
     ViewData["Title"] = "Create";
 }
@@ -19,11 +18,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="TypeId" class="control-label"></label>
-                <select asp-for="TypeId" class ="form-control" asp-items="ViewBag.TypeId"></select>
+                <select asp-for="TypeId" class="form-control" asp-items="ViewBag.TypeId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="SellTypeId" class="control-label"></label>
-                <select asp-for="SellTypeId" class ="form-control" asp-items="ViewBag.SellTypeId"></select>
+                <select asp-for="SellTypeId" class="form-control" asp-items="ViewBag.SellTypeId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -77,5 +76,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

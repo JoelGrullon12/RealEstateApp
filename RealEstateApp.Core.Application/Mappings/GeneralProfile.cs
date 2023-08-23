@@ -4,7 +4,6 @@ using RealEstateApp.Core.Application.Dtos.API.Properties;
 using RealEstateApp.Core.Application.Dtos.API.PropertyTypes;
 using RealEstateApp.Core.Application.Dtos.API.SellTypes;
 using RealEstateApp.Core.Application.Dtos.API.Upgrades;
-using RealEstateApp.Core.Application.Features.Properties.Queries.ListProperties;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.CreatePropertyType;
 using RealEstateApp.Core.Application.Features.PropertyTypes.Commands.UpdatePropertyType;
 using RealEstateApp.Core.Application.Features.SellTypes.Commands.CreateSellType;
@@ -20,11 +19,6 @@ using RealEstateApp.Core.Application.ViewModels.SellType;
 using RealEstateApp.Core.Application.ViewModels.Upgrade;
 using RealEstateApp.Core.Application.ViewModels.User;
 using RealEstateApp.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.Mappings
 {

@@ -5,15 +5,11 @@ using RealEstateApp.Core.Application.ViewModels.SellType;
 using RealEstateApp.Core.Application.ViewModels.Upgrade;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RealEstateApp.Core.Application.ViewModels.Property
 {
     public class PropertyViewModel : BaseViewModel
     {
-
         public int Code { get; set; }
         public int TypeId { get; set; }
         public int SellTypeId { get; set; }
@@ -31,7 +27,6 @@ namespace RealEstateApp.Core.Application.ViewModels.Property
         public string ImageUrl4 { get; set; }
 
         public DateTime Created { get; set; }
-        //PropertyType = new PropertyType();
 
         #region Navigation Properties
         public PropertyTypeViewModel Type { get; set; }

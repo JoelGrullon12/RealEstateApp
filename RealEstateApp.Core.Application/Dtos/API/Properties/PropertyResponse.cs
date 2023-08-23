@@ -2,11 +2,7 @@
 using RealEstateApp.Core.Application.Dtos.API.SellTypes;
 using RealEstateApp.Core.Application.Dtos.API.Agents;
 using RealEstateApp.Core.Application.Dtos.API.Upgrades;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RealEstateApp.Core.Application.Dtos.API.Clients;
 
 namespace RealEstateApp.Core.Application.Dtos.API.Properties
@@ -26,7 +22,7 @@ namespace RealEstateApp.Core.Application.Dtos.API.Properties
         public PropertyTypeResponse Type { get; set; }
         public SellTypeResponse SellType { get; set; }
 
-        //Upgrades
+        // Upgrades
         public ICollection<UpgradeResponse> Upgrades { get; set; }
     }
 }

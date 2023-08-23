@@ -22,11 +22,15 @@ namespace RealEstateApp.Infrastructure.Shared.Services
         {
             try
             {
-                MimeMessage email = new();
-                email.Sender = MailboxAddress.Parse($"{_mailSettings.DisplayName} <{_mailSettings.EmailFrom}>");
+                MimeMessage email = new()
+                {
+                    Sender = MailboxAddress.Parse($"{_mailSettings.DisplayName} <{_mailSettings.EmailFrom}>")
+                };
                 email.To.Add(MailboxAddress.Parse(request.To));
-                BodyBuilder builder = new();
-                builder.HtmlBody = request.Body;
+                BodyBuilder builder = new()
+                {
+                    HtmlBody = request.Body
+                };
                 email.Body = builder.ToMessageBody();
                 email.Subject = request.Subject;
 
